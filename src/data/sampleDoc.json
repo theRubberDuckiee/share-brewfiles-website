@@ -1,0 +1,86 @@
+{
+  "brews": [
+    {
+      "id": "0gkIBFvI3ikB06XSM6Up",
+      "data": [
+        { "name": "\"acarl005/formulas\"", "packageManager": "tap" },
+        { "name": "\"getsentry/tools\"", "packageManager": "tap" },
+        { "name": "\"homebrew/bundle\"", "packageManager": "tap" },
+        { "name": "\"homebrew/cask-fonts\"", "packageManager": "tap" },
+        { "name": "\"homebrew/services\"", "packageManager": "tap" },
+        { "name": "\"jandedobbeleer/oh-my-posh\"", "packageManager": "tap" },
+        { "name": "\"python@3.11\"", "packageManager": "brew" },
+        { "name": "\"asciinema\"", "packageManager": "brew" },
+        { "name": "\"autojump\"", "packageManager": "brew" },
+        { "name": "\"berkeley-db\"", "packageManager": "brew" },
+        { "name": "\"carthage\"", "packageManager": "brew" },
+        { "name": "\"clang-format\"", "packageManager": "brew" },
+        { "name": "\"create-dmg\"", "packageManager": "brew" },
+        { "name": "\"dbus\"", "packageManager": "brew" },
+        { "name": "\"ddgr\"", "packageManager": "brew" },
+        { "name": "\"docker\"", "packageManager": "brew" },
+        { "name": "\"docker-compose\"", "packageManager": "brew" },
+        { "name": "\"libssh2\"", "packageManager": "brew" },
+        { "name": "\"exa\"", "packageManager": "brew" },
+        { "name": "\"eza\"", "packageManager": "brew" },
+        { "name": "\"unbound\"", "packageManager": "brew" },
+        { "name": "\"ffmpeg\"", "packageManager": "brew" },
+        { "name": "\"figlet\"", "packageManager": "brew" },
+        { "name": "\"ncurses\"", "packageManager": "brew" },
+        { "name": "\"fish\"", "packageManager": "brew" },
+        { "name": "\"fzf\"", "packageManager": "brew" },
+        { "name": "\"gh\"", "packageManager": "brew" },
+        { "name": "\"jq\"", "packageManager": "brew" },
+        { "name": "\"kubernetes-cli\"", "packageManager": "brew" },
+        { "name": "\"libtensorflow\"", "packageManager": "brew" },
+        { "name": "\"lolcat\"", "packageManager": "brew" },
+        { "name": "\"multitime\"", "packageManager": "brew" },
+        { "name": "\"navi\"", "packageManager": "brew" },
+        { "name": "\"node\"", "packageManager": "brew" },
+        { "name": "\"nyancat\"", "packageManager": "brew" },
+        { "name": "\"openssl@1.1\"", "packageManager": "brew" },
+        { "name": "\"tree\"", "packageManager": "brew" },
+        { "name": "\"pass\"", "packageManager": "brew" },
+        { "name": "\"pastel\"", "packageManager": "brew" },
+        { "name": "\"perl\"", "packageManager": "brew" },
+        { "name": "\"pyenv\"", "packageManager": "brew" },
+        { "name": "\"python@3.10\"", "packageManager": "brew" },
+        { "name": "\"ruby\"", "packageManager": "brew" },
+        { "name": "\"rust\"", "packageManager": "brew" },
+        { "name": "\"spotify-tui\"", "packageManager": "brew" },
+        { "name": "\"telnet\"", "packageManager": "brew" },
+        { "name": "\"tmux\"", "packageManager": "brew" },
+        { "name": "\"vhs\"", "packageManager": "brew" },
+        { "name": "\"vim\"", "packageManager": "brew" },
+        { "name": "\"yarn\"", "packageManager": "brew" },
+        { "name": "\"acarl005/formulas/ls-go\"", "packageManager": "brew" },
+        { "name": "\"getsentry/tools/sentry-cli\"", "packageManager": "brew" },
+        {
+          "name": "\"jandedobbeleer/oh-my-posh/oh-my-posh\"",
+          "packageManager": "brew"
+        },
+        { "name": "\"bierner.markdown-emoji\"", "packageManager": "vscode" },
+        { "name": "\"dbaeumer.vscode-eslint\"", "packageManager": "vscode" },
+        { "name": "\"esbenp.prettier-vscode\"", "packageManager": "vscode" },
+        { "name": "\"haack.warp-companion\"", "packageManager": "vscode" },
+        { "name": "\"ms-python.debugpy\"", "packageManager": "vscode" },
+        { "name": "\"ms-python.isort\"", "packageManager": "vscode" },
+        { "name": "\"ms-python.python\"", "packageManager": "vscode" },
+        { "name": "\"ms-python.vscode-pylance\"", "packageManager": "vscode" },
+        { "name": "\"ms-toolsai.jupyter\"", "packageManager": "vscode" },
+        {
+          "name": "\"ms-toolsai.jupyter-renderers\"",
+          "packageManager": "vscode"
+        },
+        {
+          "name": "\"ms-toolsai.vscode-jupyter-cell-tags\"",
+          "packageManager": "vscode"
+        },
+        {
+          "name": "\"ms-toolsai.vscode-jupyter-slideshow\"",
+          "packageManager": "vscode"
+        }
+      ]
+    }
+  ]
+}
