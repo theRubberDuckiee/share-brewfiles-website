@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// get id from urlparam
+const id = Astro.url.searchParams.get("id");
+---
+
+<BaseLayout title="Success!">
+  <h1>Success!</h1>
+
+  <p transition:persist>
+    Redirecting to home in <span id="seconds">3</span> seconds...
+  </p>
+
+  <script define:vars={{ id }}>
+    function initRedirect() {
+      const seconds = document.getElementById("seconds");
+      let count = 3;
+      setInterval(() => {
+        if (count > 0) {
+          count--;
+          seconds.innerText = count;
+        }
+      }, 1000);
+
+      // redirect to brew/[id]
+      if (id) {
+        setTimeout(() => {
+          window.location.href = `/brew/${id}`;
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
+      }
+    }
+
+    document.addEventListener("astro:after-swap", initRedirect());
+    window.addEventListener("DOMContentLoaded", initRedirect());
+  </script>
+</BaseLayout>

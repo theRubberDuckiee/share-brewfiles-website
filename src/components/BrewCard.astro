@@ -8,7 +8,7 @@ type Props = {
 const { entry } = Astro.props;
 ---
 
-<div>
+<div transition:name={entry.id}>
   <p>
     <strong>UserId:</strong>
     <a href={`${Astro.url.origin}/brew/${entry.id}`}>{entry.id}</a>
