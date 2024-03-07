@@ -1,16 +1,18 @@
 ---
+// COMPONENTS //
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BrewCard from "@/components/BrewCard.astro";
 
+// DATA //
+// for prod
+// const res = await fetch(`${Astro.url}api/getBrewfiles.json`);
+// const brewfiles: Brews = await res.json();
+
+// for dev only so I don’t burn through reads from firebase
+import brewfiles from "../data/sampleDocuments.json";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <h1>Brewfiles</h1>
+  {brewfiles.brews.map((brew) => <BrewCard entry={brew} />)}
+</BaseLayout>

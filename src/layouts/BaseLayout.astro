@@ -1,0 +1,27 @@
+---
+import { baseData } from "@/data/siteData";
+import { ViewTransitions } from "astro:transitions";
+
+const { title = baseData.title, description = baseData.description } =
+  Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <ViewTransitions />
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>
