@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^7.3.5",
     "astro": "^4.4.13",
     "firebase": "^10.8.1"
   }
