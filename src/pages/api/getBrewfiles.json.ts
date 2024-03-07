@@ -7,6 +7,7 @@ export const GET: APIRoute = async ({ request }) => {
   // get searchParams from request
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
+  console.log("🚀 ~ constGET:APIRoute= ~ id:", id);
 
   // optionally filter per param
   if (id) {

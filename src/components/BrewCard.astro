@@ -11,7 +11,7 @@ const { entry } = Astro.props;
 <div>
   <p>
     <strong>UserId:</strong>
-    {entry.id}
+    <a href={`${Astro.url.origin}/brew/${entry.id}`}>{entry.id}</a>
   </p>
   {
     entry.data.map((d) => (

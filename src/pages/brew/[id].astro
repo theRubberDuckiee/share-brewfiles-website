@@ -1,0 +1,24 @@
+---
+import BrewCard from "@/components/BrewCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { Brews, BrewsItem } from "@/types/brews";
+
+// for PROD
+// const { id } = Astro.params;
+// const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
+
+// if (!res.ok) return Astro.redirect("/404");
+// const brews: Brews = await res.json();
+
+// const entry = brews.brews[0];
+// if (!entry) return Astro.redirect("/404");
+
+// for dev only so I don’t burn through reads from firebase
+import brewEntry from "@/data/sampleDoc.json";
+const entry = brewEntry.brews[0];
+---
+
+<BaseLayout>
+  <h1>UserId: {entry.id}</h1>
+  <BrewCard entry={entry} />
+</BaseLayout>
