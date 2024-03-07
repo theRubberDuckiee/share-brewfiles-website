@@ -1,0 +1,24 @@
+---
+import type { BrewsItem } from "@/types/brews";
+
+type Props = {
+  entry: BrewsItem;
+};
+
+const { entry } = Astro.props;
+---
+
+<div>
+  <p>
+    <strong>UserId:</strong>
+    {entry.id}
+  </p>
+  {
+    entry.data.map((d) => (
+      <ul>
+        <li>{d.name}</li>
+        <li>{d.packageManager}</li>
+      </ul>
+    ))
+  }
+</div>

@@ -6,7 +6,8 @@ import type { Brews } from "@/types/brews";
 // const brewfiles: Brews = await res.json();
 
 // for dev only so I don’t burn through reads from firebase
-// import brewfiles from "../data/sampleDocuments.json";
+import brewfiles from "../data/sampleDocuments.json";
+import BrewCard from "@/components/BrewCard.astro";
 ---
 
 <html lang="en">
@@ -19,5 +20,6 @@ import type { Brews } from "@/types/brews";
   </head>
   <body>
     <h1>Brewfiles</h1>
+    {brewfiles.brews.map((brew) => <BrewCard entry={brew} />)}
   </body>
 </html>

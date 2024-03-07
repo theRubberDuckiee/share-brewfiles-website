@@ -2,7 +2,7 @@ export type Brews = {
   brews: BrewsItem[];
 };
 
-type BrewsItem = {
+export type BrewsItem = {
   id: string;
   data: BrewEntry[];
 };
