@@ -21,6 +21,12 @@ export default {
           bluelight: "#7EB1Fd",
         },
       },
+      backdropBlur: {
+        "4xl": "160px",
+      },
+      opacity: {
+        7: ".075",
+      },
       fontFamily: {
         sans: ["DM Sans Variable", ...defaultTheme.fontFamily.sans],
         mono: ["DM Mono", ...defaultTheme.fontFamily.mono],

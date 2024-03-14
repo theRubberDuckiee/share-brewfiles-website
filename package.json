@@ -15,7 +15,10 @@
     "@fontsource-variable/dm-sans": "^5.0.4",
     "@fontsource/dm-mono": "^5.0.19",
     "astro": "^4.4.13",
+    "astro-icon": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
     "firebase": "^10.8.1",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1"
   }
 }

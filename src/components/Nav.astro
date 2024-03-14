@@ -1,0 +1,15 @@
+---
+import { Icon } from "astro-icon/components";
+import Link from "./ui/Link.astro";
+---
+
+<nav
+  class="mt-4 flex items-center gap-4 justify-self-center bg-white/7 py-2 px-4 rounded-full backdrop-blur-4xl"
+>
+  <Icon name="hamburger" size={16} aria-hidden="true" />
+  <Link href="/">Home</Link>
+  <p><span id="num_uploaded">0</span> files uploaded</p>
+  <button id="info-btn" aria-label="Show Info">
+    <Icon name="info" size={24} aria-hidden="true" />
+  </button>
+</nav>
