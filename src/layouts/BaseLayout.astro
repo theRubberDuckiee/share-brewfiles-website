@@ -2,6 +2,10 @@
 import { baseData } from "@/data/siteData";
 import { ViewTransitions } from "astro:transitions";
 
+// fonts
+import "@fontsource/dm-mono";
+import "@fontsource-variable/dm-sans";
+
 const { title = baseData.title, description = baseData.description } =
   Astro.props;
 ---
@@ -16,7 +20,7 @@ const { title = baseData.title, description = baseData.description } =
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body>
+  <body class="bg-bkg text-white">
     <nav>
       <a href="/">Home</a>
     </nav>
