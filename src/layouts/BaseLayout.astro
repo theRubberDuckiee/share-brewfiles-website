@@ -5,6 +5,7 @@ import { ViewTransitions } from "astro:transitions";
 // fonts
 import "@fontsource/dm-mono";
 import "@fontsource-variable/dm-sans";
+import Lines from "@/components/ui/Lines.astro";
 
 const { title = baseData.title, description = baseData.description } =
   Astro.props;
@@ -21,11 +22,16 @@ const { title = baseData.title, description = baseData.description } =
     <ViewTransitions />
   </head>
   <body class="bg-bkg text-white">
-    <nav>
-      <a href="/">Home</a>
-    </nav>
-    <main>
-      <slot />
-    </main>
+    <div class="max-w-[2200px] mx-auto relative">
+      <Lines />
+      <div class="grid">
+        <nav>
+          <a href="/">Home</a>
+        </nav>
+        <main>
+          <slot />
+        </main>
+      </div>
+    </div>
   </body>
 </html>
