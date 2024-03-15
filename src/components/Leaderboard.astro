@@ -1,0 +1,13 @@
+---
+import BrewCard from "@/components/PackageRow.astro";
+// for prod
+// const res = await fetch(`${Astro.url}api/getBrewfiles.json`);
+// const brewfiles: Brews = await res.json();
+import brewfiles from "../data/sampleDocuments.json";
+---
+
+<div class="container">
+  <div class="flex justify-between items-end">
+    <h2 class="text-balance">Who’s in the lead?</h2>
+  </div>
+</div>

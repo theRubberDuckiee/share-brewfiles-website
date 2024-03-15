@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cva, type VariantProps } from "class-variance-authority";
+import { twMerge } from "tailwind-merge";
+
+export const tagOptions = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
+
+const heading = cva("text-balance leading-heading font-bold", {
+  variants: {
+    variant: {
+      default: "",
+      accent: "text-accent",
+    },
+    size: {
+      xs: "text-md",
+      sm: "text-xl",
+      md: "text-2xl",
+      lg: "text-3xl",
+      xl: "text-4xl",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+    size: "md",
+  },
+});
+
+export interface Props extends VariantProps<typeof heading> {
+  tagType: (typeof tagOptions)[number];
+  classes?: string;
+}
+
+const { classes, size, tagType, variant, ...rest } = Astro.props;
+
+const Tag = tagType;
+---
+
+<Tag class:list={[twMerge(heading({ size, variant }), classes)]} {...rest}>
+  <slot />
+</Tag>
