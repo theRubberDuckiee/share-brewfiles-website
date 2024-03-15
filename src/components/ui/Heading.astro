@@ -5,21 +5,24 @@ import { twMerge } from "tailwind-merge";
 
 export const tagOptions = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
-const heading = cva("text-balance leading-heading font-bold", {
+const heading = cva("text-balance leading-heading", {
   variants: {
     variant: {
       default: "",
       accent: "text-accent",
     },
+    uppercase: {
+      true: "uppercase",
+      false: "",
+    },
     size: {
-      xs: "text-md",
       sm: "text-xl",
       md: "text-2xl",
-      lg: "text-3xl",
-      xl: "text-4xl",
+      lg: "text-8xl",
     },
   },
   defaultVariants: {
+    uppercase: false,
     variant: "default",
     size: "md",
   },
@@ -30,11 +33,14 @@ export interface Props extends VariantProps<typeof heading> {
   classes?: string;
 }
 
-const { classes, size, tagType, variant, ...rest } = Astro.props;
+const { classes, size, tagType, variant, uppercase, ...rest } = Astro.props;
 
 const Tag = tagType;
 ---
 
-<Tag class:list={[twMerge(heading({ size, variant }), classes)]} {...rest}>
+<Tag
+  class:list={[twMerge(heading({ size, variant, uppercase }), classes)]}
+  {...rest}
+>
   <slot />
 </Tag>

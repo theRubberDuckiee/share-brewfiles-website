@@ -28,6 +28,12 @@ export default {
         "4xl": "160px",
         "5xl": "320px",
       },
+      leading: {
+        heading: "1.1",
+      },
+      maxWidth: {
+        heading: "570px",
+      },
       opacity: {
         7: ".075",
       },
