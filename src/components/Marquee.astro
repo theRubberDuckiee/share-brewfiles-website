@@ -10,11 +10,13 @@ const brews = [
   { name: "openssl@3", color: "bg-accent-bluemedium" },
   { name: "readline", color: "bg-accent-orange" },
   { name: "lazydocker", color: "bg-accent-teal" },
+  { name: "fzf", color: "bg-accent-pink" },
+  { name: "lolcat", color: "bg-accent-green" },
 ];
 ---
 
 <div class="relative">
-  <div class="absolute flex justify-center overflow-x-hidden marquee">
+  <div class="absolute flex overflow-x-hidden marquee w-full">
     <div class="py-12 animate-marquee whitespace-nowrap flex gap-12 px-6">
       {
         brews.map((brew) => (
