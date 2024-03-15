@@ -1,0 +1,44 @@
+---
+import Heading from "../ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+import Link from "../ui/Link.astro";
+import LeaderboardList from "./LeaderboardList.astro";
+---
+
+<section class="container" aria-label="Brewfiles Leaderboard">
+  <div class="grid gap-20">
+    <div class="flex justify-between items-end flex-wrap">
+      <Heading
+        tagType="h2"
+        size="lg"
+        classes="flex items-center max-w-heading flex-wrap gap-2"
+      >
+        <div class="flex gap-4">
+          <div class="px-12 py-6 bg-accent-bluemedium rounded-lg max-w-fit">
+            <Icon name="trophy" width={59} height={47} aria-hidden="true" />
+          </div>
+          <span>Who’s</span>
+        </div>
+        <span>in the lead?</span>
+      </Heading>
+      <Link href="brewfiles" size="large" variant={"text"}>
+        <span>See all Brewfiles</span>
+        <div
+          class="bg-white/7 size-9 grid place-items-center rounded-full -mr-5"
+        >
+          <Icon name="external-link" size={13} aria-hidden="true" />
+        </div>
+      </Link>
+    </div>
+    <div class="grid gap-6">
+      <div class="flex justify-between text-white/50">
+        <div class="flex gap-4">
+          <p class="md:w-36">Rank</p>
+          <p>Package</p>
+        </div>
+        <p>Downloads</p>
+      </div>
+      <LeaderboardList />
+    </div>
+  </div>
+</section>
