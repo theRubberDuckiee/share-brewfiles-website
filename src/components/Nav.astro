@@ -1,19 +1,83 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "./ui/Link.astro";
+import Code from "./ui/Code.astro";
+import { keyLinks } from "@/data/siteData";
 ---
 
-<nav
-  class="mt-4 flex items-center gap-4 justify-self-center bg-white/7 py-2 px-4 rounded-full backdrop-blur-4xl"
->
-  <Icon name="hamburger" size={16} aria-hidden="true" />
-  <Link href="/">Share Brewfiles</Link>
-  <p>
-    <span id="num_uploaded" class="w-3 inline-block">0</span> files uploaded
-  </p>
-  <button id="info-btn" aria-label="Show Info">
-    <Icon name="info" size={24} aria-hidden="true" />
-  </button>
+<div id="backdrop" class="hidden absolute inset-0 z-40"></div>
+
+<nav class="relative mt-4 flex justify-self-center z-50">
+  <div
+    class="flex gap-4 items-center backdrop-blur-4xl py-2 px-4 rounded-full z-50 bg-white/7"
+  >
+    <Icon name="hamburger" size={16} aria-hidden="true" />
+    <Link href="/">Share Brewfiles</Link>
+    <p>
+      <span id="num_uploaded" class="w-3 inline-block">0</span> files uploaded
+    </p>
+    <button
+      id="info-btn"
+      aria-label="Show Info"
+      aria-expanded="false"
+      aria-pressed="false"
+      aria-controls="panel"
+      class="aria-pressed:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-transparent transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
+    >
+      <Icon name="info" size={24} aria-hidden="true" />
+    </button>
+  </div>
+  <div
+    aria-labelledby="info-btn"
+    id="panel"
+    class="hidden gap-8 bg-white/5 rounded-[32px] absolute -inset-x-2 -top-2 backdrop-blur-5xl shadow-custom px-5 pt-24 pb-8 text-white/75 z-40"
+  >
+    <div class="grid gap-4">
+      <div class="grid gap-2">
+        <p class="font-bolder text-2xl text-white">What is a Brewfile?</p>
+        <p>
+          Homebrew is one of the most popular package managers for MacOS and
+          Linux. People use it to download command-line tools (like tmux,
+          LazyDocker, and NeoVim), libraries (like C, C++, and Rust), dev
+          environments (like MySQL, Apache, and Nginx), and applications (like
+          Warp, Raycast, or Zoom).
+        </p>
+      </div>
+      <p>
+        Brewfiles is just a simple txt file that includes all packages and
+        applications that are installed on the system via Homebrew.
+      </p>
+    </div>
+    <div class="grid gap-4">
+      <p class="font-bolder text-2xl text-white">Uploading a Brewfile</p>
+      <p>
+        To upload your brewfile, run the following command in your terminal:
+      </p>
+      <Code>npx dockhunt</Code>
+      <p>The command will:</p>
+      <ol class="list-inside list-decimal">
+        <li>Find the apps in your dock</li>
+        <li>Upload any icons not yet in our database</li>
+        <li>Create a dock on this website</li>
+      </ol>
+      <Link href={keyLinks.github}
+        ><span>View source code on Github</span>
+        <div
+          class="bg-white/7 size-9 grid place-items-center rounded-full -mr-2"
+        >
+          <Icon name="external-link" size={13} />
+        </div>
+      </Link>
+      <Link href={keyLinks.npm}
+        ><span>View npm package</span>
+        <div
+          class="bg-white/7 size-9 grid place-items-center rounded-full -mr-2"
+        >
+          <Icon name="external-link" size={13} />
+        </div>
+      </Link>
+    </div>
+  </div>
 </nav>
 
 <script>
@@ -42,4 +106,34 @@ import Link from "./ui/Link.astro";
     clearInterval(incrementCounter);
     numUploaded.textContent = "0";
   }
+
+  // expand info panel
+  const infoBtn = document.getElementById("info-btn") as HTMLButtonElement;
+  const infoPanel = document.getElementById("panel") as HTMLDivElement;
+  const backdrop = document.getElementById("backdrop") as HTMLDivElement;
+  const mainTag = document.querySelector("main") as HTMLDivElement;
+
+  const toggleInfoPanel = () => {
+    const isExpanded = infoPanel.classList.contains("grid");
+    infoPanel.classList.toggle("hidden");
+    infoPanel.classList.toggle("grid");
+    infoBtn.setAttribute("aria-expanded", isExpanded ? "false" : "true");
+    infoBtn.setAttribute("aria-pressed", isExpanded ? "false" : "true");
+    if (isExpanded) {
+      backdrop.classList.add("hidden");
+      mainTag.removeAttribute("inert");
+    } else {
+      backdrop.classList.remove("hidden");
+      mainTag.setAttribute("inert", "");
+    }
+  };
+
+  backdrop.addEventListener("click", toggleInfoPanel);
+  infoBtn.addEventListener("click", toggleInfoPanel);
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && infoPanel.classList.contains("grid")) {
+      toggleInfoPanel();
+      infoBtn.focus();
+    }
+  });
 </script>

@@ -21,8 +21,12 @@ export default {
           bluelight: "#7EB1Fd",
         },
       },
+      boxShadow: {
+        custom: "0 0 32px 0 rgba(0, 0, 0, 0.25)",
+      },
       backdropBlur: {
         "4xl": "160px",
+        "5xl": "320px",
       },
       opacity: {
         7: ".075",
