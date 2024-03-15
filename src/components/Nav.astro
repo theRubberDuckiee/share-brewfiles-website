@@ -13,8 +13,8 @@ import { keyLinks } from "@/data/siteData";
   >
     <Icon name="hamburger" size={16} aria-hidden="true" />
     <Link href="/">Share Brewfiles</Link>
-    <p>
-      <span id="num_uploaded" class="w-3 inline-block">0</span> files uploaded
+    <p class="flex gap-1">
+      <span id="num_uploaded" class="w-3">0</span> files uploaded
     </p>
     <button
       id="info-btn"
@@ -83,7 +83,7 @@ import { keyLinks } from "@/data/siteData";
 <script>
   import type { Brews } from "@/types/brews";
   // for DEV
-  import brewfiles from "../data/sampleDocuments.json";
+  // import brewfiles from "../data/sampleDocuments.json";
 
   const numUploaded = document.getElementById(
     "num_uploaded"
@@ -96,8 +96,8 @@ import { keyLinks } from "@/data/siteData";
   }, 100);
 
   try {
-    // const res = await fetch(`/api/getBrewfiles.json`);
-    // const brewfiles: Brews = await res.json();
+    const res = await fetch(`/api/getBrewfiles.json`);
+    const brewfiles: Brews = await res.json();
     clearInterval(incrementCounter);
     numUploaded.classList.remove("w-3");
     numUploaded.textContent = brewfiles.brews.length.toString();
