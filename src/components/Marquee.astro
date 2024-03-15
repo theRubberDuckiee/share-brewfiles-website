@@ -13,29 +13,30 @@ const brews = [
 ];
 ---
 
-<div class="relative flex overflow-x-hidden marquee">
-  <div class="py-12 animate-marquee whitespace-nowrap flex gap-12 px-6">
-    {
-      brews.map((brew) => (
-        <div class="flex gap-2 place-items-center">
-          <p class:list={["size-2 rounded-full", brew.color]} />
-          <p>{brew.name}</p>
-        </div>
-      ))
-    }
-  </div>
-
-  <div
-    class="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex gap-12 px-6"
-  >
-    {
-      brews.map((brew) => (
-        <div class="flex gap-2 place-items-center">
-          <p class:list={["size-2 rounded-full", brew.color]} />
-          <p>{brew.name}</p>
-        </div>
-      ))
-    }
+<div class="relative">
+  <div class="absolute flex justify-center overflow-x-hidden marquee">
+    <div class="py-12 animate-marquee whitespace-nowrap flex gap-12 px-6">
+      {
+        brews.map((brew) => (
+          <div class="flex gap-2 place-items-center">
+            <p class:list={["size-2 rounded-full", brew.color]} />
+            <p>{brew.name}</p>
+          </div>
+        ))
+      }
+    </div>
+    <div
+      class="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex gap-12 px-6"
+    >
+      {
+        brews.map((brew) => (
+          <div class="flex gap-2 place-items-center">
+            <p class:list={["size-2 rounded-full", brew.color]} />
+            <p>{brew.name}</p>
+          </div>
+        ))
+      }
+    </div>
   </div>
 </div>
 
