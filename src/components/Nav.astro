@@ -7,9 +7,39 @@ import Link from "./ui/Link.astro";
   class="mt-4 flex items-center gap-4 justify-self-center bg-white/7 py-2 px-4 rounded-full backdrop-blur-4xl"
 >
   <Icon name="hamburger" size={16} aria-hidden="true" />
-  <Link href="/">Home</Link>
-  <p><span id="num_uploaded">0</span> files uploaded</p>
+  <Link href="/">Share Brewfiles</Link>
+  <p>
+    <span id="num_uploaded" class="w-3 inline-block">0</span> files uploaded
+  </p>
   <button id="info-btn" aria-label="Show Info">
     <Icon name="info" size={24} aria-hidden="true" />
   </button>
 </nav>
+
+<script>
+  import type { Brews } from "@/types/brews";
+  // for DEV
+  import brewfiles from "../data/sampleDocuments.json";
+
+  const numUploaded = document.getElementById(
+    "num_uploaded"
+  ) as HTMLSpanElement;
+
+  const incrementCounter = setInterval(() => {
+    numUploaded.textContent = (
+      parseInt(numUploaded.textContent as string) + 1
+    ).toString();
+  }, 100);
+
+  try {
+    // const res = await fetch(`/api/getBrewfiles.json`);
+    // const brewfiles: Brews = await res.json();
+    clearInterval(incrementCounter);
+    numUploaded.classList.remove("w-3");
+    numUploaded.textContent = brewfiles.brews.length.toString();
+  } catch (e) {
+    console.error(e);
+    clearInterval(incrementCounter);
+    numUploaded.textContent = "0";
+  }
+</script>
