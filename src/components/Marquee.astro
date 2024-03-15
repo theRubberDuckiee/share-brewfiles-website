@@ -1,0 +1,46 @@
+---
+const brews = [
+  { name: "acar1005/formulas", color: "bg-accent-pink" },
+  { name: "jandebobbeleer/oh-my-posh", color: "bg-accent-green" },
+  { name: "python@3.11", color: "bg-accent-bluemedium" },
+  { name: "autojump", color: "bg-accent-orange" },
+  { name: "docker-compose", color: "bg-accent-teal" },
+  { name: "exa", color: "bg-accent-pink" },
+  { name: "ffmpeg", color: "bg-accent-green" },
+  { name: "openssl@3", color: "bg-accent-bluemedium" },
+  { name: "readline", color: "bg-accent-orange" },
+  { name: "lazydocker", color: "bg-accent-teal" },
+];
+---
+
+<div class="relative flex overflow-x-hidden marquee">
+  <div class="py-12 animate-marquee whitespace-nowrap flex gap-12 px-6">
+    {
+      brews.map((brew) => (
+        <div class="flex gap-2 place-items-center">
+          <p class:list={["size-2 rounded-full", brew.color]} />
+          <p>{brew.name}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div
+    class="absolute top-0 py-12 animate-marquee2 whitespace-nowrap flex gap-12 px-6"
+  >
+    {
+      brews.map((brew) => (
+        <div class="flex gap-2 place-items-center">
+          <p class:list={["size-2 rounded-full", brew.color]} />
+          <p>{brew.name}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .marquee:hover > * {
+    animation-play-state: paused;
+  }
+</style>

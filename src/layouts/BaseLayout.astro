@@ -23,14 +23,30 @@ const { title = baseData.title, description = baseData.description } =
     <ViewTransitions />
   </head>
   <body class="bg-bkg text-white leading-[1.35]">
-    <div class="max-w-[2200px] mx-auto relative min-h-screen">
+    <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
       <Lines />
-      <div class="grid">
+      <div class="grid gap-8">
         <Nav />
         <main>
           <slot />
         </main>
       </div>
     </div>
+    <style is:global>
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
   </body>
 </html>
