@@ -7,12 +7,12 @@ import BrewCard from "@/components/BrewCard.astro";
 // for prod
 // const res = await fetch(`${Astro.url}api/getBrewfiles.json`);
 // const brewfiles: Brews = await res.json();
+import brewfiles from "../data/sampleDocuments.json";
 
 // for dev only so I don’t burn through reads from firebase
-import brewfiles from "../data/sampleDocuments.json";
+import Hero from "@/components/Hero.astro";
 ---
 
 <BaseLayout>
-  <h1>Brewfiles</h1>
-  {brewfiles.brews.map((brew) => <BrewCard entry={brew} />)}
+  <Hero />
 </BaseLayout>

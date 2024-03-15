@@ -4,18 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 
 const link = cva(
-  "flex items-center gap-2 max-w-fit focus:outline-transparent transition-all focus-visible:ring-4 ring-offset-4 leading-tight",
+  "flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight",
   {
     variants: {
       variant: {
         default:
           "bg-white/10 ring-offset-bkg ring-accent-bluemedium rounded-full hover:bg-white/20",
-        accent: "",
+        accent:
+          "bg-accent-bluedark rounded-full text-2xl hover:bg-accent-bluemedium ring-offset-bkg ring-accent-bluemedium",
         text: "",
         icon: "",
       },
       size: {
         default: "py-2 px-4",
+        large: "px-8 py-3 gap-4",
         icon: "",
       },
     },

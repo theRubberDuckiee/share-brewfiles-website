@@ -1,0 +1,28 @@
+---
+import { Icon } from "astro-icon/components";
+import Link from "./ui/Link.astro";
+import { keyLinks } from "@/data/siteData";
+---
+
+<header
+  class="grid place-items-center gap-12 place-content-center min-h-[85vh]"
+>
+  <h1
+    class="flex gap-2 flex-wrap font-mono text-7xl uppercase leading-none tracking-widest justify-center items-center"
+  >
+    <span class="px-8 py-5 bg-white/5 rounded-2xl backdrop-blur-4xl"
+      >Share
+    </span>
+    <span class="px-8 py-5 bg-white/5 rounded-full backdrop-blur-4xl">your</span
+    >
+    <span class="px-8 py-5 bg-white/5 rounded-2xl backdrop-blur-4xl"
+      >Brewfiles</span
+    >
+  </h1>
+  <Link variant="accent" size="large" href={keyLinks.npm}
+    ><span> Share Yours </span>
+    <div class="bg-white/7 size-9 grid place-items-center rounded-full -mr-5">
+      <Icon name="external-link" size={13} aria-hidden="true" />
+    </div>
+  </Link>
+</header>
