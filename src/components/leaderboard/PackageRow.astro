@@ -26,19 +26,76 @@ const { entry, index } = Astro.props;
       >
         {index.toString().padStart(2, "0")}
       </p>
-      <p class="text-5xl uppercase tracking-widest" id={`entry-${index}`}>
-        {entry.name}
+      <p
+        class="text-5xl uppercase tracking-widest"
+        id={`entry-${index}`}
+        data-packageName
+      >
       </p>
     </div>
-    <p class="text-5xl uppercase tracking-widest" id={`downloads-${index}`}>
-      {entry.downloads.toString().padStart(3, "0")}
+    <p
+      class="text-5xl uppercase tracking-widest"
+      id={`downloads-${index}`}
+      data-downloadValue
+    >
     </p>
   </a>
 </li>
 
 <script>
   // add incrementer/randomizer for initial data load
-  // add new state once data is loaded
+  const dataRows = document.querySelectorAll(
+    "[data-row]"
+  ) as NodeListOf<HTMLAnchorElement>;
+
+  const packageNames = document.querySelectorAll(
+    "[data-packageName]"
+  ) as NodeListOf<HTMLParagraphElement>;
+
+  const downloadValues = document.querySelectorAll(
+    "[data-downloadValue]"
+  ) as NodeListOf<HTMLParagraphElement>;
+
+  function getRandomWord(min = 6, max = 9) {
+    const letters = "abcdefghijklmnopqrstuvwxyz";
+    // return a string of min-max length
+    return letters
+      .split("")
+      .sort(() => Math.random() - 0.5)
+      .slice(min, Math.ceil(Math.random() * max + max))
+      .join("");
+  }
+
+  function getRandomNumber(min = 40, max = 999) {
+    return Math.floor(Math.random() * (max - min) + min)
+      .toString()
+      .padStart(3, "0");
+  }
+
+  async function fetchLeaderboardData() {
+    // fetch from api, but don't block the initial load
+    const nameIntervals = new Map();
+    const downloadIntervals = new Map();
+
+    packageNames.forEach(async (p, i) => {
+      nameIntervals.set(
+        i,
+        setInterval(() => (p.textContent = getRandomWord()), 60)
+      );
+    });
+
+    downloadValues.forEach(async (p, i) => {
+      downloadIntervals.set(
+        i,
+        setInterval(() => (p.textContent = getRandomNumber()), 60)
+      );
+    });
+
+    // fetch data can update a, names, and downloads and clear intervals
+  }
+
+  fetchLeaderboardData();
+
   // keyboard shortcuts
   const rows = [
     ...document.querySelectorAll("[data-row]"),
