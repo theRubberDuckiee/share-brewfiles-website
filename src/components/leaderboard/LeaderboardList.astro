@@ -1,16 +1,21 @@
 ---
 // for prod
-// const res = await fetch(`${Astro.url}api/getBrewfiles.json`);
-// const brewfiles: Brews = await res.json();
 import initialData from "@/data/leadershipInitialData";
-import brewfiles from "../../data/sampleDocuments.json";
 import PackageRow from "./PackageRow.astro";
 ---
 
 <ul class="grid gap-4" id="leaderboard-list">
-  {initialData.map((entry, i) => <PackageRow entry={entry} index={i + 1} />)}
+  {
+    Astro.url.pathname === "/brewfiles"
+      ? Array.from({ length: 100 }).map((_, i, arr) => (
+          <PackageRow isLast={i === arr.length - 1} index={i + 1} />
+        ))
+      : initialData.map((_, i, arr) => (
+          <PackageRow isLast={i === arr.length - 1} index={i + 1} />
+        ))
+  }
 </ul>
 
 <script>
-  // keyboard events for leaderboard list focus
+  import "@/lib/handlePackageRowLoad";
 </script>

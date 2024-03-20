@@ -1,17 +1,17 @@
 ---
-import type { PackageEntry } from "@/types/packageEntry";
+import { getRandomNumber, getRandomWord } from "@/lib/getRandomValue";
 
 type Props = {
-  entry: PackageEntry;
+  isLast?: boolean;
   index: number;
 };
 
-const { entry, index } = Astro.props;
+const { index, isLast } = Astro.props;
 ---
 
 <li class="relative">
   {
-    index !== 10 && (
+    !isLast && (
       <div class="absolute -bottom-2 border-b border-white/15 w-[2200px] -ml-[20%]" />
     )
   }
@@ -31,6 +31,7 @@ const { entry, index } = Astro.props;
         id={`entry-${index}`}
         data-packageName
       >
+        {getRandomWord()}
       </p>
     </div>
     <p
@@ -38,95 +39,7 @@ const { entry, index } = Astro.props;
       id={`downloads-${index}`}
       data-downloadValue
     >
+      {getRandomNumber()}
     </p>
   </a>
 </li>
-
-<script>
-  // add incrementer/randomizer for initial data load
-  const dataRows = document.querySelectorAll(
-    "[data-row]"
-  ) as NodeListOf<HTMLAnchorElement>;
-
-  const packageNames = document.querySelectorAll(
-    "[data-packageName]"
-  ) as NodeListOf<HTMLParagraphElement>;
-
-  const downloadValues = document.querySelectorAll(
-    "[data-downloadValue]"
-  ) as NodeListOf<HTMLParagraphElement>;
-
-  function getRandomWord(min = 6, max = 9) {
-    const letters = "abcdefghijklmnopqrstuvwxyz";
-    // return a string of min-max length
-    return letters
-      .split("")
-      .sort(() => Math.random() - 0.5)
-      .slice(min, Math.ceil(Math.random() * max + max))
-      .join("");
-  }
-
-  function getRandomNumber(min = 40, max = 999) {
-    return Math.floor(Math.random() * (max - min) + min)
-      .toString()
-      .padStart(3, "0");
-  }
-
-  async function fetchLeaderboardData() {
-    // fetch from api, but don't block the initial load
-    const nameIntervals = new Map();
-    const downloadIntervals = new Map();
-
-    packageNames.forEach(async (p, i) => {
-      nameIntervals.set(
-        i,
-        setInterval(() => (p.textContent = getRandomWord()), 60)
-      );
-    });
-
-    downloadValues.forEach(async (p, i) => {
-      downloadIntervals.set(
-        i,
-        setInterval(() => (p.textContent = getRandomNumber()), 60)
-      );
-    });
-
-    // fetch data can update a, names, and downloads and clear intervals
-  }
-
-  fetchLeaderboardData();
-
-  // keyboard shortcuts
-  const rows = [
-    ...document.querySelectorAll("[data-row]"),
-  ] as HTMLAnchorElement[];
-
-  rows.forEach((row, idx) => {
-    row.addEventListener("keydown", (e) => {
-      if (
-        e.key === "ArrowUp" ||
-        e.key === "ArrowDown" ||
-        e.key === "Home" ||
-        e.key === "End"
-      ) {
-        e.preventDefault();
-      }
-      switch (e.key) {
-        case "ArrowUp":
-          idx > 0 ? rows[idx - 1].focus() : rows[rows.length - 1].focus();
-          break;
-        case "ArrowDown":
-          idx < rows.length - 1 ? rows[idx + 1].focus() : rows[0].focus();
-          break;
-        case "Home":
-          rows[0].focus();
-          break;
-        case "End":
-          rows[rows.length - 1].focus();
-          break;
-        default:
-          break;
-      }
-    });
-  });
-</script>

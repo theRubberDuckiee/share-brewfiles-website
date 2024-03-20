@@ -1,6 +1,5 @@
 ---
 import { baseData } from "@/data/siteData";
-import { ViewTransitions } from "astro:transitions";
 
 // fonts
 import "@fontsource/dm-mono";
@@ -23,8 +22,6 @@ const { title = baseData.title, description = baseData.description } =
     <meta name="theme-color" content="#111111" />
     <meta name="color-scheme" content="dark" />
     <title>{title}</title>
-
-    <ViewTransitions />
   </head>
   <body class="bg-bkg text-white leading-[1.35]">
     <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
