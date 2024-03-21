@@ -9,9 +9,18 @@ import { keyLinks } from "@/data/siteData";
 
 <nav class="relative mt-4 flex justify-self-center z-50">
   <div
-    class="flex gap-4 items-center backdrop-blur-4xl py-2 px-4 rounded-full z-50 bg-white/7"
+    class="flex gap-4 items-center backdrop-blur-4xl p-2 rounded-full z-50 bg-white/7"
   >
-    <Icon name="hamburger" size={16} aria-hidden="true" />
+    <button
+      id="nav-btn"
+      aria-label="Show Nav"
+      aria-expanded="false"
+      aria-pressed="false"
+      aria-controls="nav-panel"
+      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -mr-2"
+    >
+      <Icon name="hamburger" size={16} aria-hidden="true" />
+    </button>
     <Link href="/">Share Brewfiles</Link>
     <p class="flex gap-1">
       <span id="num_uploaded" class="w-3">0</span> files uploaded
@@ -21,15 +30,15 @@ import { keyLinks } from "@/data/siteData";
       aria-label="Show Info"
       aria-expanded="false"
       aria-pressed="false"
-      aria-controls="panel"
-      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
+      aria-controls="info-panel"
+      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2"
     >
       <Icon name="info" size={24} aria-hidden="true" />
     </button>
   </div>
   <div
     aria-labelledby="info-btn"
-    id="panel"
+    id="info-panel"
     class="hidden gap-8 bg-white/5 rounded-[32px] absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-5 pt-24 pb-8 text-white/75 z-40"
   >
     <div class="grid gap-4">
@@ -78,62 +87,19 @@ import { keyLinks } from "@/data/siteData";
       </Link>
     </div>
   </div>
+  <div
+    aria-labelledby="nav-btn"
+    id="nav-panel"
+    class="hidden bg-white/5 rounded-t-[32px] rounded-b-3xl absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-2 pt-[70px] pb-2 text-white/75 z-40"
+  >
+    <Link variant={"nav"} href="/brewfiles">All Brewfiles</Link>
+    <Link variant={"nav"} href={keyLinks.github}
+      >View source code on Github</Link
+    >
+    <Link variant={"nav"} href={keyLinks.npm}>View npm package</Link>
+  </div>
 </nav>
 
 <script>
-  import type { Brews } from "@/types/brews";
-  // for DEV
-  // import brewfiles from "../data/sampleDocuments.json";
-
-  const numUploaded = document.getElementById(
-    "num_uploaded"
-  ) as HTMLSpanElement;
-
-  const incrementCounter = setInterval(() => {
-    numUploaded.textContent = (
-      parseInt(numUploaded.textContent as string) + 1
-    ).toString();
-  }, 100);
-
-  try {
-    const res = await fetch(`/api/getBrewfiles.json`);
-    const brewfiles: Brews = await res.json();
-    clearInterval(incrementCounter);
-    numUploaded.classList.remove("w-3");
-    numUploaded.textContent = brewfiles.brews.length.toString();
-  } catch (e) {
-    console.error(e);
-    clearInterval(incrementCounter);
-    numUploaded.textContent = "0";
-  }
-
-  // expand info panel
-  const infoBtn = document.getElementById("info-btn") as HTMLButtonElement;
-  const infoPanel = document.getElementById("panel") as HTMLDivElement;
-  const backdrop = document.getElementById("backdrop") as HTMLDivElement;
-  const mainTag = document.querySelector("main") as HTMLDivElement;
-
-  const toggleInfoPanel = () => {
-    const isExpanded = infoPanel.classList.contains("grid");
-    infoPanel.classList.toggle("hidden");
-    infoPanel.classList.toggle("grid");
-    infoBtn.setAttribute("aria-expanded", isExpanded ? "false" : "true");
-    infoBtn.setAttribute("aria-pressed", isExpanded ? "false" : "true");
-    if (isExpanded) {
-      backdrop.classList.add("hidden");
-      mainTag.removeAttribute("inert");
-    } else {
-      backdrop.classList.remove("hidden");
-      mainTag.setAttribute("inert", "");
-    }
-  };
-
-  backdrop.addEventListener("click", toggleInfoPanel);
-  infoBtn.addEventListener("click", toggleInfoPanel);
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && infoPanel.classList.contains("grid")) {
-      toggleInfoPanel();
-      infoBtn.focus();
-    }
-  });
+  import "@/lib/handleNav";
 </script>
