@@ -4,7 +4,7 @@ export const baseData = {
 };
 
 export const keyLinks = {
-  github: "https://github.com/Share-Brewfiles",
+  github: "https://github.com/theRubberDuckiee/share-brewfiles",
   npm: "https://www.npmjs.com/package/share-brewfiles",
 };
 
