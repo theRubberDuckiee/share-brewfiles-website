@@ -5,7 +5,6 @@ export default function initRowEventListeners() {
 
   rows.forEach((row, idx) => {
     row.addEventListener("keydown", (e) => {
-      console.log("here");
       if (
         e.key === "ArrowUp" ||
         e.key === "ArrowDown" ||
@@ -17,7 +16,6 @@ export default function initRowEventListeners() {
       switch (e.key) {
         case "ArrowUp":
           idx > 0 ? rows[idx - 1].focus() : rows[rows.length - 1].focus();
-          console.log(rows[rows.length - 1]);
           break;
         case "ArrowDown":
           idx < rows.length - 1 ? rows[idx + 1].focus() : rows[0].focus();

@@ -15,9 +15,9 @@ const { index, isLast } = Astro.props;
       <div class="absolute -bottom-2 border-b border-white/15 w-[2200px] -ml-[20%]" />
     )
   }
-  <a
-    href="/"
-    class="p-2 relative flex justify-between items-center font-mono hover:bg-white/5 rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg"
+  <div
+  id={`${index}`}
+    class="p-2 relative flex justify-between items-center group font-mono hover:bg-white/5 rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg"
     data-row
   >
     <div class="flex gap-8 items-center">
@@ -33,6 +33,20 @@ const { index, isLast } = Astro.props;
       >
         {getRandomWord()}
       </p>
+      <div class="flex items-center hidden group-hover:block">
+        <a 
+        class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20 mr-4" 
+        link-packageName
+        target="_blank"
+        >
+          Explore tool
+        </a>
+        <a 
+        class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20" 
+        href="/">
+          See users
+        </a>
+      </div>
     </div>
     <p
       class="text-5xl uppercase tracking-widest"
@@ -41,5 +55,7 @@ const { index, isLast } = Astro.props;
     >
       {getRandomNumber()}
     </p>
-  </a>
+  </div>
 </li>
+
+

@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import Link from "./ui/Link.astro";
-import { keyLinks } from "@/data/siteData";
 ---
 
 <header
@@ -19,7 +18,7 @@ import { keyLinks } from "@/data/siteData";
       >Brewfiles</span
     >
   </h1>
-  <Link variant="accent" size="large" href={keyLinks.npm}
+  <Link id="share-yours" variant="accent" size="large" href={"#"}
     ><span> Share Yours </span>
     <div class="bg-white/7 size-9 grid place-items-center rounded-full -mr-5">
       <Icon name="external-link" size={13} aria-hidden="true" />

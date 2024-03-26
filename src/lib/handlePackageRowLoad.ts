@@ -1,6 +1,7 @@
 import type { PackageCounted } from "@/types/packageEntry";
 import { getRandomNumber, getRandomWord } from "./getRandomValue";
 import initRowEventListeners from "./handleKeyboardForList";
+import { brewfileLinkDictionary } from "./getBrewfileLink";
 
 const dataRows = document.querySelectorAll(
   "[data-row]"
@@ -8,6 +9,10 @@ const dataRows = document.querySelectorAll(
 
 const packageNames = document.querySelectorAll(
   "[data-packageName]"
+) as NodeListOf<HTMLParagraphElement>;
+
+const packageLinks = document.querySelectorAll(
+  "[link-packageName]"
 ) as NodeListOf<HTMLParagraphElement>;
 
 const downloadValues = document.querySelectorAll(
@@ -45,11 +50,11 @@ async function fetchLeaderboardData() {
     clearInterval(nameIntervals.get(i));
     clearInterval(downloadIntervals.get(i));
     packageNames[i].textContent = name;
+    packageLinks[i].setAttribute("href", brewfileLinkDictionary[name])
     downloadValues[i].textContent = String(downloads);
     dataRows[i].href = `/`;
     // remove unused data items
     if (i === data.length - 1) {
-      console.log("last row", i);
       const remainingDataRows = [...dataRows].slice(i + 1);
       remainingDataRows.forEach((row) => {
         row.parentElement?.remove();

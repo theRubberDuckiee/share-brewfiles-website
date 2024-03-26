@@ -21,8 +21,8 @@ import LeaderboardList from "./LeaderboardList.astro";
         </div>
         <span>in the lead?</span>
       </Heading>
-      <Link href="brewfiles" size="large" variant={"text"}>
-        <span>See all Brewfiles</span>
+      <Link id="leaderboardLink" href="leaderboard" size="large" variant={"text"}>
+        <span>See Full Leaderboard</span>
         <div
           class="bg-white/7 size-9 grid place-items-center rounded-full -mr-5"
         >
@@ -42,3 +42,11 @@ import LeaderboardList from "./LeaderboardList.astro";
     </div>
   </div>
 </section>
+
+<script>
+
+  const seeFullLeaderboardSpan = document.querySelector('[id="leaderboardLink"]')
+  if (seeFullLeaderboardSpan && window.location.pathname !== '/') {
+    seeFullLeaderboardSpan.style.display = 'none';
+  }
+</script>
