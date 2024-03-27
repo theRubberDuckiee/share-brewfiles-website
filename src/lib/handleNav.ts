@@ -22,11 +22,13 @@ try {
 
 // expand info panel
 const infoBtn = document.getElementById("info-btn") as HTMLButtonElement;
+const shareYours = document.getElementById("share-yours") as HTMLButtonElement;
 const infoPanel = document.getElementById("info-panel") as HTMLDivElement;
 const navBtn = document.getElementById("nav-btn") as HTMLButtonElement;
 const navPanel = document.getElementById("nav-panel") as HTMLDivElement;
 const backdrop = document.getElementById("backdrop") as HTMLDivElement;
 const mainTag = document.querySelector("main") as HTMLDivElement;
+const codeContainer = document.getElementById('codeContainer');
 
 const closeAllPanels = () => {
   infoPanel.classList.add("hidden");
@@ -37,6 +39,7 @@ const closeAllPanels = () => {
   navBtn.setAttribute("aria-pressed", "false");
   backdrop.classList.add("hidden");
   mainTag.removeAttribute("inert");
+  codeContainer?.classList.remove('animate-pulse');
 };
 
 const expandPanel = ({
@@ -78,6 +81,12 @@ const togglePanel = ({
 backdrop.addEventListener("click", closeAllPanels);
 infoBtn.addEventListener("click", () =>
   togglePanel({ panelToExpand: infoPanel, btnToExpand: infoBtn })
+);
+shareYours?.addEventListener("click", () => {
+  expandPanel({ panelToExpand: infoPanel, btnToExpand: infoBtn })
+  const codeContainer = document.getElementById('codeContainer');
+  codeContainer?.classList.add('animate-pulse');
+}
 );
 navBtn.addEventListener("click", () =>
   togglePanel({ panelToExpand: navPanel, btnToExpand: navBtn })

@@ -6,8 +6,8 @@ import PackageRow from "./PackageRow.astro";
 
 <ul class="grid gap-4" id="leaderboard-list">
   {
-    Astro.url.pathname === "/brewfiles"
-      ? Array.from({ length: 100 }).map((_, i, arr) => (
+    Astro.url.pathname === "/leaderboard"
+      ? Array.from({ length: 300 }).map((_, i, arr) => (
           <PackageRow isLast={i === arr.length - 1} index={i + 1} />
         ))
       : initialData.map((_, i, arr) => (

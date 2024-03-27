@@ -8,20 +8,23 @@ import { keyLinks } from "@/data/siteData";
 <div id="backdrop" class="hidden absolute inset-0 z-40"></div>
 
 <nav class="relative mt-4 flex justify-self-center z-50">
-  <div
-    class="flex gap-4 items-center backdrop-blur-4xl p-2 rounded-full z-50 bg-white/7"
-  >
+  <div class="flex gap-4 items-center backdrop-blur-4xl p-2 rounded-full z-50 bg-white/7">
+  <div class="flex">
     <button
       id="nav-btn"
       aria-label="Show Nav"
       aria-expanded="false"
       aria-pressed="false"
       aria-controls="nav-panel"
-      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -mr-2"
+      class="flex items-center justify-center backdrop-blur-4xl hover:bg-white/5 rounded-full focus:outline-none focus-visible:ring-4 ring-offset-4 ring-offset-gray-200 ring-blue-medium p-3"
     >
-      <Icon name="hamburger" size={16} aria-hidden="true" />
+      <div class="flex items-center space-x-3">
+        <Icon name="hamburger" size={16} aria-hidden="true" />
+        <span id="selectedNavItem" class="px-2"></span>
+      </div>
     </button>
-    <Link href="/">Share Brewfiles</Link>
+  </div>  
+  <div class="flex items-center gap-3">
     <p class="flex gap-1">
       <span id="num_uploaded" class="w-3">0</span> files uploaded
     </p>
@@ -31,10 +34,22 @@ import { keyLinks } from "@/data/siteData";
       aria-expanded="false"
       aria-pressed="false"
       aria-controls="info-panel"
-      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2"
+      class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
     >
       <Icon name="info" size={24} aria-hidden="true" />
     </button>
+    <a
+      id="github-btn"
+      href={keyLinks.github}
+      target="_blank"
+      aria-label="Github Repo"
+      aria-expanded="false"
+      aria-pressed="false"
+      class="p-0 aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2 mr-2"
+      >
+      <Icon name="github" size={22} aria-hidden="true" />
+    </a>
+  </div>
   </div>
   <div
     aria-labelledby="info-btn"
@@ -62,7 +77,17 @@ import { keyLinks } from "@/data/siteData";
       <p>
         To upload your brewfile, run the following command in your terminal:
       </p>
-      <Code>npx dockhunt</Code>
+      <div class="group max-w-fit relative">
+        <a href="warp://action/new_window">
+          <Code class="animate-pulse">npx dockhunt</Code>
+        </a>
+        <p class="absolute top-1/2 left-full transform -translate-y-1/2 bg-black text-white text-center text-sm px-2 py-1.5 rounded opacity-0 transition-opacity duration-300 ml-2 w-44 opacity-0 group-hover:opacity-100">
+          Click to open command in
+          <a class="underline" href="https://warp.dev" target="_blank">Warp</a> 
+          terminal
+        </p>
+      </div>
+      
       <p>The command will:</p>
       <ol class="list-inside list-decimal">
         <li>Find the apps in your dock</li>
@@ -90,16 +115,25 @@ import { keyLinks } from "@/data/siteData";
   <div
     aria-labelledby="nav-btn"
     id="nav-panel"
-    class="hidden bg-white/5 rounded-t-[32px] rounded-b-3xl absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-2 pt-[70px] pb-2 text-white/75 z-40"
+    class="hidden bg-white/5 rounded-t-[32px] rounded-b-3xl absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-2 pt-[85px] pb-2 text-white/75 z-40"
   >
-    <Link variant={"nav"} href="/brewfiles">All Brewfiles</Link>
-    <Link variant={"nav"} href={keyLinks.github}
-      >View source code on Github</Link
-    >
-    <Link variant={"nav"} href={keyLinks.npm}>View npm package</Link>
+    <Link id='navItem' variant={"nav"} href="/">Welcome!</Link>
+    <Link id='navItem' variant={"nav"} href="/leaderboard">Leaderboard</Link>
+    <Link id='navItem' variant={"nav"} href="/brewfiles">All Brewfiles</Link>
   </div>
 </nav>
 
 <script>
   import "@/lib/handleNav";
+import { navItemDisplay } from "@/types/navItem";
+
+  const codeContainer = document.getElementById('codeContainer');
+  codeContainer?.addEventListener('mouseenter', () => {
+    codeContainer?.classList.remove('animate-pulse');
+  })
+
+  const currentPath = window.location.pathname;
+  let selectedNavItem = document.getElementById("selectedNavItem") as HTMLSpanElement;
+  selectedNavItem.textContent = navItemDisplay[currentPath];
+
 </script>
