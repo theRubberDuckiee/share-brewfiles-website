@@ -1,6 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
 import Button from "./Button.astro";
+
+// get params for page
+const url = new URL(Astro.request.url);
+const filter = url.searchParams.get("filter") || "";
 ---
 
 <form
@@ -10,6 +14,7 @@ import Button from "./Button.astro";
     type="search"
     name="brew-search"
     id="brew-search"
+    value={filter}
     class="bg-transparent focus:outline-none w-full text-3xl uppercase tracking-widest font-mono"
   />
   <Button variant={"text"} size={"round"}>
