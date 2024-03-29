@@ -45,7 +45,12 @@ const { item } = Astro.props;
       aria-controls={`info-panel-${item.id}`}
       class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium peer"
     >
-      <Icon name="info" size={24} aria-hidden="true" />
+      <Icon
+        name="info"
+        size={24}
+        aria-hidden="true"
+        class="pointer-events-none"
+      />
     </button>
     <div
       id={`info-panel-${item.id}`}

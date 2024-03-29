@@ -1,35 +1,57 @@
 ---
-export const prerender = false;
-
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Input from "@/components/ui/Input.astro";
 import BrewCard from "@/components/brewfiles/BrewCard.astro";
-import type { Brews } from "@/types/brews";
+import type { BrewsItem } from "@/types/brews";
+
+const url = new URL(Astro.request.url);
+const filter = url.searchParams.get("filter") || "";
 
 const docs = await fetch(`${Astro.url.origin}/api/getBrewfiles.json`);
-const sampleDocs: Brews = await docs.json();
+const brews = await docs.json();
+
+const filteredBrews = brews.brews.filter((b: BrewsItem) =>
+  b.data.some((i) => i.name.includes(filter))
+);
 ---
 
 <BaseLayout>
-  <Input />
-  <div class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start">
-    {sampleDocs.brews.map((doc) => <BrewCard item={doc} />)}
+  <Input filter={filter} />
+  <div
+    class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
+    id="brewfiles-grid"
+  >
+    {
+      filteredBrews.length > 0 ? (
+        filteredBrews.map((doc: BrewsItem) => <BrewCard item={doc} />)
+      ) : (
+        <p class="font-mono text-3xl uppercase tracking-widest">
+          No brewfiles found
+        </p>
+      )
+    }
   </div>
 </BaseLayout>
 
 <script>
-  const infoBtns = document.querySelectorAll("[data-infoBtn]");
+  import type { Brews, BrewsItem } from "@/types/brews";
 
-  infoBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const expanded = btn.getAttribute("aria-expanded");
+  const brewfilesGrid = document.getElementById(
+    "brewfiles-grid"
+  ) as HTMLDivElement;
+
+  brewfilesGrid?.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const isInfoButton = target.hasAttribute("data-infobtn");
+    if (isInfoButton) {
+      const expanded = target.getAttribute("aria-expanded");
       if (expanded === "false") {
-        btn.setAttribute("aria-expanded", "true");
-        btn.setAttribute("aria-pressed", "true");
+        target.setAttribute("aria-expanded", "true");
+        target.setAttribute("aria-pressed", "true");
       } else {
-        btn.setAttribute("aria-expanded", "false");
-        btn.setAttribute("aria-pressed", "false");
+        target.setAttribute("aria-expanded", "false");
+        target.setAttribute("aria-pressed", "false");
       }
-    });
+    }
   });
 </script>
