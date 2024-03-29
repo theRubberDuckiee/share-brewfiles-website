@@ -4,9 +4,11 @@ import Link from "./ui/Link.astro";
 import Code from "./ui/Code.astro";
 import { keyLinks } from "@/data/siteData";
 import type { Brews } from "@/types/brews";
+import { navItemDisplay } from "@/types/navItem";
 
 const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json`);
 const brewfiles: Brews = await res.json();
+const currentPath = Astro.url.pathname;
 ---
 
 <div id="backdrop" class="hidden absolute inset-0 z-40"></div>
@@ -22,14 +24,17 @@ const brewfiles: Brews = await res.json();
         aria-expanded="false"
         aria-pressed="false"
         aria-controls="nav-panel"
-        class="flex items-center justify-center backdrop-blur-4xl hover:bg-white/5 rounded-full focus:outline-none focus-visible:ring-4 ring-offset-4 ring-offset-gray-200 ring-blue-medium p-3"
+        class="flex items-center justify-center backdrop-blur-4xl hover:bg-white/5 rounded-full focus:outline-none focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium p-3"
       >
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2">
           <Icon name="hamburger" size={16} aria-hidden="true" />
-          <span id="selectedNavItem" class="px-2"></span>
+          <span class="px-2 empty:hidden hidden sm:inline"
+            >{navItemDisplay[currentPath]}</span
+          >
         </div>
       </button>
     </div>
+
     <div class="flex items-center gap-3">
       <p class="flex gap-1">
         <span id="num_uploaded" class="w-3">{brewfiles.brews.length}</span> files
@@ -50,18 +55,48 @@ const brewfiles: Brews = await res.json();
         href={keyLinks.github}
         target="_blank"
         aria-label="Github Repo"
-        aria-expanded="false"
-        aria-pressed="false"
-        class="p-0 aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2 mr-2"
+        class="p-0 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2"
       >
         <Icon name="github" size={22} aria-hidden="true" />
+      </a>
+      <a
+        href="https://warp.dev"
+        target="_blank"
+        aria-label="Warp Dev"
+        class="p-0 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2 mr-2"
+      >
+        <Icon name="warp" size={22} aria-hidden="true" />
       </a>
     </div>
   </div>
   <div
+    aria-labelledby="nav-btn"
+    id="nav-panel"
+    class="hidden bg-white/5 rounded-t-[36px] rounded-b-3xl absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-2 pt-[85px] pb-2 text-white/75 z-40"
+  >
+    <Link
+      data-navlink
+      variant={"nav"}
+      aria-current={currentPath === "/" && "page"}
+      href="/">Welcome!</Link
+    >
+    <Link
+      data-navlink
+      variant={"nav"}
+      aria-current={currentPath === "/leaderboard" && "page"}
+      href="/leaderboard">Leaderboard</Link
+    >
+    <Link
+      data-navlink
+      variant={"nav"}
+      aria-current={currentPath === "/brewfiles" && "page"}
+      href="/brewfiles">All Brewfiles</Link
+    >
+  </div>
+  <div
     aria-labelledby="info-btn"
     id="info-panel"
-    class="hidden gap-8 bg-white/5 rounded-[32px] absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-5 pt-24 pb-8 text-white/75 z-40"
+    class="hidden gap-8 bg-white/5 rounded-[36px] absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-5 pt-24 pb-6 text-white/75 z-40"
   >
     <div class="grid gap-4">
       <div class="grid gap-2">
@@ -85,11 +120,11 @@ const brewfiles: Brews = await res.json();
         To upload your brewfile, run the following command in your terminal:
       </p>
       <div class="group max-w-fit relative">
-        <a href="warp://action/new_window">
+        <Link href="warp://action/new_window" variant="code" size="icon">
           <Code class="animate-pulse">npx share-brewfiles</Code>
-        </a>
+        </Link>
         <p
-          class="absolute top-1/2 left-full transform -translate-y-1/2 bg-black text-white text-center text-sm px-2 py-1.5 rounded opacity-0 transition-opacity duration-300 ml-2 w-44 opacity-0 group-hover:opacity-100"
+          class="absolute hidden top-1/2 left-full -translate-y-1/2 bg-black text-white text-center text-sm px-2 py-1.5 rounded transition-opacity duration-300 ml-2 w-44 opacity-0 group-hover:block group-hover:opacity-100"
         >
           Click to open command in
           <a class="underline" href="https://warp.dev" target="_blank">Warp</a>
@@ -121,29 +156,13 @@ const brewfiles: Brews = await res.json();
       </Link>
     </div>
   </div>
-  <div
-    aria-labelledby="nav-btn"
-    id="nav-panel"
-    class="hidden bg-white/5 rounded-t-[32px] rounded-b-3xl absolute -inset-x-2 -top-2 backdrop-blur-3xl shadow-custom px-2 pt-[85px] pb-2 text-white/75 z-40"
-  >
-    <Link id="navItem" variant={"nav"} href="/">Welcome!</Link>
-    <Link id="navItem" variant={"nav"} href="/leaderboard">Leaderboard</Link>
-    <Link id="navItem" variant={"nav"} href="/brewfiles">All Brewfiles</Link>
-  </div>
 </nav>
 
 <script>
   import "@/lib/handleNav";
-  import { navItemDisplay } from "@/types/navItem";
 
   const codeContainer = document.getElementById("codeContainer");
   codeContainer?.addEventListener("mouseenter", () => {
     codeContainer?.classList.remove("animate-pulse");
   });
-
-  const currentPath = window.location.pathname;
-  let selectedNavItem = document.getElementById(
-    "selectedNavItem"
-  ) as HTMLSpanElement;
-  selectedNavItem.textContent = navItemDisplay[currentPath];
 </script>

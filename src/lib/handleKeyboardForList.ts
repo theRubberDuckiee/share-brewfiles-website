@@ -1,8 +1,4 @@
-export default function initRowEventListeners() {
-  const rows = [
-    ...document.querySelectorAll("[data-row]"),
-  ] as HTMLAnchorElement[];
-
+export default function initRowEventListeners(rows: HTMLAnchorElement[]) {
   rows.forEach((row, idx) => {
     row.addEventListener("keydown", (e) => {
       if (

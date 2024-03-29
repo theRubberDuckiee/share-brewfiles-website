@@ -1,24 +1,4 @@
-import type { Brews } from "@/types/brews";
-
-const numUploaded = document.getElementById("num_uploaded") as HTMLSpanElement;
-
-// const incrementCounter = setInterval(() => {
-//   numUploaded.textContent = (
-//     parseInt(numUploaded.textContent as string) + 1
-//   ).toString();
-// }, 100);
-
-// try {
-//   const res = await fetch(`/api/getBrewfiles.json`);
-//   const brewfiles: Brews = await res.json();
-//   clearInterval(incrementCounter);
-//   numUploaded.classList.remove("w-3");
-//   numUploaded.textContent = brewfiles.brews.length.toString();
-// } catch (e) {
-//   console.error(e);
-//   clearInterval(incrementCounter);
-//   numUploaded.textContent = "0";
-// }
+import initRowEventListeners from "./handleKeyboardForList";
 
 // expand info panel
 const infoBtn = document.getElementById("info-btn") as HTMLButtonElement;
@@ -90,10 +70,22 @@ shareYours?.addEventListener("click", () => {
 navBtn.addEventListener("click", () =>
   togglePanel({ panelToExpand: navPanel, btnToExpand: navBtn })
 );
+
 window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && infoPanel.classList.contains("grid")) {
-    const btnToFocus = infoPanel.classList.contains("grid") ? infoBtn : navBtn;
-    closeAllPanels();
-    btnToFocus.focus();
+  if (e.key === "Escape") {
+    if (
+      infoPanel.classList.contains("grid") ||
+      navPanel.classList.contains("grid")
+    ) {
+      const btnToFocus = infoPanel.classList.contains("grid")
+        ? infoBtn
+        : navBtn;
+      closeAllPanels();
+      btnToFocus.focus();
+    }
   }
 });
+
+initRowEventListeners([
+  ...document.querySelectorAll("[data-navlink]"),
+] as HTMLAnchorElement[]);

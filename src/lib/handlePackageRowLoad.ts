@@ -50,7 +50,7 @@ async function fetchLeaderboardData() {
     clearInterval(nameIntervals.get(i));
     clearInterval(downloadIntervals.get(i));
     packageNames[i].textContent = name;
-    packageLinks[i].setAttribute("href", brewfileLinkDictionary[name])
+    packageLinks[i].setAttribute("href", brewfileLinkDictionary[name]);
     downloadValues[i].textContent = String(downloads);
     dataRows[i].href = `/`;
     // remove unused data items
@@ -61,7 +61,9 @@ async function fetchLeaderboardData() {
       });
     }
   });
-  initRowEventListeners();
+  initRowEventListeners([
+    ...document.querySelectorAll("[data-row]"),
+  ] as HTMLAnchorElement[]);
 }
 
 const leaderboardListUl = document.querySelector(
