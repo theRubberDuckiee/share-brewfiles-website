@@ -1,8 +1,33 @@
 ---
-import Input from "@/components/ui/Input.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Input from "@/components/ui/Input.astro";
+import BrewCard from "@/components/brewfiles/BrewCard.astro";
+import type { Brews } from "@/types/brews";
+
+const docs = await fetch(`${Astro.url.origin}/api/getBrewfiles.json`);
+const sampleDocs: Brews = await docs.json();
 ---
 
 <BaseLayout>
   <Input />
+  <div class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start">
+    {sampleDocs.brews.map((doc) => <BrewCard item={doc} />)}
+  </div>
 </BaseLayout>
+
+<script>
+  const infoBtns = document.querySelectorAll("[data-infoBtn]");
+
+  infoBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded");
+      if (expanded === "false") {
+        btn.setAttribute("aria-expanded", "true");
+        btn.setAttribute("aria-pressed", "true");
+      } else {
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-pressed", "false");
+      }
+    });
+  });
+</script>

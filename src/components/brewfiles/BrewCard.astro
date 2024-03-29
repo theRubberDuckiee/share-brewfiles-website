@@ -1,0 +1,62 @@
+---
+import type { BrewsItem } from "@/types/brews";
+import Link from "../ui/Link.astro";
+import { Icon } from "astro-icon/components";
+
+type Props = {
+  item: BrewsItem;
+};
+
+const { item } = Astro.props;
+---
+
+<article
+  class="bg-white/5 p-6 rounded-3xl backdrop-blur-4xl flex justify-between relative"
+>
+  <ul class="font-mono text-2xl uppercase tracking-widest">
+    {
+      item.data.slice(0, 7).map((i) => (
+        <li>
+          <Link
+            variant={"nav"}
+            href=""
+            link-packageName
+            target="_blank"
+            class="break-all"
+          >
+            {i.name.replaceAll('"', "")}
+          </Link>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="flex flex-col justify-between z-50">
+    <Link variant="accent" size="icon" href={"#"}>
+      <div class="bg-white/7 size-9 grid place-items-center rounded-full">
+        <Icon name="external-link" size={13} aria-hidden="true" />
+      </div>
+    </Link>
+    <button
+      id={`info-btn-${item.id}`}
+      data-infoBtn
+      aria-label="Show Info"
+      aria-expanded="false"
+      aria-pressed="false"
+      aria-controls={`info-panel-${item.id}`}
+      class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium peer"
+    >
+      <Icon name="info" size={24} aria-hidden="true" />
+    </button>
+    <div
+      id={`info-panel-${item.id}`}
+      aria-labelledby={`info-btn-${item.id}`}
+      class="absolute bg-bkg p-4 pr-12 rounded-xl bottom-4 right-4 hidden peer-aria-expanded:grid"
+    >
+      <ul class="grid gap-1">
+        <li><strong>Name:</strong> USERNAME</li>
+        <li><strong>Date:</strong> {new Date().toLocaleDateString()}</li>
+        <li><strong>Total:</strong> {item.data.length} brewfiles</li>
+      </ul>
+    </div>
+  </div>
+</article>
