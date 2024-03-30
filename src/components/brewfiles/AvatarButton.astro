@@ -1,0 +1,22 @@
+---
+import Image from "astro/components/Image.astro";
+import anon from "./anon.jpg";
+---
+
+<div class="group">
+  <a
+    href="#"
+    data-infoBtn
+    aria-label="Show uploader info"
+    class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 isolate focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
+  >
+    <Image
+      src={anon}
+      width={35}
+      height={35}
+      alt=""
+      aria-hidden="true"
+      class="pointer-events-none rounded-full grayscale"
+    />
+  </a>
+</div>

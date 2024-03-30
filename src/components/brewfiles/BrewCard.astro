@@ -2,7 +2,8 @@
 import type { BrewsItem } from "@/types/brews";
 import Link from "../ui/Link.astro";
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
+import AvatarButton from "./AvatarButton.astro";
+import { getRandomWord } from "@/lib/getRandomValue";
 
 type Props = {
   item: BrewsItem;
@@ -17,20 +18,14 @@ const GITHUB_IMAGE =
 ---
 
 <article
-  class="bg-white/5 p-6 rounded-3xl backdrop-blur-4xl flex justify-between relative"
+  class="bg-white/5 p-6 rounded-3xl backdrop-blur-4xl flex justify-between relative animate-pulse"
 >
   <ul class="font-mono text-2xl uppercase tracking-widest">
     {
-      item.data.slice(0, 7).map((i) => (
+      Array.from({ length: 7 }).map((i) => (
         <li>
-          <Link
-            variant={"nav"}
-            href=""
-            link-packageName
-            target="_blank"
-            class="break-all"
-          >
-            {i.name.replaceAll('"', "")}
+          <Link variant={"nav"} href="#" class="break-all" data-randomize>
+            {getRandomWord()}
           </Link>
         </li>
       ))
@@ -42,41 +37,16 @@ const GITHUB_IMAGE =
         <Icon name="external-link" size={13} aria-hidden="true" />
       </div>
     </Link>
-    <div class="group">
-      <div
-        id={`info-panel-${item.id}`}
-        class="absolute bg-bkg p-4 pr-12 rounded-xl bottom-4 right-4 hidden group-hover:grid group-focus-within:grid"
-      >
-        <ul class="grid gap-1">
-          <li>
-            <strong>Name:</strong>
-            <Link
-              classes="underline inline hover:text-accent-bluemedium"
-              href={GITHUB_LINK}
-              variant={"icon"}
-              size="icon">{USERNAME}</Link
-            >
-          </li>
-          <li><strong>Date:</strong> {new Date().toLocaleDateString()}</li>
-          <li><strong>Total:</strong> {item.data.length} packages</li>
-        </ul>
-      </div>
-      <a
-        id={`info-btn-${item.id}`}
-        href={GITHUB_LINK}
-        data-infoBtn
-        aria-label="Show uploader info"
-        class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 isolate focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
-      >
-        <Image
-          src={GITHUB_IMAGE}
-          width={35}
-          height={35}
-          alt={USERNAME}
-          aria-hidden="true"
-          class="pointer-events-none rounded-full grayscale"
-        />
-      </a>
-    </div>
+    <AvatarButton />
   </div>
 </article>
+
+<script>
+  import { getRandomWord } from "@/lib/getRandomValue";
+
+  const packageNames = document.querySelectorAll("[data-randomize]");
+  packageNames.forEach(async (p) => {
+    p.textContent = getRandomWord();
+    setInterval(() => (p.textContent = getRandomWord()), 80);
+  });
+</script>

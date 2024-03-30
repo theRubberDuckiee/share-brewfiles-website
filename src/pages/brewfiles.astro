@@ -21,15 +21,7 @@ const filteredBrews = brews.brews.filter((b: BrewsItem) =>
     class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
     id="brewfiles-grid"
   >
-    {
-      filteredBrews.length > 0 ? (
-        filteredBrews.map((doc: BrewsItem) => <BrewCard item={doc} />)
-      ) : (
-        <p class="font-mono text-3xl uppercase tracking-widest">
-          No brewfiles found
-        </p>
-      )
-    }
+    {filteredBrews.map((doc: BrewsItem) => <BrewCard item={doc} />)}
   </div>
 </BaseLayout>
 
@@ -53,3 +45,7 @@ const filteredBrews = brews.brews.filter((b: BrewsItem) =>
     }
   });
 </script>
+
+<!--         <p class="font-mono text-3xl uppercase tracking-widest">
+          No brewfiles found
+        </p> -->
