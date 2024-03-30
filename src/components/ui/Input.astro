@@ -63,12 +63,12 @@ const { filter } = Astro.props;
     }
 
     debounceTimer = window.setTimeout(() => {
-      window.location.href = `/brewfiles?filter=${brewSearch.value}`;
+      window.location.href = `/brewfiles?package=${brewSearch.value}`;
     }, 500);
   });
 
   brewSearchForm?.addEventListener("submit", (event) => {
     event.preventDefault();
-    window.location.href = `/brewfiles?filter=${brewSearch?.value}`;
+    window.location.href = `/brewfiles?package=${brewSearch?.value}`;
   });
 </script>

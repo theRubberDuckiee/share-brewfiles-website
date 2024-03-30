@@ -2,12 +2,18 @@
 import type { BrewsItem } from "@/types/brews";
 import Link from "../ui/Link.astro";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
 
 type Props = {
   item: BrewsItem;
 };
 
 const { item } = Astro.props;
+
+const USERNAME = "theRubberDuckiee";
+const GITHUB_LINK = "https://github.com/theRubberDuckiee";
+const GITHUB_IMAGE =
+  "https://avatars.githubusercontent.com/u/13528197?s=48&v=4";
 ---
 
 <article
@@ -36,32 +42,41 @@ const { item } = Astro.props;
         <Icon name="external-link" size={13} aria-hidden="true" />
       </div>
     </Link>
-    <button
-      id={`info-btn-${item.id}`}
-      data-infoBtn
-      aria-label="Show Info"
-      aria-expanded="false"
-      aria-pressed="false"
-      aria-controls={`info-panel-${item.id}`}
-      class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium peer"
-    >
-      <Icon
-        name="info"
-        size={24}
-        aria-hidden="true"
-        class="pointer-events-none"
-      />
-    </button>
-    <div
-      id={`info-panel-${item.id}`}
-      aria-labelledby={`info-btn-${item.id}`}
-      class="absolute bg-bkg p-4 pr-12 rounded-xl bottom-4 right-4 hidden peer-aria-expanded:grid"
-    >
-      <ul class="grid gap-1">
-        <li><strong>Name:</strong> USERNAME</li>
-        <li><strong>Date:</strong> {new Date().toLocaleDateString()}</li>
-        <li><strong>Total:</strong> {item.data.length} brewfiles</li>
-      </ul>
+    <div class="group">
+      <div
+        id={`info-panel-${item.id}`}
+        class="absolute bg-bkg p-4 pr-12 rounded-xl bottom-4 right-4 hidden group-hover:grid group-focus-within:grid"
+      >
+        <ul class="grid gap-1">
+          <li>
+            <strong>Name:</strong>
+            <Link
+              classes="underline inline"
+              href={GITHUB_LINK}
+              variant={"text"}
+              size="icon">{USERNAME}</Link
+            >
+          </li>
+          <li><strong>Date:</strong> {new Date().toLocaleDateString()}</li>
+          <li><strong>Total:</strong> {item.data.length} packages</li>
+        </ul>
+      </div>
+      <a
+        id={`info-btn-${item.id}`}
+        href={GITHUB_LINK}
+        data-infoBtn
+        aria-label="Show Info"
+        class="hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 isolate focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium peer"
+      >
+        <Image
+          src={GITHUB_IMAGE}
+          width={24}
+          height={24}
+          alt={USERNAME}
+          aria-hidden="true"
+          class="pointer-events-none rounded-full"
+        />
+      </a>
     </div>
   </div>
 </article>

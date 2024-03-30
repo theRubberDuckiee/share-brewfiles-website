@@ -5,7 +5,7 @@ import BrewCard from "@/components/brewfiles/BrewCard.astro";
 import type { BrewsItem } from "@/types/brews";
 
 const url = new URL(Astro.request.url);
-const filter = url.searchParams.get("filter") || "";
+const filter = url.searchParams.get("package") || "";
 
 const docs = await fetch(`${Astro.url.origin}/api/getBrewfiles.json`);
 const brews = await docs.json();
@@ -34,8 +34,6 @@ const filteredBrews = brews.brews.filter((b: BrewsItem) =>
 </BaseLayout>
 
 <script>
-  import type { Brews, BrewsItem } from "@/types/brews";
-
   const brewfilesGrid = document.getElementById(
     "brewfiles-grid"
   ) as HTMLDivElement;

@@ -13,7 +13,11 @@ const packageNames = document.querySelectorAll(
 
 const packageLinks = document.querySelectorAll(
   "[link-packageName]"
-) as NodeListOf<HTMLParagraphElement>;
+) as NodeListOf<HTMLAnchorElement>;
+
+const packageFilters = document.querySelectorAll(
+  "[link-packageFilter]"
+) as NodeListOf<HTMLAnchorElement>;
 
 const downloadValues = document.querySelectorAll(
   "[data-downloadValue]"
@@ -51,6 +55,10 @@ async function fetchLeaderboardData() {
     clearInterval(downloadIntervals.get(i));
     packageNames[i].textContent = name;
     packageLinks[i].setAttribute("href", brewfileLinkDictionary[name]);
+    packageFilters[i].setAttribute(
+      "href",
+      `/brewfiles?package=${name.replace("/", "%2F")}`
+    );
     downloadValues[i].textContent = String(downloads);
     dataRows[i].href = `/`;
     // remove unused data items
