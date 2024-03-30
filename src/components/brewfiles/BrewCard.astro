@@ -1,20 +1,8 @@
 ---
-import type { BrewsItem } from "@/types/brews";
 import Link from "../ui/Link.astro";
 import { Icon } from "astro-icon/components";
 import AvatarButton from "./AvatarButton.astro";
 import { getRandomWord } from "@/lib/getRandomValue";
-
-type Props = {
-  item: BrewsItem;
-};
-
-const { item } = Astro.props;
-
-const USERNAME = "theRubberDuckiee";
-const GITHUB_LINK = "https://github.com/theRubberDuckiee";
-const GITHUB_IMAGE =
-  "https://avatars.githubusercontent.com/u/13528197?s=48&v=4";
 ---
 
 <article
