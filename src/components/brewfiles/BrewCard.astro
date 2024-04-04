@@ -12,9 +12,7 @@ import { getRandomWord } from "@/lib/getRandomValue";
     {
       Array.from({ length: 7 }).map((i) => (
         <li>
-          <Link variant={"nav"} href="#" class="break-all" data-randomize>
-            {getRandomWord()}
-          </Link>
+          <Link variant={"nav"} href="#" classes="min-h-11" data-randomize />
         </li>
       ))
     }
@@ -28,13 +26,3 @@ import { getRandomWord } from "@/lib/getRandomValue";
     <AvatarButton />
   </div>
 </article>
-
-<script>
-  import { getRandomWord } from "@/lib/getRandomValue";
-
-  const packageNames = document.querySelectorAll("[data-randomize]");
-  packageNames.forEach(async (p) => {
-    p.textContent = getRandomWord();
-    setInterval(() => (p.textContent = getRandomWord()), 80);
-  });
-</script>

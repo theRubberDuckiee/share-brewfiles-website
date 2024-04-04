@@ -35,6 +35,9 @@ const { title = baseData.title, description = baseData.description } =
       </div>
     </div>
     <style is:global>
+      * {
+        scrollbar-gutter: stable;
+      }
       @media (prefers-reduced-motion: reduce) {
         html:focus-within {
           scroll-behavior: auto;
@@ -48,6 +51,11 @@ const { title = baseData.title, description = baseData.description } =
           transition-duration: 0.01ms !important;
           scroll-behavior: auto !important;
         }
+      }
+
+      mark {
+        background-color: #7eb1fd;
+        color: #111111;
       }
     </style>
   </body>
