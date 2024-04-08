@@ -16,7 +16,7 @@ const { index, isLast } = Astro.props;
     )
   }
   <div
-  id={`${index}`}
+    id={`${index}`}
     class="p-2 relative flex justify-between items-center group font-mono hover:bg-white/5 rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg"
     data-row
   >
@@ -33,17 +33,19 @@ const { index, isLast } = Astro.props;
       >
         {getRandomWord()}
       </p>
-      <div class="flex items-center hidden group-hover:block">
-        <a 
-        class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20 mr-4" 
-        link-packageName
-        target="_blank"
+      <div class="items-center hidden group-hover:flex">
+        <a
+          class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20 mr-4"
+          link-packageName
+          target="_blank"
         >
           Explore tool
         </a>
-        <a 
-        class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20" 
-        href="/">
+        <a
+          class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20"
+          href="/"
+          link-packageFilter
+        >
           See users
         </a>
       </div>
@@ -57,5 +59,3 @@ const { index, isLast } = Astro.props;
     </p>
   </div>
 </li>
-
-

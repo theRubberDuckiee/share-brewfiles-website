@@ -26,15 +26,18 @@ const { title = baseData.title, description = baseData.description } =
   <body class="bg-bkg text-white leading-[1.35]">
     <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
       <Lines />
-      <div class="grid gap-8">
+      <div class="grid gap-8 grid-rows-[auto_1fr_auto] min-h-screen">
         <Nav />
-        <main class="grid gap-20">
+        <main class="grid gap-20 items-start content-start">
           <slot />
         </main>
         <Footer />
       </div>
     </div>
     <style is:global>
+      * {
+        scrollbar-gutter: stable;
+      }
       @media (prefers-reduced-motion: reduce) {
         html:focus-within {
           scroll-behavior: auto;
@@ -48,6 +51,11 @@ const { title = baseData.title, description = baseData.description } =
           transition-duration: 0.01ms !important;
           scroll-behavior: auto !important;
         }
+      }
+
+      mark {
+        background-color: #7eb1fd;
+        color: #111111;
       }
     </style>
   </body>

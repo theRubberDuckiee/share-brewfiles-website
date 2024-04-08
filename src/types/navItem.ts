@@ -3,7 +3,7 @@ interface navItemDisplayInterface {
 }
 
 export const navItemDisplay: navItemDisplayInterface = {
-  '/brewfiles': "All Brewfiles",
-  '/': 'Welcome!',
-  '/leaderboard': 'Leaderboard'
-}
+  "/brewfiles": "All Brewfiles",
+  "/": "Welcome!",
+  "/leaderboard": "Leaderboard",
+};

@@ -1,24 +1,4 @@
-import type { Brews } from "@/types/brews";
-
-const numUploaded = document.getElementById("num_uploaded") as HTMLSpanElement;
-
-const incrementCounter = setInterval(() => {
-  numUploaded.textContent = (
-    parseInt(numUploaded.textContent as string) + 1
-  ).toString();
-}, 100);
-
-try {
-  const res = await fetch(`/api/getBrewfiles.json`);
-  const brewfiles: Brews = await res.json();
-  clearInterval(incrementCounter);
-  numUploaded.classList.remove("w-3");
-  numUploaded.textContent = brewfiles.brews.length.toString();
-} catch (e) {
-  console.error(e);
-  clearInterval(incrementCounter);
-  numUploaded.textContent = "0";
-}
+import initRowEventListeners from "./handleKeyboardForList";
 
 // expand info panel
 const infoBtn = document.getElementById("info-btn") as HTMLButtonElement;
@@ -28,7 +8,7 @@ const navBtn = document.getElementById("nav-btn") as HTMLButtonElement;
 const navPanel = document.getElementById("nav-panel") as HTMLDivElement;
 const backdrop = document.getElementById("backdrop") as HTMLDivElement;
 const mainTag = document.querySelector("main") as HTMLDivElement;
-const codeContainer = document.getElementById('codeContainer');
+const codeContainer = document.getElementById("codeContainer");
 
 const closeAllPanels = () => {
   infoPanel.classList.add("hidden");
@@ -39,7 +19,7 @@ const closeAllPanels = () => {
   navBtn.setAttribute("aria-pressed", "false");
   backdrop.classList.add("hidden");
   mainTag.removeAttribute("inert");
-  codeContainer?.classList.remove('animate-pulse');
+  codeContainer?.classList.remove("animate-pulse");
 };
 
 const expandPanel = ({
@@ -83,18 +63,29 @@ infoBtn.addEventListener("click", () =>
   togglePanel({ panelToExpand: infoPanel, btnToExpand: infoBtn })
 );
 shareYours?.addEventListener("click", () => {
-  expandPanel({ panelToExpand: infoPanel, btnToExpand: infoBtn })
-  const codeContainer = document.getElementById('codeContainer');
-  codeContainer?.classList.add('animate-pulse');
-}
-);
+  expandPanel({ panelToExpand: infoPanel, btnToExpand: infoBtn });
+  const codeContainer = document.getElementById("codeContainer");
+  codeContainer?.classList.add("animate-pulse");
+});
 navBtn.addEventListener("click", () =>
   togglePanel({ panelToExpand: navPanel, btnToExpand: navBtn })
 );
+
 window.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && infoPanel.classList.contains("grid")) {
-    const btnToFocus = infoPanel.classList.contains("grid") ? infoBtn : navBtn;
-    closeAllPanels();
-    btnToFocus.focus();
+  if (e.key === "Escape") {
+    if (
+      infoPanel.classList.contains("grid") ||
+      navPanel.classList.contains("grid")
+    ) {
+      const btnToFocus = infoPanel.classList.contains("grid")
+        ? infoBtn
+        : navBtn;
+      closeAllPanels();
+      btnToFocus.focus();
+    }
   }
 });
+
+initRowEventListeners([
+  ...document.querySelectorAll("[data-navlink]"),
+] as HTMLAnchorElement[]);

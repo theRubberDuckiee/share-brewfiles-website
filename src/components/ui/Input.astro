@@ -1,0 +1,161 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "./Button.astro";
+
+type Props = {
+  filter: string;
+};
+
+const { filter } = Astro.props;
+---
+
+<div
+  class="relative rounded-full bg-white/10 w-full p-2 max-w-xl mx-auto flex gap-4 transition-all focus-within:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium backdrop-blur-4xl"
+>
+  <div
+    class="pl-2 size-9 grid place-items-center pointer-events-none"
+    aria-hidden="true"
+  >
+    <Icon name="search" size={24} />
+  </div>
+  <input
+    type="search"
+    name="brew-search"
+    id="brew-search"
+    value={filter}
+    placeholder="Search Brews"
+    autofocus={true}
+    autocomplete="off"
+    class="bg-transparent focus:outline-none w-full text-3xl uppercase tracking-widest font-mono peer"
+  />
+  <Button
+    variant="text"
+    id="focus-search"
+    tabindex={-1}
+    classes="text-white/50 px-3 bg-white/5 rounded-full peer-focus:opacity-0"
+  >
+    ⌘+K
+  </Button>
+</div>
+
+<style>
+  /* clears the 'X' from Internet Explorer */
+  input[type="search"]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  input[type="search"]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  /* clears the 'X' from Chrome */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+</style>
+
+<script>
+  import initRowEventListeners from "@/lib/handleKeyboardForList";
+
+  const focusSearchBtn = document.getElementById(
+    "focus-search"
+  ) as HTMLButtonElement;
+  const brewSearchInput = document.getElementById(
+    "brew-search"
+  ) as HTMLInputElement;
+
+  const brewfilesGrid = document.getElementById(
+    "brewfiles-grid"
+  ) as HTMLDivElement;
+
+  focusSearchBtn.addEventListener("click", () => {
+    brewSearchInput.focus();
+  });
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      brewSearchInput.focus();
+    }
+    if (e.key === "Escape") {
+      brewSearchInput.blur();
+    }
+  });
+
+  brewSearchInput.addEventListener("input", () => {
+    const url = new URL(location.href);
+    url.searchParams.set("package", brewSearchInput.value);
+    history.replaceState(null, "", url.href);
+    brewfilesGrid.dispatchEvent(new Event("update-brewcards"));
+  });
+
+  let noBrewfilesParagraph: HTMLParagraphElement;
+
+  const brewCards = new Map();
+
+  // on initial load, add brewcards and all their data to a Map
+  brewfilesGrid.addEventListener("brewfiles-loaded", () => {
+    brewfilesGrid.querySelectorAll("article").forEach((card) => {
+      const cards = Array.from(
+        card.querySelectorAll("[data-brewlink]")
+      ) as HTMLAnchorElement[];
+      brewCards.set(card, cards);
+      initRowEventListeners(cards);
+    });
+    noBrewfilesParagraph = document.getElementById(
+      "no-brewfiles"
+    ) as HTMLParagraphElement;
+  });
+
+  brewfilesGrid.addEventListener("update-brewcards", () => {
+    let showNoBrewfilesParagraph = true;
+    if (!brewSearchInput.value) {
+      brewCards.forEach((_, card) => {
+        card.classList.remove("hidden");
+      });
+      noBrewfilesParagraph.classList.add("hidden");
+      return;
+    }
+
+    brewCards.forEach((cardData, card) => {
+      let shouldHide = true;
+      // highlight text in cards that match
+      cardData.forEach((link: HTMLAnchorElement) => {
+        if (
+          link.textContent
+            ?.toLowerCase()
+            .includes(brewSearchInput.value.toLowerCase())
+        ) {
+          link.innerHTML = `<span>${link.textContent.replaceAll(
+            brewSearchInput.value.toLowerCase(),
+            `<mark>${brewSearchInput.value.toLowerCase()}</mark>`
+          )}</span>`;
+          shouldHide = false;
+        } else {
+          link.innerHTML =
+            (link.textContent
+              ?.replaceAll("<mark>", "")
+              .replaceAll("</mark>", "") as string) || "";
+        }
+      });
+
+      if (shouldHide) {
+        card.classList.add("hidden");
+      } else {
+        card.classList.remove("hidden");
+        showNoBrewfilesParagraph = false;
+      }
+    });
+
+    if (showNoBrewfilesParagraph) {
+      noBrewfilesParagraph.classList.remove("hidden");
+    } else {
+      noBrewfilesParagraph.classList.add("hidden");
+    }
+  });
+</script>
