@@ -2,22 +2,17 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Input from "@/components/ui/Input.astro";
 import BrewCard from "@/components/brewfiles/BrewCard.astro";
+import BrewfilesRoute from "@/components/brewfiles/BrewfilesRoute";
 
 const url = new URL(Astro.request.url);
 const filter = url.searchParams.get("package") || "";
 ---
 
 <BaseLayout>
-  <Input filter={filter} />
-  <div
-    class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
-    id="brewfiles-grid"
-  >
-    {Array.from({ length: 9 }).map(() => <BrewCard />)}
-  </div>
+  <BrewfilesRoute client:only="react" />
 </BaseLayout>
 
-<script>
+<!-- <script>
   import { createBrewCard } from "@/lib/createBrewCard";
   import type { BrewsItem } from "@/types/brews";
 
@@ -44,4 +39,4 @@ const filter = url.searchParams.get("package") || "";
       console.error(e);
     }
   });
-</script>
+</script> -->
