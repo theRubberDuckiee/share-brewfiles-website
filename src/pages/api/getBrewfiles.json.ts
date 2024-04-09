@@ -66,6 +66,8 @@ export const GET: APIRoute = async ({ request }) => {
       return {
         id: doc.id,
         data: brewData,
+        dateUploaded: doc.data().date,
+        userInfo: doc.data().userInfo,
       };
     }) as BrewsItem[];
 
