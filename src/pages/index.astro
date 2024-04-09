@@ -6,10 +6,28 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/Hero.astro";
 import Marquee from "@/components/Marquee.astro";
 import Leaderboard from "@/components/leaderboard/LeadershipSection.astro";
+import AuthPopup from "@/components/AuthPopup.astro";
 ---
 
 <BaseLayout>
+  <AuthPopup></AuthPopup>
   <Hero />
   <Marquee />
   <Leaderboard />
 </BaseLayout>
+
+<script>
+  const url = new URL(window.location.href);
+  const paramName = url.searchParams.get("code");
+  const authPopup = document.querySelector("#authPopup");
+  
+  if (paramName && authPopup) {
+    const popupText = document.querySelector("#popupText");
+    if(popupText){
+      popupText.textContent = paramName;
+    }
+    authPopup.classList.remove("hidden");
+  } else {
+    authPopup?.classList.add("hidden");
+  }
+</script>
