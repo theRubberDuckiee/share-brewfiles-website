@@ -10,8 +10,6 @@ export const GET: APIRoute = async ({ request }) => {
   // get searchParams from request
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
-  const showOnlyTop10 = url.searchParams.get("showOnlyTop10");
-  const getTotals = url.searchParams.get("getTotals");
 
   // optionally filter per param
   if (id) {
@@ -69,13 +67,6 @@ export const GET: APIRoute = async ({ request }) => {
       };
     }) as BrewsItem[];
 
-    if (getTotals) {
-      const totalData = totalBrewData(
-        brews.map((brew) => brew.data).flat(),
-        showOnlyTop10 === "true"
-      );
-      return new Response(JSON.stringify(totalData));
-    }
     return new Response(JSON.stringify({ brews: brews }));
   } else {
     return new Response(JSON.stringify({ message: "No brews found" }), {

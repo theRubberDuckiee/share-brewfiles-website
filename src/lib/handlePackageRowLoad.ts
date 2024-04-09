@@ -44,8 +44,8 @@ async function fetchLeaderboardData() {
 
   // fetch data can update a, names, and downloads and clear intervals
   const req = await fetch(
-    `/api/getBrewfiles.json?getTotals=true${
-      dataRows.length < 11 && "&showOnlyTop10=true"
+    `/api/getRankedPackages.json${
+      dataRows.length < 11 ? "?showOnlyTop10=true" : ""
     }`
   );
   const data = (await req.json()) as PackageCounted[];
