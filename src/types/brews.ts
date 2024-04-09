@@ -5,6 +5,12 @@ export type Brews = {
 export type BrewsItem = {
   id: string;
   data: BrewEntry[];
+  date: string;
+  userInfo: {
+    profileUrl: string;
+    avatarUrl: string;
+    username: string;
+  };
 };
 
 export type BrewEntry = {
