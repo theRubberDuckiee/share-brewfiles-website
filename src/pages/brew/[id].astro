@@ -1,24 +1,37 @@
 ---
-import BrewCard from "@/components/leaderboard/PackageRow.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import type { Brews, BrewsItem } from "@/types/brews";
-
-// for PROD
-// const { id } = Astro.params;
-// const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
-
-// if (!res.ok) return Astro.redirect("/");
-// const brews: Brews = await res.json();
-
-// const entry = brews.brews[0];
-// if (!entry) return Astro.redirect("/");
-
-// for dev only so I don’t burn through reads from firebase
 import brewEntry from "@/data/sampleDoc.json";
+
 const entry = brewEntry.brews[0];
 ---
 
 <BaseLayout title={entry.id} description={`Brewfiles for ${entry.id}`}>
-  <h1>UserId: {entry.id}</h1>
-  <BrewCard entry={entry} />
+  <div class="flex justify-between items-center px-20 pt-20">
+    <div class="py-2 px-4 bg-accent-bluedark rounded-full">
+      {entry.data.length} packages in this Brewfile
+    </div>
+    <div class="flex">
+      <div class="">
+        @Wesbos
+      </div>
+      <div class="ml-5">
+        Image
+      </div>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center">
+    {entry.data.map((item, index) => (
+      <div
+        key={index}
+        variant="text"
+        id="focus-search"
+        tabindex={-1}
+        class="relative flex justify-between items-center group m-2"
+      >
+      <div class="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit">
+          {item.name.replaceAll('"', "")}
+        </div>
+      </div>
+    ))}
+  </div>
 </BaseLayout>
