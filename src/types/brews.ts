@@ -17,3 +17,11 @@ export type BrewEntry = {
   name: string;
   packageManager: string;
 };
+
+export type BrewCard = {
+  id: string;
+  username: string;
+  date: string;
+  totalPackages: number;
+  totalMatches: number;
+};

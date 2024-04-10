@@ -1,12 +1,13 @@
 import { forwardRef } from "react";
-import SearchIcon from "../brewfiles/SearchIcon";
+import SearchIcon from "./SearchIcon";
 
 type Props = {
   filter: string;
+  handleInputChange: () => void;
 };
 
 const BrewSearch = forwardRef<HTMLInputElement, Props>(
-  ({ filter }: Props, ref) => {
+  ({ filter, handleInputChange }: Props, ref) => {
     return (
       <div className="relative rounded-full bg-white/10 w-full p-2 max-w-xl mx-auto flex gap-4 transition-all focus-within:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium backdrop-blur-4xl">
         <div
@@ -21,6 +22,7 @@ const BrewSearch = forwardRef<HTMLInputElement, Props>(
           name="brew-search"
           id="brew-search"
           value={filter}
+          onInput={() => handleInputChange()}
           placeholder="Search Brews"
           autoFocus={true}
           autoComplete="off"
