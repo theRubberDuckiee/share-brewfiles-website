@@ -72,7 +72,9 @@ const BrewfilesRoute = () => {
 
         {filteredBrews &&
           filteredBrews.length > 0 &&
-          filteredBrews.map((b) => <BrewCard entry={b} key={b.id} />)}
+          filteredBrews
+            .sort((a, b) => (a.totalMatches < b.totalMatches ? 1 : -1))
+            .map((b) => <BrewCard entry={b} key={b.id} />)}
       </div>
     </>
   );
