@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import BrewSearch from "./SearchInput";
 import type { BrewCard } from "@/types/brews";
 import useBrewFiles from "./useBrewFiles";
+import BrewSkeletonCard from "./BrewSkeletonCard";
 
 const BrewfilesRoute = () => {
   const { brews, error, isLoading } = useBrewFiles();
@@ -61,7 +62,7 @@ const BrewfilesRoute = () => {
         className="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
         id="brewfiles-grid"
       >
-        {isLoading && <p>Loading...</p>}
+        {isLoading && Array.from({ length: 9 }).map(() => <BrewSkeletonCard />)}
 
         {!isLoading && filteredBrews && filteredBrews.length === 0 && (
           <p className="font-mono text-3xl uppercase tracking-widest col-span-3 text-center">
