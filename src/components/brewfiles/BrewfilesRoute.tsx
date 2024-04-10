@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import BrewSearch from "./SearchInput";
-import type { BrewCard } from "@/types/brews";
+import type { TBrewCard } from "@/types/brews";
 import useBrewFiles from "./useBrewFiles";
 import BrewSkeletonCard from "./BrewSkeletonCard";
+import BrewCard from "./BrewCard";
 
 const BrewfilesRoute = () => {
   const { brews, error, isLoading } = useBrewFiles();
   const [filter, setFilter] = useState(
     new URL(location.href).searchParams.get("package") || ""
   );
-  const [filteredBrews, setFilteredBrews] = useState<BrewCard[] | null>(null);
+  const [filteredBrews, setFilteredBrews] = useState<TBrewCard[] | null>(null);
 
   useEffect(() => {
     if (!brews) return;
@@ -72,7 +73,7 @@ const BrewfilesRoute = () => {
 
         {filteredBrews &&
           filteredBrews.length > 0 &&
-          filteredBrews.map((b) => <p key={b.id}>{b.username}</p>)}
+          filteredBrews.map((b) => <BrewCard entry={b} key={b.id} />)}
       </div>
     </>
   );

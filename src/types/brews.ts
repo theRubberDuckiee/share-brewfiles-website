@@ -18,7 +18,7 @@ export type BrewEntry = {
   packageManager: string;
 };
 
-export type BrewCard = {
+export type TBrewCard = {
   id: string;
   username: string;
   date: string;
