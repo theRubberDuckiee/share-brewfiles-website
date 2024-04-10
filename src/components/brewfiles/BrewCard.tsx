@@ -14,7 +14,10 @@ const BrewCard = ({ entry }: Props) => {
       }`}
     >
       <div className="flex flex-col gap-6 justify-between">
-        <div className="flex items-center gap-3">
+        <a
+          className="flex items-center gap-3 group rounded-full focus:outline-none focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
+          href={entry ? `https://github.com/${entry.username}` : "#"}
+        >
           <img
             src={
               entry ? `https://github.com/${entry.username}.png` : anonImage.src
@@ -22,19 +25,20 @@ const BrewCard = ({ entry }: Props) => {
             alt="anon"
             width="50"
             height="50"
-            className="rounded-full grayscale"
+            className="rounded-full grayscale group-hover:ring-4 "
           />
-          <p className="font-mono text-2xl uppercase tracking-widest">
+          <p className="font-mono text-2xl uppercase tracking-widest group-hover:underline underline-offset-4 decoration-white/20">
             {entry ? entry.username : "Username"}
           </p>
-        </div>
+        </a>
+
         <div className="grid gap-1">
           <p className="text-xl uppercase tracking-widest text-white/60 min-h-7"></p>
           <p className="text-xl uppercase tracking-widest text-white/60">
             {entry ? entry.date : "Date"}
           </p>
           <p className="text-xl uppercase tracking-widest text-white/60">
-            {entry ? entry.totalPackages : "Packages"}
+            {entry ? `${entry.totalPackages} packages` : "Packages"}
           </p>
         </div>
       </div>
