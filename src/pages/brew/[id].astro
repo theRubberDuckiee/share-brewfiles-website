@@ -1,6 +1,9 @@
 ---
+import Link from "@/components/ui/Link.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { brewfileLinkDictionary } from "@/lib/getBrewfileLink";
 import type { Brews, BrewsItem } from "@/types/brews";
+import { Image } from "astro:assets";
 
 // for PROD
 const { id } = Astro.params;
@@ -11,10 +14,6 @@ const brews: Brews = await res.json();
 
 const entry = brews.brews[0];
 if (!entry) return Astro.redirect("/");
-
-// for dev only so I don’t burn through reads from firebase
-// import brewEntry from "@/data/sampleDoc.json";
-// const entry = brewEntry.brews[0];
 ---
 
 <BaseLayout title={entry.id} description={`Brewfiles for ${entry.id}`}>
@@ -22,28 +21,50 @@ if (!entry) return Astro.redirect("/");
     <div class="py-2 px-4 bg-accent-bluedark rounded-full">
       {entry.data.length} packages in this Brewfile
     </div>
-    <div class="flex">
-      <div class="">
-        @Wesbos
-      </div>
-      <div class="ml-5">
-        Image
-      </div>
+    <div class="flex gap-2">
+      <Link
+        href={`https://github.com/${entry.userInfo.username}`}
+        variant={"text"}>@{entry.userInfo.username}</Link
+      >
+      <Link
+        href={`https://github.com/${entry.userInfo.username}`}
+        variant={"icon"}
+        size={"icon"}
+        classes="rounded-full hover:opacity-80"
+      >
+        <Image
+          src={`https://github.com/${entry.userInfo.username}.png`}
+          alt={entry.userInfo.username}
+          width="50"
+          height="50"
+          class="rounded-full grayscale group-hover:ring-4"
+        />
+      </Link>
     </div>
   </div>
   <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center">
-    {entry.data.map((item, index) => (
-      <div
-        key={index}
-        variant="text"
-        id="focus-search"
-        tabindex={-1}
-        class="relative flex justify-between items-center group m-2"
-      >
-      <div class="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit">
-          {item.name.replaceAll('"', "")}
+    {
+      entry.data.map((item, index) => (
+        <div
+          key={index}
+          variant="text"
+          id="focus-search"
+          tabindex={-1}
+          class="relative flex justify-between items-center group m-2"
+        >
+          <Link
+            variant="icon"
+            size={"icon"}
+            classes="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit hover:opacity-80"
+            href={
+              brewfileLinkDictionary[item.name] ??
+              `https://google.com?q=${item.name}+package`
+            }
+          >
+            {item.name.replaceAll('"', "")}
+          </Link>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </BaseLayout>

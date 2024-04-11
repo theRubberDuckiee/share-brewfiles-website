@@ -54,7 +54,9 @@ async function fetchLeaderboardData() {
     clearInterval(nameIntervals.get(i));
     clearInterval(downloadIntervals.get(i));
     packageNames[i].textContent = name;
-    packageLinks[i].setAttribute("href", brewfileLinkDictionary[name]);
+    const brewfileLink =
+      brewfileLinkDictionary[name] ?? `https://google.com?q=${name}+package`;
+    packageLinks[i].setAttribute("href", brewfileLink);
     packageFilters[i].setAttribute(
       "href",
       `/brewfiles?package=${name.replace("/", "%2F")}`
