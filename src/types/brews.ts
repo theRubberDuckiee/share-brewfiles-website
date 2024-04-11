@@ -5,8 +5,12 @@ export type Brews = {
 export type BrewsItem = {
   id: string;
   data: BrewEntry[];
-  dateUploaded: string;
-  userInfo: UserInfo
+  date: string;
+  userInfo: {
+    profileUrl: string;
+    avatarUrl: string;
+    username: string;
+  };
 };
 
 export type UserInfo = {
@@ -18,4 +22,12 @@ export type UserInfo = {
 export type BrewEntry = {
   name: string;
   packageManager: string;
+};
+
+export type TBrewCard = {
+  id: string;
+  username: string;
+  date: string;
+  totalPackages: number;
+  totalMatches: number;
 };

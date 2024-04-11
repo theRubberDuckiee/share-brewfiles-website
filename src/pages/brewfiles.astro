@@ -1,47 +1,10 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import Input from "@/components/ui/Input.astro";
-import BrewCard from "@/components/brewfiles/BrewCard.astro";
+import BrewfilesRoute from "@/components/brewfiles/BrewfilesRoute";
 
 const url = new URL(Astro.request.url);
-const filter = url.searchParams.get("package") || "";
 ---
 
 <BaseLayout>
-  <Input filter={filter} />
-  <div
-    class="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
-    id="brewfiles-grid"
-  >
-    {Array.from({ length: 9 }).map(() => <BrewCard />)}
-  </div>
+  <BrewfilesRoute client:only="react" />
 </BaseLayout>
-
-<script>
-  import { createBrewCard } from "@/lib/createBrewCard";
-  import type { BrewsItem } from "@/types/brews";
-
-  const brewfilesGrid = document.getElementById(
-    "brewfiles-grid"
-  ) as HTMLDivElement;
-
-  window.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const res = await fetch("/api/getBrewfiles.json");
-      if (!res.ok) {
-        throw new Error(res.statusText);
-      }
-      const brews = await res.json();
-      if (brews.status === 400) {
-        throw new Error(brews.message);
-      }
-      brewfilesGrid.innerHTML =
-        `<p class="font-mono text-3xl uppercase tracking-widest col-span-3 hidden text-center" id="no-brewfiles">No brewfiles found</p>` +
-        (brews.brews as BrewsItem[]).map(createBrewCard).join("");
-      brewfilesGrid.dispatchEvent(new Event("brewfiles-loaded"));
-      brewfilesGrid.dispatchEvent(new Event("update-brewcards"));
-    } catch (e) {
-      console.error(e);
-    }
-  });
-</script>
