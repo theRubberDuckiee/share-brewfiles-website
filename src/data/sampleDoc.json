@@ -80,7 +80,13 @@
           "name": "\"ms-toolsai.vscode-jupyter-slideshow\"",
           "packageManager": "vscode"
         }
-      ]
+      ],
+      "date": "4/9/2024",
+      "userInfo": {
+        "profileUrl": "https://api.github.com/users/theRubberDuckiee",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/13528197?v=4",
+        "username": "theRubberDuckiee"
+      }
     }
   ]
 }

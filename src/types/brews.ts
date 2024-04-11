@@ -13,6 +13,12 @@ export type BrewsItem = {
   };
 };
 
+export type UserInfo = {
+  username: string;
+  imageUrl: string;
+  profileUrl: string;
+}
+
 export type BrewEntry = {
   name: string;
   packageManager: string;
