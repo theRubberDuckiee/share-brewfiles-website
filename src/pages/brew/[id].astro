@@ -1,6 +1,7 @@
 ---
 import Link from "@/components/ui/Link.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { brewfileLinkDictionary } from "@/lib/getBrewfileLink";
 import type { Brews, BrewsItem } from "@/types/brews";
 import { Image } from "astro:assets";
 
@@ -51,9 +52,17 @@ if (!entry) return Astro.redirect("/");
           tabindex={-1}
           class="relative flex justify-between items-center group m-2"
         >
-          <div class="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit">
+          <Link
+            variant="icon"
+            size={"icon"}
+            classes="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit hover:opacity-80"
+            href={
+              brewfileLinkDictionary[item.name] ??
+              `https://google.com?q=${item.name}+package`
+            }
+          >
             {item.name.replaceAll('"', "")}
-          </div>
+          </Link>
         </div>
       ))
     }
