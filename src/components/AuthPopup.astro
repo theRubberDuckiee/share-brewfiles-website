@@ -1,35 +1,65 @@
-<div id="authPopup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-    <div class="backdrop-blur-4xl px-20 py-20 rounded-lg border border-white shadow-md text-center relative">
-        <button id="closePopup" class="absolute top-0 right-0 mt-2 mr-6 text-white text-4xl">&times;</button>
-        <p id="popupText" class="text-white text-4xl tracking-widest">
-            <slot />
-        </p>
-        <button id="copyTextButton" class="mt-4 bg-white text-black px-4 py-2 rounded-md">Copy Code</button>
-    </div>
+<div
+  id="authPopup"
+  class="hidden fixed inset-0 items-center justify-center bg-black bg-opacity-70 z-50"
+>
+  <div
+    class="backdrop-blur-4xl px-20 py-20 rounded-lg border border-white shadow-md text-center relative"
+  >
+    <button
+      id="closePopup"
+      class="absolute top-0 right-0 mt-2 mr-6 text-white text-4xl"
+      >&times;</button
+    >
+    <p id="popupText" class="text-white text-4xl tracking-widest">
+      <slot />
+    </p>
+    <button
+      id="copyTextButton"
+      class="mt-4 bg-white text-black px-4 py-2 rounded-md">Copy Code</button
+    >
+  </div>
 </div>
 
 <script>
-    const authPopup = document.getElementById('authPopup');
-    const copyTextButton = document.getElementById('copyTextButton');
-    const closePopupButton = document.getElementById('closePopup')
+  const authPopup = document.getElementById("authPopup");
+  const copyTextButton = document.getElementById("copyTextButton");
+  const closePopupButton = document.getElementById("closePopup");
 
-    copyTextButton?.addEventListener('click', function(event) {
-        event.stopPropagation();
-        copyTextToClipboard(); 
-    });
+  copyTextButton?.addEventListener("click", function (event) {
+    event.stopPropagation();
+    copyTextToClipboard();
+  });
 
-    closePopupButton?.addEventListener('click', function(event) {
-        authPopup?.classList.add('hidden');
-    });
+  closePopupButton?.addEventListener("click", function (event) {
+    authPopup?.classList.add("hidden");
+  });
 
-    function copyTextToClipboard() {
-        const popupText = document.getElementById('popupText');
-        if (popupText) {
-            const textToCopy = popupText.textContent;
-            if (textToCopy) {
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => copyTextButton ? copyTextButton.textContent = 'Copied!' : {})
-            }
-        }
+  function copyTextToClipboard() {
+    const popupText = document.getElementById("popupText");
+    if (popupText) {
+      const textToCopy = popupText.textContent;
+      if (textToCopy) {
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() =>
+            copyTextButton ? (copyTextButton.textContent = "Copied!") : {}
+          );
+      }
     }
+  }
+
+  const url = new URL(window.location.href);
+  const paramName = url.searchParams.get("code");
+
+  if (paramName && authPopup) {
+    const popupText = document.querySelector("#popupText");
+    if (popupText) {
+      popupText.textContent = paramName;
+    }
+    authPopup.classList.remove("hidden");
+    authPopup.classList.add("flex");
+  } else {
+    authPopup?.classList.add("hidden");
+    authPopup?.classList.remove("flex");
+  }
 </script>

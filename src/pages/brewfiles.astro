@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import BrewfilesRoute from "@/components/brewfiles/BrewfilesRoute";
-
-const url = new URL(Astro.request.url);
 ---
 
-<BaseLayout>
+<BaseLayout title="Submitted Brewfiles">
   <BrewfilesRoute client:only="react" />
 </BaseLayout>

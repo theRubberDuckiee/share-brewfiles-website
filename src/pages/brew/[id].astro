@@ -2,7 +2,7 @@
 import Link from "@/components/ui/Link.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { brewfileLinkDictionary } from "@/lib/getBrewfileLink";
-import type { Brews, BrewsItem } from "@/types/brews";
+import type { Brews } from "@/types/brews";
 import { Image } from "astro:assets";
 
 // for PROD
@@ -29,7 +29,7 @@ if (!entry) return Astro.redirect("/");
       <Link
         href={`https://github.com/${entry.userInfo.username}`}
         variant={"icon"}
-        size={"icon"}
+        size={"bland"}
         classes="rounded-full hover:opacity-80"
       >
         <Image
@@ -45,25 +45,16 @@ if (!entry) return Astro.redirect("/");
   <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center">
     {
       entry.data.map((item, index) => (
-        <div
-          key={index}
-          variant="text"
-          id="focus-search"
-          tabindex={-1}
-          class="relative flex justify-between items-center group m-2"
+        <Link
+          variant={"tile"}
+          size={"bland"}
+          href={
+            brewfileLinkDictionary[item.name] ??
+            `https://google.com?q=${item.name}+package`
+          }
         >
-          <Link
-            variant="icon"
-            size={"icon"}
-            classes="text-white/80 text-3xl px-2 py-4 bg-white/15 font-mono tracking-widest uppercase max-w-fit hover:opacity-80"
-            href={
-              brewfileLinkDictionary[item.name] ??
-              `https://google.com?q=${item.name}+package`
-            }
-          >
-            {item.name.replaceAll('"', "")}
-          </Link>
-        </div>
+          {item.name.replaceAll('"', "")}
+        </Link>
       ))
     }
   </div>

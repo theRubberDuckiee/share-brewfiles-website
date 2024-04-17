@@ -5,6 +5,7 @@ import Code from "./ui/Code.astro";
 import { keyLinks } from "@/data/siteData";
 import type { Brews } from "@/types/brews";
 import { navItemDisplay } from "@/types/navItem";
+import Button from "./ui/Button.astro";
 
 const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json`);
 const brewfiles: Brews = await res.json();
@@ -18,13 +19,13 @@ const currentPath = Astro.url.pathname;
     class="flex gap-4 items-center backdrop-blur-4xl p-2 rounded-full z-50 bg-white/7"
   >
     <div class="flex">
-      <button
+      <Button
         id="nav-btn"
         aria-label="Show Nav"
         aria-expanded="false"
         aria-pressed="false"
         aria-controls="nav-panel"
-        class="flex items-center justify-center backdrop-blur-4xl hover:bg-white/5 rounded-full focus:outline-none focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium p-3"
+        classes="p-3"
       >
         <div class="flex items-center space-x-2">
           <Icon name="hamburger" size={16} aria-hidden="true" />
@@ -32,40 +33,45 @@ const currentPath = Astro.url.pathname;
             >{navItemDisplay[currentPath]}</span
           >
         </div>
-      </button>
+      </Button>
     </div>
 
     <div class="flex items-center gap-3">
       <p class="flex gap-1">
         <span id="num_uploaded">{brewfiles.brews.length}</span> files uploaded
       </p>
-      <button
+      <Button
         id="info-btn"
         aria-label="Show Info"
         aria-expanded="false"
         aria-pressed="false"
         aria-controls="info-panel"
-        class="aria-pressed:bg-white/7 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium"
+        variant={"circle"}
+        size={"bland"}
       >
         <Icon name="info" size={24} aria-hidden="true" />
-      </button>
-      <a
+      </Button>
+      <Link
         id="github-btn"
         href={keyLinks.github}
         target="_blank"
         aria-label="Github Repo"
-        class="p-0 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2"
+        variant={"circle"}
+        size={"bland"}
+        classes="-ml-2"
       >
         <Icon name="github" size={22} aria-hidden="true" />
-      </a>
-      <a
+      </Link>
+      <Link
         href="https://warp.dev"
         target="_blank"
         aria-label="Warp Dev"
-        class="p-0 hover:bg-white/7 size-9 grid place-items-center rounded-full z-20 focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg ring-accent-bluemedium -ml-2 mr-2"
+        variant={"circle"}
+        size={"bland"}
+        classes="-ml-2 mr-2"
       >
         <Icon name="warp" size={22} aria-hidden="true" />
-      </a>
+      </Link>
     </div>
   </div>
   <div

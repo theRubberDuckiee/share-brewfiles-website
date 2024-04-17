@@ -43,12 +43,18 @@ const BrewfilesRoute = () => {
   // set filter on change
   const searchInput = useRef<HTMLInputElement>(null);
   const handleInputChange = () => {
-    if (searchInput.current) {
-      setFilter(searchInput.current.value);
-    }
+    const currentFilter = searchInput?.current?.value ?? "";
+    setFilter(currentFilter);
     const url = new URL(location.href);
-    url.searchParams.set("package", filter);
+    currentFilter.length > 0
+      ? url.searchParams.set("package", currentFilter)
+      : url.searchParams.delete("package");
     history.replaceState({}, "", url.toString());
+    // update title
+    document.title =
+      currentFilter.length > 0
+        ? `Brewfiles search: ${currentFilter}`
+        : `Submitted brewfiles`;
   };
 
   return (
@@ -62,6 +68,11 @@ const BrewfilesRoute = () => {
         className="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
         id="brewfiles-grid"
       >
+        {error && (
+          <p className="font-mono text-3xl uppercase tracking-widest col-span-3 text-center">
+            {error}
+          </p>
+        )}
         {isLoading && Array.from({ length: 9 }).map(() => <BrewCard />)}
 
         {!isLoading && filteredBrews && filteredBrews.length === 0 && (

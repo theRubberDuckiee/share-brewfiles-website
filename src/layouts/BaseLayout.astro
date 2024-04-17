@@ -7,22 +7,14 @@ import "@fontsource-variable/dm-sans";
 import Lines from "@/components/ui/Lines.astro";
 import Nav from "@/components/Nav.astro";
 import Footer from "@/components/Footer.astro";
+import BaseHead from "./BaseHead.astro";
 
 const { title = baseData.title, description = baseData.description } =
   Astro.props;
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <meta name="theme-color" content="#111111" />
-    <meta name="color-scheme" content="dark" />
-    <title>{title}</title>
-  </head>
+  <BaseHead title={title} description={description} />
   <body class="bg-bkg text-white leading-[1.35]">
     <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
       <Lines />
@@ -52,7 +44,6 @@ const { title = baseData.title, description = baseData.description } =
           scroll-behavior: auto !important;
         }
       }
-
       mark {
         background-color: #7eb1fd;
         color: #111111;
