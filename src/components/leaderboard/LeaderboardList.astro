@@ -1,6 +1,5 @@
 ---
 // for prod
-import initialData from "@/data/leadershipInitialData";
 import PackageRow from "./PackageRow.astro";
 ---
 
@@ -10,7 +9,7 @@ import PackageRow from "./PackageRow.astro";
       ? Array.from({ length: 300 }).map((_, i, arr) => (
           <PackageRow isLast={i === arr.length - 1} index={i + 1} />
         ))
-      : initialData.map((_, i, arr) => (
+      : Array.from({ length: 10 }).map((_, i, arr) => (
           <PackageRow isLast={i === arr.length - 1} index={i + 1} />
         ))
   }
