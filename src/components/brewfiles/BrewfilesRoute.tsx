@@ -25,8 +25,12 @@ const BrewfilesRoute = () => {
       );
     }
     const brewsMatchingFilter = brews.brews
-      .filter((brew) =>
-        brew.data.some((entry) => entry.name.toLowerCase().includes(filter))
+      .filter(
+        (brew) =>
+          brew.userInfo.username
+            .toLowerCase()
+            .includes(filter.replaceAll(" ", "-")) ||
+          brew.data.some((entry) => entry.name.toLowerCase().includes(filter))
       )
       .map((brew) => ({
         id: brew.id,
@@ -44,7 +48,7 @@ const BrewfilesRoute = () => {
   const searchInput = useRef<HTMLInputElement>(null);
   const handleInputChange = () => {
     const currentFilter = searchInput?.current?.value ?? "";
-    setFilter(currentFilter);
+    setFilter(currentFilter.toLowerCase());
     const url = new URL(location.href);
     currentFilter.length > 0
       ? url.searchParams.set("package", currentFilter)
