@@ -52,6 +52,7 @@ if (!entry) return Astro.redirect("/");
             brewfileLinkDictionary[item.name] ??
             `https://google.com?q=${item.name}+package`
           }
+          classes="backdrop-blur-3xl"
         >
           {item.name.replaceAll('"', "")}
         </Link>

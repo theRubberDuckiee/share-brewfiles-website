@@ -34,7 +34,7 @@ const BrewCard = ({ entry }: Props) => {
         </a>
 
         <div className="grid gap-1">
-          <p className="text-xl uppercase tracking-widest text-white min-h-7">
+          <p className="text-xl uppercase tracking-widest text-accent-bluelight min-h-7">
             {entry && entry.totalMatches === 0
               ? ""
               : `${entry?.totalMatches} matches`}

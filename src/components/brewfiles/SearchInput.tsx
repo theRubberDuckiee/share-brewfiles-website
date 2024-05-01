@@ -23,7 +23,7 @@ const BrewSearch = forwardRef<HTMLInputElement, Props>(
           id="brew-search"
           value={filter}
           onInput={() => handleInputChange()}
-          placeholder="Search Brews"
+          placeholder="Search packages"
           autoFocus={true}
           autoComplete="off"
           className="bg-transparent focus:outline-none w-full text-3xl uppercase tracking-widest font-mono peer"
