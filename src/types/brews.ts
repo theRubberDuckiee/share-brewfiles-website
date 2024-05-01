@@ -10,6 +10,7 @@ export type BrewsItem = {
     profileUrl: string;
     avatarUrl: string;
     username: string;
+    isFeatured: boolean;
   };
 };
 
@@ -30,4 +31,5 @@ export type TBrewCard = {
   date: string;
   totalPackages: number;
   totalMatches: number;
+  isFeatured: boolean;
 };

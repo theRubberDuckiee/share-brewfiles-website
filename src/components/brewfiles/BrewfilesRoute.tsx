@@ -3,8 +3,12 @@ import BrewSearch from "./SearchInput";
 import type { TBrewCard } from "@/types/brews";
 import useBrewFiles from "./useBrewFiles";
 import BrewCard from "./BrewCard";
+import FeaturedBrewfileToggle from "./FeaturedBrewfileToggle";
 
 const BrewfilesRoute = () => {
+  const [isToggledFeatured, setIsToggledFeatured] = useState(
+    new URL(location.href).searchParams.get("isFeaturedToggled") === 'true'
+  );
   const { brews, error, isLoading } = useBrewFiles();
   const [filter, setFilter] = useState(
     new URL(location.href).searchParams.get("package") || ""
@@ -12,20 +16,24 @@ const BrewfilesRoute = () => {
   const [filteredBrews, setFilteredBrews] = useState<TBrewCard[] | null>(null);
 
   useEffect(() => {
+    let brewsMatchingFilter
     if (!brews) return;
     if (filter === "") {
-      return setFilteredBrews(
-        brews.brews.map((brew) => ({
-          id: brew.id,
-          username: brew.userInfo.username,
-          date: brew.date,
-          totalPackages: brew.data.length,
-          totalMatches: 0,
-        }))
-      );
+      brewsMatchingFilter = brews.brews
+      .filter((brew) => isToggledFeatured ? brew.userInfo.isFeatured === isToggledFeatured : brew)
+      .map((brew) => ({
+        id: brew.id,
+        username: brew.userInfo.username,
+        date: brew.date,
+        totalPackages: brew.data.length,
+        totalMatches: 0,
+        isFeatured: brew.userInfo.isFeatured ?? false
+      }))
+      return setFilteredBrews(brewsMatchingFilter);
     }
-    const brewsMatchingFilter = brews.brews
+    brewsMatchingFilter = brews.brews
       .filter((brew) =>
+       (isToggledFeatured ? brew.userInfo.isFeatured === isToggledFeatured : brew) &&
         brew.data.some((entry) => entry.name.toLowerCase().includes(filter))
       )
       .map((brew) => ({
@@ -36,9 +44,10 @@ const BrewfilesRoute = () => {
         totalMatches: brew.data.filter((entry) =>
           entry.name.toLowerCase().includes(filter)
         ).length,
+        isFeatured: brew.userInfo.isFeatured ?? false
       }));
     setFilteredBrews(brewsMatchingFilter);
-  }, [brews, filter]);
+  }, [brews, filter, isToggledFeatured]);
 
   // set filter on change
   const searchInput = useRef<HTMLInputElement>(null);
@@ -59,11 +68,17 @@ const BrewfilesRoute = () => {
 
   return (
     <>
+    <div className="flex">
       <BrewSearch
         filter={filter}
         handleInputChange={handleInputChange}
         ref={searchInput}
       />
+      <FeaturedBrewfileToggle 
+      isToggledFeatured={Boolean(isToggledFeatured)} 
+      setIsToggledFeatured={setIsToggledFeatured}
+      />
+    </div>
       <div
         className="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
         id="brewfiles-grid"
