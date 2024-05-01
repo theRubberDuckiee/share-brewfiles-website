@@ -23,7 +23,7 @@ const FeaturedBrewfileToggle = ({isToggledFeatured, setIsToggledFeatured}: Props
           onChange={handleCheckboxChange}
           className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
         />
-        <span className="text-gray-700">Featured Brewfiles</span>
+        <span className="text-gray-400">Featured Brewfiles</span>
       </label>
     )
   }
