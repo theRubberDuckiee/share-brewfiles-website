@@ -1,32 +1,76 @@
 import type { APIRoute } from 'astro';
 import { db } from '@/firebase/config';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, updateDoc, addDoc } from 'firebase/firestore';
+import type { UserInfo } from '@/types/brews';
 
 export const POST: APIRoute = async ({ request }) => {
     try {
-        const { brewfileData, userInfo } = await request.json();
+        const { brewfileData, accessToken } = await request.json();
+        if (!accessToken) {
+            throw new Error('Access token is empty!');
+        }
+
+        const response = await fetch('https://api.github.com/user', {
+            headers: {
+                Authorization: `token ${accessToken}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('We failed to fetch your user information from the GitHub API.');
+        }
+
+        const completeUserInfo = await response.json();
+        const userInfo: UserInfo = {
+            username: completeUserInfo.login,
+            imageUrl: completeUserInfo.avatar_url,
+            profileUrl: completeUserInfo.url,
+            isFeatured: false,
+        }
+
+        if (!userInfo || !userInfo.username) {
+            throw new Error('The user information we got from Github API is invalid.');
+        }
+
         const collectionRef = collection(db, 'brewfiles');
-        
         const getCurrentDate = () => new Date().toISOString();
 
-        // Verify brewfile data
+        const q = query(collectionRef, where("userInfo.username", "==", userInfo.username));
 
-        // Deal with potential duplicate user
+        const existingDocs = await getDocs(q);
 
-        // Start generating personality quiz
-
-        const docRef = await addDoc(collectionRef, { 
-            data: brewfileData,
-            date: getCurrentDate(),
-            userInfo: userInfo,
-        });
-
-        return new Response(JSON.stringify({ success: true, id: docRef.id }), {
-            status: 200,
-        });
+        if (!existingDocs.empty) {
+            const existingDoc = existingDocs.docs[0];
+            await updateDoc(doc(db, 'brewfiles', existingDoc.id), {
+                data: brewfileData,
+                date: getCurrentDate(),
+                userInfo: userInfo
+            });
+            return new Response(JSON.stringify({ success: true, id: existingDoc.id, updated: true }), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        } else {
+            const docRef = await addDoc(collectionRef, {
+                data: brewfileData,
+                date: getCurrentDate(),
+                userInfo: userInfo,
+            });
+            return new Response(JSON.stringify({ success: true, id: docRef.id, created: true }), {
+                status: 200,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+        }
     } catch (error) {
-        return new Response(JSON.stringify({ message: "An unknown error occurred" }), {
+        return new Response(JSON.stringify({ message: error.message }), {
             status: 500,
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
     }
 };
