@@ -7,7 +7,7 @@ import FeaturedBrewfileToggle from "./FeaturedBrewfileToggle";
 
 const BrewfilesRoute = () => {
   const [isToggledFeatured, setIsToggledFeatured] = useState(
-    new URL(location.href).searchParams.get("isFeaturedToggled") === 'true'
+    new URL(location.href).searchParams.get("isFeaturedToggled") === "true"
   );
   const { brews, error, isLoading } = useBrewFiles();
   const [filter, setFilter] = useState(
@@ -16,28 +16,37 @@ const BrewfilesRoute = () => {
   const [filteredBrews, setFilteredBrews] = useState<TBrewCard[] | null>(null);
 
   useEffect(() => {
-    let brewsMatchingFilter
+    let brewsMatchingFilter;
     if (!brews) return;
     if (filter === "") {
       brewsMatchingFilter = brews.brews
-      .filter((brew) => isToggledFeatured ? brew.userInfo.isFeatured === isToggledFeatured : brew)
-      .map((brew) => ({
-        id: brew.id,
-        username: brew.userInfo.username,
-        date: brew.date,
-        totalPackages: brew.data.length,
-        totalMatches: 0,
-        isFeatured: brew.userInfo.isFeatured ?? false
-      }))
+        .filter((brew) =>
+          isToggledFeatured
+            ? brew.userInfo.isFeatured === isToggledFeatured
+            : brew
+        )
+        .map((brew) => ({
+          id: brew.id,
+          username: brew.userInfo.username,
+          date: brew.date,
+          totalPackages: brew.data.length,
+          totalMatches: 0,
+          isFeatured: brew.userInfo.isFeatured ?? false,
+        }));
       return setFilteredBrews(brewsMatchingFilter);
     }
     brewsMatchingFilter = brews.brews
-      .filter((brew) =>
-       (isToggledFeatured ? brew.userInfo.isFeatured === isToggledFeatured : brew) &&
-       (brew.userInfo.username
-        .toLowerCase()
-        .includes(filter.replaceAll(" ", "-")) ||
-       brew.data.some((entry) => entry.name.toLowerCase().includes(filter)))
+      .filter(
+        (brew) =>
+          (isToggledFeatured
+            ? brew.userInfo.isFeatured === isToggledFeatured
+            : brew) &&
+          (brew.userInfo.username
+            .toLowerCase()
+            .includes(filter.replaceAll(" ", "-")) ||
+            brew.data.some((entry) =>
+              entry.name.toLowerCase().includes(filter)
+            ))
       )
       .map((brew) => ({
         id: brew.id,
@@ -47,7 +56,7 @@ const BrewfilesRoute = () => {
         totalMatches: brew.data.filter((entry) =>
           entry.name.toLowerCase().includes(filter)
         ).length,
-        isFeatured: brew.userInfo.isFeatured ?? false
+        isFeatured: brew.userInfo.isFeatured ?? false,
       }));
     setFilteredBrews(brewsMatchingFilter);
   }, [brews, filter, isToggledFeatured]);
@@ -71,17 +80,17 @@ const BrewfilesRoute = () => {
 
   return (
     <>
-    <div className="flex">
-      <BrewSearch
-        filter={filter}
-        handleInputChange={handleInputChange}
-        ref={searchInput}
-      />
-      <FeaturedBrewfileToggle 
-      isToggledFeatured={Boolean(isToggledFeatured)} 
-      setIsToggledFeatured={setIsToggledFeatured}
-      />
-    </div>
+      <div className="flex items-center justify-center md:justify-between w-full gap-4 flex-wrap">
+        <BrewSearch
+          filter={filter}
+          handleInputChange={handleInputChange}
+          ref={searchInput}
+        />
+        <FeaturedBrewfileToggle
+          isToggledFeatured={Boolean(isToggledFeatured)}
+          setIsToggledFeatured={setIsToggledFeatured}
+        />
+      </div>
       <div
         className="grid gap-4 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 items-start"
         id="brewfiles-grid"

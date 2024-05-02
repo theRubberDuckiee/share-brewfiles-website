@@ -1,13 +1,14 @@
 import type { TBrewCard } from "@/types/brews";
 import BrewLink from "./BrewLink";
 import anonImage from "./anon.jpg";
-import starIcon from '../../icons/star.svg';
+import starIcon from "../../icons/star.svg";
 
 type Props = {
   entry?: TBrewCard;
 };
 
 const BrewCard = ({ entry }: Props) => {
+  console.log(entry);
   return (
     <article
       className={`bg-white/5 rounded-3xl backdrop-blur-4xl flex justify-between relative @container ${
@@ -36,9 +37,10 @@ const BrewCard = ({ entry }: Props) => {
 
         <div className="grid gap-1">
           <p className="@md:text-lg uppercase tracking-widest text-accent-bluelight min-h-5 @md:min-h-7">
-            {entry && entry.totalMatches === 0
-              ? ""
-              : `${entry?.totalMatches} matches`}
+            {entry?.totalMatches === 0 && ""}
+            {entry &&
+              entry?.totalMatches > 0 &&
+              `${entry?.totalMatches} matches`}
           </p>
           <p className="@md:text-lg uppercase tracking-widest text-white/60">
             {entry ? new Date(entry.date).toLocaleDateString() : "Date"}
