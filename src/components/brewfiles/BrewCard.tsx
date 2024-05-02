@@ -30,6 +30,7 @@ const BrewCard = ({ entry }: Props) => {
           <p className="font-mono text-2xl uppercase tracking-widest group-hover:underline underline-offset-4 decoration-white/20">
             {entry ? entry.username : "Username"}
           </p>
+          {entry?.isFeatured && <img src="src/icons/star.svg" alt="star" />}
         </a>
 
         <div className="grid gap-1">

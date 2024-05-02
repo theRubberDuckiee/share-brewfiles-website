@@ -49,7 +49,7 @@ async function fetchLeaderboardData() {
     }`
   );
   const data = (await req.json()) as PackageCounted[];
-
+  
   data.forEach(({ name, downloads }, i) => {
     clearInterval(nameIntervals.get(i));
     clearInterval(downloadIntervals.get(i));
