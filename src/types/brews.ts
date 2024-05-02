@@ -5,7 +5,7 @@ export type Brews = {
 export type BrewsItem = {
   id: string;
   data: BrewEntry[];
-  date: string;
+  date: Date;
   userInfo: {
     profileUrl: string;
     avatarUrl: string;
@@ -18,7 +18,7 @@ export type UserInfo = {
   username: string;
   imageUrl: string;
   profileUrl: string;
-}
+};
 
 export type BrewEntry = {
   name: string;
@@ -28,7 +28,7 @@ export type BrewEntry = {
 export type TBrewCard = {
   id: string;
   username: string;
-  date: string;
+  date: Date;
   totalPackages: number;
   totalMatches: number;
   isFeatured: boolean;

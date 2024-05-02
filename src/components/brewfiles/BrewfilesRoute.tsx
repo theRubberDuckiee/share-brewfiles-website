@@ -83,18 +83,19 @@ const BrewfilesRoute = () => {
       />
     </div>
       <div
-        className="container grid gap-8 sm:grid-cols-2 md:grid-cols-3 items-start"
+        className="grid gap-4 sm:gap-8 md:grid-cols-2 xl:grid-cols-3 items-start"
         id="brewfiles-grid"
       >
         {error && (
-          <p className="font-mono text-3xl uppercase tracking-widest col-span-3 text-center">
+          <p className="font-mono text-lg sm:text-2xl uppercase tracking-widest col-span-3 text-center">
             {error}
           </p>
         )}
-        {isLoading && Array.from({ length: 9 }).map(() => <BrewCard />)}
+        {isLoading &&
+          Array.from({ length: 9 }).map((_, i) => <BrewCard key={i} />)}
 
         {!isLoading && filteredBrews && filteredBrews.length === 0 && (
-          <p className="font-mono text-3xl uppercase tracking-widest col-span-3 text-center">
+          <p className="font-mono text-lg sm:text-2xl uppercase tracking-widest col-span-3 text-center">
             No brewfiles found
           </p>
         )}
