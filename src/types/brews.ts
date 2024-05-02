@@ -5,7 +5,7 @@ export type Brews = {
 export type BrewsItem = {
   id: string;
   data: BrewEntry[];
-  date: string;
+  date: Date;
   userInfo: UserInfo
 };
 
@@ -24,7 +24,7 @@ export type BrewEntry = {
 export type TBrewCard = {
   id: string;
   username: string;
-  date: string;
+  date: Date;
   totalPackages: number;
   totalMatches: number;
   isFeatured: boolean;

@@ -17,7 +17,9 @@ if (!entry) return Astro.redirect("/");
 ---
 
 <BaseLayout title={entry.id} description={`Brewfiles for ${entry.id}`}>
-  <div class="flex justify-between items-center px-20 pt-20">
+  <div
+    class="flex justify-center sm:justify-between items-center flex-wrap container pt-8 md:pt-16 gap-4"
+  >
     <div class="py-2 px-4 bg-accent-bluedark rounded-full">
       {entry.data.length} packages in this Brewfile
     </div>
@@ -30,7 +32,7 @@ if (!entry) return Astro.redirect("/");
         href={`https://github.com/${entry.userInfo.username}`}
         variant={"icon"}
         size={"bland"}
-        classes="rounded-full hover:opacity-80"
+        classes="rounded-full hover:opacity-80 group"
       >
         <Image
           src={`https://github.com/${entry.userInfo.username}.png`}
@@ -42,9 +44,9 @@ if (!entry) return Astro.redirect("/");
       </Link>
     </div>
   </div>
-  <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-center">
+  <div class="flex flex-wrap justify-center container">
     {
-      entry.data.map((item, index) => (
+      entry.data.map((item) => (
         <Link
           variant={"tile"}
           size={"bland"}
@@ -54,7 +56,7 @@ if (!entry) return Astro.redirect("/");
           }
           classes="backdrop-blur-3xl"
         >
-          {item.name.replaceAll('"', "")}
+          {item.name}
         </Link>
       ))
     }

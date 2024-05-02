@@ -7,7 +7,11 @@ export default {
     extend: {
       container: {
         center: true,
-        padding: "2rem",
+        padding: {
+          DEFAULT: "1.15rem",
+          sm: "1.75rem",
+          lg: "2.5rem",
+        },
       },
       colors: {
         bkg: "#111111",
@@ -41,9 +45,26 @@ export default {
         sans: ["DM Sans Variable", ...defaultTheme.fontFamily.sans],
         mono: ["DM Mono", ...defaultTheme.fontFamily.mono],
       },
+      fontSize: {
+        "2xs": ".7rem",
+        xs: "clamp(0.8681rem, 0.8961rem + -0.0362vi, 0.8889rem)",
+        sm: "clamp(1rem, 0.9855rem + 0.0725vi, 1.0417rem)",
+        base: "clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem)",
+        lg: "clamp(1.2656rem, 1.1841rem + 0.4076vi, 1.5rem)",
+        xl: "clamp(1.4238rem, 1.293rem + 0.6542vi, 1.8rem)",
+        "2xl": "clamp(1.6018rem, 1.4077rem + 0.9708vi, 2.16rem)",
+        "3xl": "clamp(1.802rem, 1.5273rem + 1.3739vi, 2.592rem)",
+        "4xl": "clamp(2.0273rem, 1.6506rem + 1.8837vi, 3.1104rem)",
+        "5xl": "clamp(2.2807rem, 1.7757rem + 2.5248vi, 3.7325rem)",
+        "6xl": "clamp(2.5658rem, 1.9003rem + 3.3273vi, 4.479rem)",
+        "7xl": "clamp(2.8865rem, 2.021rem + 4.3274vi, 5.3748rem)",
+      },
       animation: {
         marquee: "marquee 40s linear infinite",
         marquee2: "marquee2 40s linear infinite",
+      },
+      screens: {
+        xs: "475px",
       },
       keyframes: {
         marquee: {
@@ -57,5 +78,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/container-queries")],
 };

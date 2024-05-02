@@ -9,7 +9,7 @@ type Props = {
 const { index, isLast } = Astro.props;
 ---
 
-<li class="relative">
+<li class="relative @container">
   {
     !isLast && (
       <div class="absolute -bottom-2 border-b border-white/15 w-[2200px] -ml-[20%]" />
@@ -17,41 +17,43 @@ const { index, isLast } = Astro.props;
   }
   <div
     id={`${index}`}
-    class="p-2 relative flex justify-between items-center group font-mono hover:bg-white/5 rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg"
+    class="sm:p-2 relative flex justify-between items-center group font-mono hover:bg-white/5 rounded-xl sm:rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg @sm:text-lg @lg:text-2xl @2xl:text-4xl"
     data-row
   >
-    <div class="flex gap-8 items-center">
+    <div class="flex gap-4 sm:gap-8 items-center">
       <p
-        class="text-white/50 text-5xl px-8 py-6 bg-white/5 max-w-fit rounded-2xl leading-none"
+        class="text-white/50 px-4 py-3 sm:px-8 sm:py-6 bg-white/5 max-w-fit rounded-xl sm:rounded-2xl leading-none"
       >
         {index.toString().padStart(2, "0")}
       </p>
       <p
-        class="text-5xl uppercase tracking-widest"
+        class="uppercase tracking-widest break-all pr-4 sm:pr-2"
         id={`entry-${index}`}
         data-packageName
       >
         {getRandomWord()}
       </p>
-      <div class="items-center hidden group-hover:flex">
+      <div
+        class="items-center hidden group-hover:sm:flex gap-2 shrink-0 pr-8 text-base"
+      >
         <a
-          class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20 mr-4"
-          link-packageName
+          class="flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
+          data-packageNameLink
           target="_blank"
         >
           Explore tool
         </a>
         <a
-          class="py-2 px-4 bg-white/10 ring-accent-bluemedium rounded-full hover:bg-white/20"
+          class="flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
           href="/"
-          link-packageFilter
+          data-packageFilterLink
         >
           See users
         </a>
       </div>
     </div>
     <p
-      class="text-5xl uppercase tracking-widest"
+      class="uppercase tracking-widest mr-3"
       id={`downloads-${index}`}
       data-downloadValue
     >

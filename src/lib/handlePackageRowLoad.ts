@@ -12,11 +12,11 @@ const packageNames = document.querySelectorAll(
 ) as NodeListOf<HTMLParagraphElement>;
 
 const packageLinks = document.querySelectorAll(
-  "[link-packageName]"
+  "[data-packageNameLink]"
 ) as NodeListOf<HTMLAnchorElement>;
 
 const packageFilters = document.querySelectorAll(
-  "[link-packageFilter]"
+  "[data-packageFilterLink]"
 ) as NodeListOf<HTMLAnchorElement>;
 
 const downloadValues = document.querySelectorAll(
