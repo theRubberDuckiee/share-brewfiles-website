@@ -1,4 +1,6 @@
 ---
+import Seo from "@/components/Seo.astro";
+
 const { title, description } = Astro.props;
 ---
 
@@ -7,8 +9,7 @@ const { title, description } = Astro.props;
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
-  <meta name="description" content={description} />
   <meta name="theme-color" content="#111111" />
   <meta name="color-scheme" content="dark" />
-  <title>{title}</title>
+  <Seo title={title} {description} />
 </head>
