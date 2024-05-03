@@ -16,7 +16,10 @@ const entry = brews.brews[0];
 if (!entry) return Astro.redirect("/");
 ---
 
-<BaseLayout title={entry.id} description={`Brewfiles for ${entry.id}`}>
+<BaseLayout
+  title={`${entry.userInfo.username}’s Brewfile`}
+  description={`All packages in ${entry.userInfo.username}'s brewfile.`}
+>
   <div
     class="flex justify-center sm:justify-between items-center flex-wrap container pt-8 md:pt-16 gap-4"
   >

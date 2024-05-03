@@ -1,0 +1,58 @@
+---
+import jsonLDGenerator from "@/lib/jsonLD";
+import { baseData } from "@/data/siteData";
+
+const { title, description } = Astro.props;
+
+const url = Astro.url.href;
+
+const jsonLD = jsonLDGenerator({
+  title,
+  url,
+});
+---
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="canonical" href={url} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:site_name" content={baseData.title} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={`${Astro.site}social-image.jpg`} />
+<meta property="og:image:url" content={`${Astro.site}social-image.jpg`} />
+<meta
+  property="og:image:secure_url"
+  content={`${Astro.site}social-image.jpg`}
+/>
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="600" />
+<meta property="og:image:alt" content={baseData.title} />
+
+<!-- Twitter -->
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content={`${Astro.site}social-image.jpg`} />
+<meta name="twitter:image:alt" content={title} />
+<meta name="twitter:domain" content={Astro.site} />
+
+<!-- Google Analytics -->
+<script
+  is:inline
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-WGD9RH2E7M"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-WGD9RH2E7M");
+</script>
+
+<!-- JSON-LD -->
+<Fragment set:html={jsonLD} />
