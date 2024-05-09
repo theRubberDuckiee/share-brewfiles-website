@@ -1,0 +1,25 @@
+---
+import type { UserInfo } from "@/types/brews";
+import CardWrapper from "./CardWrapper.astro";
+
+type Props = {
+  username: UserInfo["username"];
+};
+const { username } = Astro.props;
+---
+
+<CardWrapper name="github">
+  <div class="flex justify-between items-center gap-3">
+    <img
+      src={`https://github.com/${username}.png`}
+      alt={username}
+      width="50"
+      height="50"
+      class="rounded-full grayscale hover:ring-4"
+    />
+
+    <p class="font-mono text-lg uppercase tracking-widest break-all">
+      {username}
+    </p>
+  </div>
+</CardWrapper>

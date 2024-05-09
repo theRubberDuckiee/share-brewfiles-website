@@ -1,0 +1,23 @@
+---
+import type { PersonalitySummary } from "@/types/brews";
+
+type Props = {
+  title: PersonalitySummary["title"];
+  percentileSimilarToType: PersonalitySummary["percentileSimilarToType"];
+};
+
+const { percentileSimilarToType, title } = Astro.props;
+---
+
+<div
+  class="text-center grid place-items-center px-3 rounded-full bg-bkg/70"
+  data-gridName="similar"
+>
+  <p class="flex gap-2">
+    <span class="bg-accent-bluemedium rounded-full px-2"
+      >{percentileSimilarToType}%
+    </span>others are also {title.substring(0, 1).toUpperCase()}{
+      title.substring(1)
+    } Developers
+  </p>
+</div>

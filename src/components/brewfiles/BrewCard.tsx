@@ -8,7 +8,6 @@ type Props = {
 };
 
 const BrewCard = ({ entry }: Props) => {
-  console.log(entry);
   return (
     <article
       className={`bg-white/5 rounded-3xl backdrop-blur-4xl flex justify-between relative @container ${
@@ -27,7 +26,7 @@ const BrewCard = ({ entry }: Props) => {
                   ? `https://github.com/${entry.username}.png`
                   : anonImage.src
               }
-              alt="anon"
+              alt={entry?.username}
               width="50"
               height="50"
               className="rounded-full grayscale hover:ring-4 "

@@ -1,0 +1,100 @@
+---
+import "@fontsource-variable/dm-sans";
+import "@fontsource/dm-mono";
+import Lines from "@/components/ui/Lines.astro";
+import BaseHead from "@/layouts/BaseHead.astro";
+import type { Brews } from "@/types/brews";
+import { Image } from "astro:assets";
+
+// const { id } = Astro.params;
+// const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
+
+// if (!res.ok) return Astro.redirect("/");
+// const brews: Brews = await res.json();
+
+// const entry = brews.brews[0];
+
+import entry from "@/data/sampleDoc.json";
+const id = entry.id;
+
+if (!entry) return Astro.redirect("/");
+
+import { baseData } from "@/data/siteData";
+import Heading from "@/components/ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import ProfileGrid from "@/components/profile/ProfileGrid.astro";
+---
+
+<html lang="en">
+  <BaseHead title={baseData.title} description={baseData.description} />
+  <body class="bg-bkg text-white leading-[1.35]">
+    <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
+      <Lines />
+      <div class="place-content-center min-h-screen">
+        <main class="grid gap-4 place-items-center py-8">
+          <Heading tagType="h1" size="md" classes="flex items-center gap-2"
+            >Screenshot and Share <Icon name="twitter" /></Heading
+          >
+          <!-- @ts-ignore -->
+          <ProfileGrid entry={entry} />
+          <Button
+            variant="default"
+            size="large"
+            id="copy-btn"
+            classes="backdrop-blur-3xl"
+            ><span id="copy-link">Copy Link</span>
+            <Icon name="copy" size={32} aria-hidden="true" />
+          </Button>
+        </main>
+      </div>
+    </div>
+    <script define:vars={{ id, site: Astro.url.origin }}>
+      const copyBtn = document.getElementById("copy-btn");
+      const copyLink = document.getElementById("copy-link");
+      let copyTimeout;
+
+      const resetCopyText = () => {
+        copyTimeout = setTimeout(() => {
+          copyLink.textContent = "Copy Link";
+        }, 2000);
+      };
+
+      copyBtn?.addEventListener("click", () => {
+        const url = `${site}/brew/${id}/`;
+        clearTimeout(copyTimeout);
+        navigator.clipboard
+          .writeText(url)
+          .then(() => {
+            copyLink.textContent = "Copied!";
+            resetCopyText();
+          })
+          .catch((err) => {
+            copyLink.textContent = "Failed to copy";
+            resetCopyText();
+            console.error("Failed to copy: ", err);
+          });
+      });
+    </script>
+
+    <style>
+      * {
+        scrollbar-gutter: stable;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html:focus-within {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </body>
+</html>

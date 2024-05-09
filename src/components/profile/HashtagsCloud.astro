@@ -1,0 +1,19 @@
+---
+import type { PersonalitySummary } from "@/types/brews";
+
+type Props = {
+  hashtags: PersonalitySummary["hashtags"];
+};
+
+const { hashtags } = Astro.props;
+---
+
+<div class="flex gap-4 items-center" data-gridname="hashtags">
+  {
+    hashtags.map((h) => (
+      <p class="text-sm rounded-full bg-bkg/70 text-center py-1 px-2.5 text-white/70">
+        #{h}
+      </p>
+    ))
+  }
+</div>
