@@ -1,3 +1,5 @@
+import type { PersonalitySummary } from "./personality";
+
 export type Brews = {
   brews: BrewsItem[];
 };
@@ -7,6 +9,7 @@ export type BrewsItem = {
   data: BrewEntry[];
   date: Date;
   userInfo: UserInfo
+  personalitySummary?: PersonalitySummary
 };
 
 export type UserInfo = {
