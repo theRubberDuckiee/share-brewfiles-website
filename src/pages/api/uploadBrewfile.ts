@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { db } from '@/firebase/config';
 import { collection, query, where, getDocs, doc, updateDoc, addDoc } from 'firebase/firestore';
 import type { UserInfo } from '@/types/brews';
+import { generatePersonality } from '@/lib/generatePersonality';
 
 export const POST: APIRoute = async ({ request }) => {
     try {
@@ -46,6 +47,7 @@ export const POST: APIRoute = async ({ request }) => {
                 date: getCurrentDate(),
                 userInfo: userInfo
             });
+            generatePersonality(brewfileData, existingDoc.id)
             return new Response(JSON.stringify({ success: true, id: existingDoc.id, updated: true }), {
                 status: 200,
                 headers: {
@@ -58,6 +60,7 @@ export const POST: APIRoute = async ({ request }) => {
                 date: getCurrentDate(),
                 userInfo: userInfo,
             });
+            generatePersonality(brewfileData, docRef.id)
             return new Response(JSON.stringify({ success: true, id: docRef.id, created: true }), {
                 status: 200,
                 headers: {
