@@ -1,4 +1,4 @@
-import type { DeveloperType } from "@/types/brews";
+import type { DeveloperType } from "@/types/personality";
 import { PieChart } from "react-minimal-pie-chart";
 
 const CustomPieChart = ({ data }: { data: DeveloperType }) => {
@@ -13,7 +13,7 @@ const CustomPieChart = ({ data }: { data: DeveloperType }) => {
 
   const pieData = Object.entries(data).map(([title, value], index) => ({
     title,
-    value,
+    value: parseFloat(value),
     color: colors[index],
   }));
   return (

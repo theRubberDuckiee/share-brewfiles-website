@@ -1,6 +1,15 @@
 export type Statistic = {
-    title?: string,
+    title: string,
     content: string,
+}
+
+export type DeveloperType = {
+    fractionBackend: string,
+    fractionFrontend: string,
+    fractionDevOps: string,
+    fractionSecurity: string,
+    fractionData: string,
+    fractionGeneral: string,
 }
 
 export enum DeveloperPersonalityType {
@@ -35,14 +44,7 @@ export type PersonalitySummary = {
     relevantStat: Statistic,
     totalPackagesUploaded: number,
     totalPackagesUploadedComparitive: number,
-    developerType: {
-        fractionBackend: string,
-        fractionFrontend: string,
-        fractionDevOps: string,
-        fractionSecurity: string,
-        fractionData: string,
-        fractionGeneral: string,
-    }
+    developerType: DeveloperType
   };
 
 export type PersonalityTotalCountStatistics = {

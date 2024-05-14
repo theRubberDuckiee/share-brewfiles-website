@@ -200,7 +200,6 @@ async function turnStatsIntoPersonality(personalityPercentageStatistics: Persona
       percentileSimilarToType = getPercentileSimilarToType(title, brews)
       totalPackagesUploadedComparitive = getTotalPackagesUploadedComparitive(personalityPercentageStatistics.totalPackages, brews)
     }
-    
     const personalitySummary: PersonalitySummary = {
         title: title,
         description: description,
@@ -234,6 +233,9 @@ function getPercentileSimilarToType(personalityTitle: string, allBrewfiles: Brew
             }
         }
     });
+    if (!totalPersonalities) {
+        return 0
+    }
     return numSimilarToType/totalPersonalities
 }
 
@@ -244,7 +246,7 @@ function getTotalPackagesUploadedComparitive(packagesUploaded: number, allBrewfi
         totalNumPackages += brew.data.length
     });
     const averageUploadedPackages = Math.round(totalNumPackages/numBrewfiles)
-    return Math.abs(averageUploadedPackages - packagesUploaded)
+    return averageUploadedPackages - packagesUploaded
 }
 
 function getMostPopularPackage(packages: BrewEntry[]): string {
