@@ -6,16 +6,16 @@ import BaseHead from "@/layouts/BaseHead.astro";
 import type { Brews } from "@/types/brews";
 import { Image } from "astro:assets";
 
-// const { id } = Astro.params;
-// const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
+const { id } = Astro.params;
+const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
 
-// if (!res.ok) return Astro.redirect("/");
-// const brews: Brews = await res.json();
+if (!res.ok) return Astro.redirect("/");
+const brews: Brews = await res.json();
 
-// const entry = brews.brews[0];
+const entry = brews.brews[0];
 
-import entry from "@/data/sampleDoc.json";
-const id = entry.id;
+//
+//const id = entry.id;
 
 if (!entry) return Astro.redirect("/");
 

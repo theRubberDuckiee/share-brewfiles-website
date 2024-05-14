@@ -1,26 +1,22 @@
 ---
-import type { PersonalitySummary } from "@/types/brews";
+import type { PersonalitySummary } from "@/types/personality";
 import CardWrapper from "./CardWrapper.astro";
 
 type Props = {
   totalPackagesUploaded: PersonalitySummary["totalPackagesUploaded"];
-  totalPackagesUploadedComparison: PersonalitySummary["totalPackagesUploadedComparison"];
+  totalPackagesUploadedComparitive: PersonalitySummary["totalPackagesUploadedComparitive"];
 };
-
-const { totalPackagesUploadedComparison, totalPackagesUploaded } = Astro.props;
+const { totalPackagesUploadedComparitive, totalPackagesUploaded } = Astro.props;
 
 const processedRank = () => {
   const isAboveAverage =
-    totalPackagesUploaded > totalPackagesUploadedComparison;
+  totalPackagesUploadedComparitive > 0
 
   return {
     measurement: {
       spatial: isAboveAverage ? "above" : "below",
       quantitative: isAboveAverage ? "more" : "fewer",
     },
-    difference: isAboveAverage
-      ? totalPackagesUploaded - totalPackagesUploadedComparison
-      : totalPackagesUploadedComparison - totalPackagesUploaded,
   };
 };
 ---
@@ -29,7 +25,7 @@ const processedRank = () => {
   <div class="grid gap-4 place-items-center place-content-center">
     <p class="text-white/70 text-pretty">
       With {totalPackagesUploaded} packages installed, you’ve installed {
-        processedRank().difference
+        totalPackagesUploadedComparitive
       }
       {processedRank().measurement.quantitative} packages when compared to the average
       uploader.
@@ -37,7 +33,7 @@ const processedRank = () => {
     <p
       class="text-xl uppercase text-balance leading-heading tracking-widest font-mono"
     >
-      {processedRank().difference}
+      {totalPackagesUploadedComparitive}
       {processedRank().measurement.spatial} average
     </p>
   </div>

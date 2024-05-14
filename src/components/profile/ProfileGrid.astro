@@ -44,7 +44,7 @@ if (!personalitySummary) {
     data-gridWrapper
   >
     <CustomPieChart data={personalitySummary.developerType} />
-    <PopularCard mostPopularPackage="kubernetes-cli" />
+    <PopularCard mostPopularPackage={personalitySummary.mostPopularPackage} />
     <FriendsCard friendsWith={personalitySummary.friendsWith} />
     <ProfileCard username={entry.userInfo.username} />
     <DevTypeCard title={personalitySummary.title} />
@@ -52,10 +52,10 @@ if (!personalitySummary) {
     <DescriptionCard description={personalitySummary.description} />
     <StatCard
       title={statRandomizer
-        ? personalitySummary.generalStat.title
+        ? personalitySummary.relevantStat.title
         : personalitySummary.relevantStat.title}
       content={statRandomizer
-        ? personalitySummary.generalStat.content
+        ? personalitySummary.relevantStat.content
         : personalitySummary.relevantStat.content}
     />
     <TotalPackagesCard
@@ -63,7 +63,7 @@ if (!personalitySummary) {
     />
     <RankingCard
       totalPackagesUploaded={personalitySummary.totalPackagesUploaded}
-      totalPackagesUploadedComparison={personalitySummary.totalPackagesUploadedComparison}
+      totalPackagesUploadedComparitive={personalitySummary.totalPackagesUploadedComparitive}
     />
     <SimilarCard
       percentileSimilarToType={personalitySummary.percentileSimilarToType}
