@@ -11,7 +11,7 @@ export async function generatePersonality(packages: BrewEntry[], id: string) {
     const personalitySummary = await turnStatsIntoPersonality(personalityPercentageStatistics, packages);
 
     try {
-        const response = await fetch('/api/updatePersonality', {
+        const response = await fetch('https://www.brewfiles.com/api/updatePersonality', {
             method: 'POST', 
             headers: {
                 'Content-Type': 'application/json'

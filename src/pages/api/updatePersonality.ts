@@ -5,7 +5,6 @@ import { doc, updateDoc, getDoc } from 'firebase/firestore';
 export const POST: APIRoute = async ({ request }) => {
     try {
         const { personalitySummary, id } = await request.json();
-        console.log('id', id)
         const singleBrewDoc = await getDoc(doc(db, "brewfiles", id));
         if (singleBrewDoc.exists()) {
             await updateDoc(doc(db, 'brewfiles', id), {
