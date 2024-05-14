@@ -1,0 +1,21 @@
+---
+import type { PersonalitySummary } from "@/types/brews";
+import CardWrapper from "./CardWrapper.astro";
+
+type Props = {
+  totalPackagesUploaded: PersonalitySummary["totalPackagesUploaded"];
+};
+
+const { totalPackagesUploaded } = Astro.props;
+---
+
+<CardWrapper name="totalPackages">
+  <div class="grid gap-4 place-items-center place-content-center">
+    <p
+      class="text-xl uppercase text-balance leading-heading tracking-widest font-mono"
+    >
+      {totalPackagesUploaded}
+    </p>
+    <p class="text-white/70">total packages</p>
+  </div>
+</CardWrapper>

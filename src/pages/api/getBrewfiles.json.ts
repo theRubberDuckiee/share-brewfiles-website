@@ -33,6 +33,8 @@ export const GET: APIRoute = async ({ request }) => {
                 }),
                 date: singleBrewDoc.data().date,
                 userInfo: singleBrewDoc.data().userInfo,
+                personalitySummary:
+                  singleBrewDoc.data().personalitySummary ?? null,
               },
             ],
           })

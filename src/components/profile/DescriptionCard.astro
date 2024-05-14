@@ -1,0 +1,16 @@
+---
+import type { PersonalitySummary } from "@/types/brews";
+import CardWrapper from "./CardWrapper.astro";
+
+type Props = {
+  description: PersonalitySummary["description"];
+};
+
+const { description } = Astro.props;
+---
+
+<CardWrapper name="desc">
+  <p class="grid place-items-center text-[1.28rem] text-white/70 text-pretty">
+    {description}
+  </p>
+</CardWrapper>

@@ -1,0 +1,19 @@
+---
+import { twMerge } from "tailwind-merge";
+
+type Props = {
+  name: string;
+  classes?: string;
+};
+const { name, classes } = Astro.props;
+---
+
+<div
+  class:list={twMerge([
+    "flex p-6 rounded-xl bg-bkg/70 text-center justify-center",
+    classes,
+  ])}
+  data-gridName={name}
+>
+  <slot />
+</div>

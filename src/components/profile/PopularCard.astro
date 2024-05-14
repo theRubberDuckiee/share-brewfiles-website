@@ -1,0 +1,31 @@
+---
+type Props = {
+  mostPopularPackage: string;
+};
+
+const { mostPopularPackage } = Astro.props;
+---
+
+<div
+  class="flex px-3 rounded-full bg-bkg/70 items-center gap-2"
+  data-gridName={"top-package"}
+>
+  <div class="flex items-center">
+    <p class="bg-accent-bluemedium pl-3 pr-1 rounded-l-full leading-normal">
+      most popular package
+    </p>
+    <span class="triangle"></span>
+    <p class="ml-4">{mostPopularPackage}</p>
+  </div>
+</div>
+
+<style>
+  .triangle {
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0.8em 0 0.8em 1.5em;
+    border-color: transparent transparent transparent #0868f9;
+    transform: rotate(0deg);
+  }
+</style>

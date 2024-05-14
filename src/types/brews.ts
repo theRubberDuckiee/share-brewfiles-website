@@ -17,7 +17,7 @@ export type UserInfo = {
   imageUrl: string;
   profileUrl: string;
   isFeatured: boolean;
-}
+};
 
 export type BrewEntry = {
   name: string;

@@ -1,0 +1,42 @@
+---
+import type { PersonalitySummary } from "@/types/brews";
+import { Image, getImage } from "astro:assets";
+import CardWrapper from "./CardWrapper.astro";
+
+type Props = {
+  friendsWith: PersonalitySummary["friendsWith"];
+};
+
+const { friendsWith } = Astro.props;
+
+// TODO: Replace with custom images
+const imgSrc = "wallflower";
+---
+
+<CardWrapper name="friends">
+  <div class="grid gap-4 place-items-center place-content-center">
+    <div>
+      <p
+        class="text-xl uppercase text-balance leading-heading tracking-widest font-mono"
+      >
+        Friends With
+      </p>
+      <p class="text-white/70">You would get along well with…</p>
+    </div>
+    <div class="flex gap-4 items-start">
+      {
+        friendsWith.map((friend) => (
+          <div class="grid gap-1 place-items-center">
+            <Image
+              src={`/images/${imgSrc}.png`}
+              width={50}
+              height={50}
+              alt={friend}
+            />
+            <p>{friend}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</CardWrapper>
