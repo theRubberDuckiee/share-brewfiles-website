@@ -262,6 +262,9 @@ function getMostPopularPackage(packages: BrewEntry[]): string {
 }
 
 function convertFractionToPercentage(fraction: number): string {
+    if (fraction == 0) {
+        return '0.0'
+    }
     const percentage = fraction * 100;
     const roundedPercentage = percentage.toFixed(1);
     return roundedPercentage;
