@@ -18,15 +18,18 @@ const CustomPieChart = ({ data }: { data: DeveloperType }) => {
   }));
   return (
     <div
-      class="flex p-6 rounded-xl bg-bkg/70 text-center justify-center"
+      className="flex p-3 sm:p-6 rounded-xl bg-bkg/70 text-center justify-center"
       data-gridName="pie"
     >
       <div className="grid gap-4">
-        <p className="text-xl uppercase text-balance leading-heading tracking-widest font-mono">
+        <p className="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono">
           Dev Breakdown
         </p>
-        <PieChart data={pieData} />
-        <div className="flex gap-2 flex-wrap justify-center max-w-xs">
+        <PieChart
+          data={pieData}
+          className="max-w-[100px] place-self-center sm:max-w-full"
+        />
+        <div className="flex gap-2 flex-wrap justify-center justify-self-center max-w-2xs sm:max-w-xs">
           {pieData
             .filter(({ value }) => value > 0)
             .map(({ title, color }) => (
@@ -37,7 +40,7 @@ const CustomPieChart = ({ data }: { data: DeveloperType }) => {
                     backgroundColor: color,
                   }}
                 ></div>
-                <p>{title.substring(8)}</p>
+                <p className="text-xs sm:text-sm">{title.substring(8)}</p>
               </div>
             ))}
         </div>

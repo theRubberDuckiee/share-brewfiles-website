@@ -12,10 +12,10 @@ const { title, content } = Astro.props;
 <CardWrapper name="stat">
   <div class="grid gap-4 place-items-center place-content-center">
     <p
-      class="text-xl uppercase text-balance leading-heading tracking-widest font-mono"
+      class="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono"
     >
       {title}
     </p>
-    <p class="text-white/70 text-pretty">{content}</p>
+    <p class="text-white/70 text-balance">{content}</p>
   </div>
 </CardWrapper>

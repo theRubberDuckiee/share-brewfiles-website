@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import CardWrapper from "./CardWrapper.astro";
 import type { PersonalitySummary } from "@/types/personality";
 
-
 type Props = {
   title: PersonalitySummary["title"];
 };
@@ -12,11 +11,17 @@ const { title } = Astro.props;
 ---
 
 <CardWrapper name="type" classes="border-2 border-accent-bluemedium">
-  <div class="grid gap-6 place-items-center place-content-center">
-    <p class="text-white/70 text-lg">You are a…</p>
-    <Image src={`/images/${title.toLowerCase()}.png`} width={120} height={120} alt={title} />
+  <div class="grid gap-2 sm:gap-6 place-items-center place-content-center">
+    <p class="text-white/70 sm:text-lg">You are a…</p>
+    <Image
+      src={`/images/${title}.png`}
+      width={120}
+      height={120}
+      alt={title}
+      class="size-16 sm:size-28"
+    />
     <p
-      class="text-3xl uppercase text-balance leading-[1.04] tracking-widest font-mono"
+      class="text-xl lg:text-3xl uppercase text-balance leading-[1.04] tracking-widest font-mono"
     >
       {title} Developer
     </p>

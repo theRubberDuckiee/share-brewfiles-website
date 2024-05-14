@@ -8,10 +8,13 @@ type Props = {
 const { hashtags } = Astro.props;
 ---
 
-<div class="flex gap-4 items-center" data-gridname="hashtags">
+<div
+  class="flex gap-2 sm:gap-4 items-center justify-center flex-wrap"
+  data-gridname="hashtags"
+>
   {
     hashtags.map((h) => (
-      <p class="text-sm rounded-full bg-bkg/70 text-center py-1 px-2.5 text-white/70">
+      <p class="text-2xs sm:text-sm rounded-full bg-bkg/70 text-center py-1 px-2.5 text-white/70">
         #{h}
       </p>
     ))

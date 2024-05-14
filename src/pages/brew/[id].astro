@@ -22,11 +22,14 @@ if (!entry) return Astro.redirect("/");
   description={`All packages in ${entry.userInfo.username}'s brewfile.`}
 >
   <div
-    class="flex justify-center sm:justify-between items-center flex-wrap container pt-8 md:pt-16 gap-4"
+    class="flex justify-center lg:justify-between items-center flex-wrap container pt-8 lg:pt-16 gap-8"
   >
-    <div class="py-2 px-4 bg-accent-bluedark rounded-full">
+    <div class="py-2 px-4 bg-white/10 rounded-full backdrop-blur-3xl">
       {entry.data.length} packages in this Brewfile
     </div>
+    <Link href=`personality` variant={"accent"} classes="order-1 lg:order-none"
+      >Generate Dev Personality</Link
+    >
     <div class="flex gap-2">
       <Link
         href={`https://github.com/${entry.userInfo.username}`}

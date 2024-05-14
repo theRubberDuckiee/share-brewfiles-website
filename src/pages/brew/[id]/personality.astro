@@ -33,11 +33,16 @@ import ProfileGrid from "@/components/profile/ProfileGrid.astro";
       <Lines />
       <div class="place-content-center min-h-screen">
         <main class="grid gap-4 place-items-center py-8">
-          <Heading tagType="h1" size="md" classes="flex items-center gap-2"
+          <Heading
+            tagType="h1"
+            size="md"
+            classes="flex items-center gap-2 text-center"
             >Screenshot and Share <Icon name="twitter" /></Heading
           >
           <!-- @ts-ignore -->
-          <ProfileGrid entry={entry} />
+          <div class="p-4">
+            <ProfileGrid entry={entry} />
+          </div>
           <Button
             variant="default"
             size="large"

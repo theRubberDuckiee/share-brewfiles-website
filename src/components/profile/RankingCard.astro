@@ -9,8 +9,7 @@ type Props = {
 const { totalPackagesUploadedComparitive, totalPackagesUploaded } = Astro.props;
 
 const processedRank = () => {
-  const isAboveAverage =
-  totalPackagesUploadedComparitive > 0
+  const isAboveAverage = totalPackagesUploadedComparitive > 0;
 
   return {
     measurement: {
@@ -24,14 +23,16 @@ const processedRank = () => {
 <CardWrapper name="ranking">
   <div class="grid gap-4 place-items-center place-content-center">
     <p class="text-white/70 text-pretty">
-      With {totalPackagesUploaded} packages installed, you’ve installed {
+      <span class="hidden sm:inline"
+        >With {totalPackagesUploaded} packages installed, y</span
+      ><span class="sm:hidden">Y</span>ou’ve installed {
         totalPackagesUploadedComparitive
       }
       {processedRank().measurement.quantitative} packages when compared to the average
       uploader.
     </p>
     <p
-      class="text-xl uppercase text-balance leading-heading tracking-widest font-mono"
+      class="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono"
     >
       {totalPackagesUploadedComparitive}
       {processedRank().measurement.spatial} average
