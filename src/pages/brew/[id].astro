@@ -27,8 +27,10 @@ if (!entry) return Astro.redirect("/");
     <div class="py-2 px-4 bg-white/10 rounded-full backdrop-blur-3xl">
       {entry.data.length} packages in this Brewfile
     </div>
-    <Link href=`personality` variant={"accent"} classes="order-1 lg:order-none"
-      >Generate Dev Personality</Link
+    <Link
+      href={`${entry.id}/personality`}
+      variant={"accent"}
+      classes="order-1 lg:order-none">Generate Dev Personality</Link
     >
     <div class="flex gap-2">
       <Link
@@ -71,20 +73,19 @@ if (!entry) return Astro.redirect("/");
   <div class="flex flex-wrap justify-center">
     <Button variant="accent" size="large"
       ><span id="generate-personality"> Generate Personality </span>
-      </div>
     </Button>
   </div>
-
-  <!-- TODO: Clean up url routing and account for when there's no personality yet. -->
-  <script define:vars={{ id, site: Astro.url.origin }}>
-
-    const generatePersonalityBtn = document.getElementById("generate-personality");
-
-    generatePersonalityBtn?.addEventListener("click", () => {
-      const url = new URL(location.href + '/profile');
-      history.replaceState({}, "", url.toString());
-      location.reload();
-    })
-  </script>
-
 </BaseLayout>
+
+<!-- TODO: Clean up url routing and account for when there's no personality yet. -->
+<script define:vars={{ id, site: Astro.url.origin }}>
+  const generatePersonalityBtn = document.getElementById(
+    "generate-personality"
+  );
+
+  generatePersonalityBtn?.addEventListener("click", () => {
+    const url = new URL(location.href + "/profile");
+    history.replaceState({}, "", url.toString());
+    location.reload();
+  });
+</script>

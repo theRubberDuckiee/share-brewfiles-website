@@ -19,7 +19,7 @@ const CustomPieChart = ({ data }: { data: DeveloperType }) => {
   return (
     <div
       className="flex p-3 sm:p-6 rounded-xl bg-bkg/70 text-center justify-center"
-      data-gridName="pie"
+      data-gridname="pie"
     >
       <div className="grid gap-4">
         <p className="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono">

@@ -24,8 +24,6 @@ const { entry } = Astro.props;
 
 const { personalitySummary } = entry;
 
-const statRandomizer = Math.random() > 0.5;
-
 // TODO: Generate personality summary if null
 if (!personalitySummary) {
   return Astro.redirect("/brew/" + entry.id);
@@ -60,12 +58,8 @@ if (!personalitySummary) {
     <HashtagsCloud hashtags={personalitySummary.hashtags} />
     <DescriptionCard description={personalitySummary.description} />
     <StatCard
-      title={statRandomizer
-        ? personalitySummary.relevantStat.title
-        : personalitySummary.relevantStat.title}
-      content={statRandomizer
-        ? personalitySummary.relevantStat.content
-        : personalitySummary.relevantStat.content}
+      title={personalitySummary.relevantStat.title}
+      content={personalitySummary.relevantStat.content}
     />
     <TotalPackagesCard
       totalPackagesUploaded={personalitySummary.totalPackagesUploaded}
