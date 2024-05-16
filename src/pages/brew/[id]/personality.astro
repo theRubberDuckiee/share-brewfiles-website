@@ -3,8 +3,13 @@ import "@fontsource-variable/dm-sans";
 import "@fontsource/dm-mono";
 import Lines from "@/components/ui/Lines.astro";
 import BaseHead from "@/layouts/BaseHead.astro";
+import { baseData } from "@/data/siteData";
+import Heading from "@/components/ui/Heading.astro";
+import { Icon } from "astro-icon/components";
+import Button from "@/components/ui/Button.astro";
+import ProfileGrid from "@/components/profile/ProfileGrid.astro";
+import { generatePersonality } from "@/lib/generatePersonality";
 import type { Brews } from "@/types/brews";
-import { Image } from "astro:assets";
 
 const { id } = Astro.params;
 const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
@@ -12,18 +17,14 @@ const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
 if (!res.ok) return Astro.redirect("/");
 const brews: Brews = await res.json();
 
-const entry = brews.brews[0];
-
-//
-//const id = entry.id;
+let entry = brews.brews[0];
 
 if (!entry) return Astro.redirect("/");
 
-import { baseData } from "@/data/siteData";
-import Heading from "@/components/ui/Heading.astro";
-import { Icon } from "astro-icon/components";
-import Button from "@/components/ui/Button.astro";
-import ProfileGrid from "@/components/profile/ProfileGrid.astro";
+if (!entry.personalitySummary) {
+  const personalitySummary = await generatePersonality(entry.data, entry.id);
+  entry = { ...entry, personalitySummary };
+}
 ---
 
 <html lang="en">
@@ -33,11 +34,15 @@ import ProfileGrid from "@/components/profile/ProfileGrid.astro";
       <Lines />
       <div class="place-content-center min-h-screen">
         <main class="grid gap-4 place-items-center py-8">
-          <Heading tagType="h1" size="md" classes="flex items-center gap-2"
+          <Heading
+            tagType="h1"
+            size="md"
+            classes="flex items-center gap-2 text-center"
             >Screenshot and Share <Icon name="twitter" /></Heading
           >
-          <!-- @ts-ignore -->
-          <ProfileGrid entry={entry} />
+          <div class="p-4">
+            <ProfileGrid entry={entry} />
+          </div>
           <Button
             variant="default"
             size="large"

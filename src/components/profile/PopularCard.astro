@@ -7,11 +7,13 @@ const { mostPopularPackage } = Astro.props;
 ---
 
 <div
-  class="flex px-3 rounded-full bg-bkg/70 items-center gap-2"
-  data-gridName={"top-package"}
+  class="flex px-2 rounded-full bg-bkg/70 items-center gap-2 text-xs py-2 lg:text-sm 3xl:py-0"
+  data-gridname={"top-package"}
 >
   <div class="flex items-center">
-    <p class="bg-accent-bluemedium pl-3 pr-1 rounded-l-full leading-normal">
+    <p
+      class="bg-accent-bluemedium pl-3 pr-1 rounded-l-full leading-normal text-2xs lg:text-sm"
+    >
       most popular package
     </p>
     <span class="triangle"></span>

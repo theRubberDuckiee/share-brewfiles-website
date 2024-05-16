@@ -63,8 +63,12 @@ export default {
         marquee: "marquee 40s linear infinite",
         marquee2: "marquee2 40s linear infinite",
       },
+      maxWidth: {
+        "2xs": "260px",
+      },
       screens: {
         xs: "475px",
+        "3xl": "1380px",
       },
       keyframes: {
         marquee: {

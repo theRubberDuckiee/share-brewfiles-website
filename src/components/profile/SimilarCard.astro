@@ -11,9 +11,9 @@ const { percentileSimilarToType, title } = Astro.props;
 
 <div
   class="text-center grid place-items-center px-3 rounded-full bg-bkg/70"
-  data-gridName="similar"
+  data-gridname="similar"
 >
-  <p class="flex gap-2">
+  <p class="flex gap-2 items-center text-xs py-2 3xl:py-0 lg:text-sm">
     <span class="bg-accent-bluemedium rounded-full px-2"
       >{percentileSimilarToType}%
     </span>others are also {title.substring(0, 1).toUpperCase()}{

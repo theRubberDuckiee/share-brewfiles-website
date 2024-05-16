@@ -10,10 +10,10 @@ const { name, classes } = Astro.props;
 
 <div
   class:list={twMerge([
-    "flex p-6 rounded-xl bg-bkg/70 text-center justify-center",
+    "flex p-3 md:p-6 rounded-xl bg-bkg/70 text-center justify-center",
     classes,
   ])}
-  data-gridName={name}
+  data-gridname={name}
 >
   <slot />
 </div>
