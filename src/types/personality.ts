@@ -15,10 +15,6 @@ export type DeveloperType = {
 export enum DeveloperPersonalityType {
     RetroDeveloper = "Retro",
     Traditionalist = "Traditionalist",
-    Backend = "Backend",
-    Devops = "Devops",
-    Data = "Data",
-    General = "General",
     MarieKondo = "Marie Kondo",
     Trailblazer = "Trailblazer",
     CrazyScientist = "Crazy Scientist",
