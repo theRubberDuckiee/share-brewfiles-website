@@ -7,7 +7,7 @@ import { baseData } from "@/data/siteData";
 import Heading from "@/components/ui/Heading.astro";
 import { Icon } from "astro-icon/components";
 import Button from "@/components/ui/Button.astro";
-import ProfileGrid from "@/components/profile/ProfileGrid.astro";
+import ProfileGrid from "@/components/personality/ProfileGrid.astro";
 import { generatePersonality } from "@/lib/generatePersonality";
 import type { Brews } from "@/types/brews";
 
@@ -41,7 +41,7 @@ if (!entry.personalitySummary) {
             >Screenshot and Share <Icon name="twitter" /></Heading
           >
           <div class="p-4">
-            <ProfileGrid entry={entry} />
+            {entry.personalitySummary && <ProfileGrid entry={entry} />}
           </div>
           <Button
             variant="default"
