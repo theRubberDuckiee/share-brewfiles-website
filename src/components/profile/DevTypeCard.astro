@@ -14,7 +14,7 @@ const { title } = Astro.props;
   <div class="grid gap-2 sm:gap-6 place-items-center place-content-center">
     <p class="text-white/70 sm:text-lg">You are a…</p>
     <Image
-      src={`/images/${title}.png`}
+      src={`/images/${title.toLowerCase}.png`}
       width={120}
       height={120}
       alt={title}
