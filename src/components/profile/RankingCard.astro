@@ -26,7 +26,7 @@ const processedRank = () => {
       <span class="hidden sm:inline"
         >With {totalPackagesUploaded} packages installed, y</span
       ><span class="sm:hidden">Y</span>ou’ve installed {
-        totalPackagesUploadedComparitive
+        Math.abs(totalPackagesUploadedComparitive)
       }
       {processedRank().measurement.quantitative} packages when compared to the average
       uploader.
@@ -34,7 +34,7 @@ const processedRank = () => {
     <p
       class="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono"
     >
-      {totalPackagesUploadedComparitive}
+      {Math.abs(totalPackagesUploadedComparitive)}
       {processedRank().measurement.spatial} average
     </p>
   </div>

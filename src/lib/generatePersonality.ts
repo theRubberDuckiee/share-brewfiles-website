@@ -182,22 +182,27 @@ async function turnStatsIntoPersonality(personalityPercentageStatistics: Persona
     const allBrews = await getDocs(collection(db, "brewfiles"));
 
     if (allBrews) {
-      const brews = allBrews.docs.map((doc) => {
-        const { data, date, userInfo } = doc.data();
+      let brews: BrewsItem[] = []
+      let personalitySummaries: PersonalitySummary[] = []
+      allBrews.docs.forEach((doc) => {
+        const { data, date, userInfo, personalitySummary } = doc.data();
         const brewData = Object.values(data as BrewEntry[]).map((value) => {
           return {
             name: value.name,
             packageManager: value.packageManager,
           };
         });
-        return {
+         brews.push({
           id: doc.id,
           data: brewData,
           date,
           userInfo,
-        };
-      }) as BrewsItem[];
-      percentileSimilarToType = getPercentileSimilarToType(title, brews)
+        })
+        if (personalitySummary){
+            personalitySummaries.push(personalitySummary)
+        }
+      });
+      percentileSimilarToType = getPercentileSimilarToType(title, personalitySummaries)
       totalPackagesUploadedComparitive = getTotalPackagesUploadedComparitive(personalityPercentageStatistics.totalPackages, brews)
     }
     const personalitySummary: PersonalitySummary = {
@@ -222,13 +227,13 @@ async function turnStatsIntoPersonality(personalityPercentageStatistics: Persona
     return personalitySummary
 }
 
-function getPercentileSimilarToType(personalityTitle: string, allBrewfiles: BrewsItem[]): number {
+function getPercentileSimilarToType(personalityTitle: string, personalitySummaries: PersonalitySummary[]): number {
     let numSimilarToType = 0
     let totalPersonalities = 0
-    allBrewfiles.forEach((brew) => {
-        if (brew.personalitySummary) {
+    personalitySummaries.forEach((personality) => {
+        if (personality && personality?.title) {
             totalPersonalities += 1
-            if (brew.personalitySummary.title == personalityTitle){
+            if (personality.title == personalityTitle){
                 numSimilarToType += 1
             }
         }
@@ -246,7 +251,7 @@ function getTotalPackagesUploadedComparitive(packagesUploaded: number, allBrewfi
         totalNumPackages += brew.data.length
     });
     const averageUploadedPackages = Math.round(totalNumPackages/numBrewfiles)
-    return averageUploadedPackages - packagesUploaded
+    return packagesUploaded - averageUploadedPackages
 }
 
 function getMostPopularPackage(packages: BrewEntry[]): string {
