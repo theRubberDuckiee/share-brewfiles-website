@@ -8,9 +8,6 @@ type Props = {
 };
 
 const { friendsWith } = Astro.props;
-
-// TODO: Replace with custom images
-const imgSrc = "wallflower";
 ---
 
 <CardWrapper name="friends">
@@ -28,7 +25,7 @@ const imgSrc = "wallflower";
         friendsWith.map((friend) => (
           <div class="grid gap-1 place-items-center">
             <Image
-              src={`/images/${imgSrc}.png`}
+              src={`/images/${friend.toLowerCase()}.png`}
               width={50}
               height={50}
               alt={friend}
