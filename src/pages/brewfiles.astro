@@ -7,4 +7,12 @@ import BrewfilesRoute from "@/components/brewfiles/BrewfilesRoute";
   <div class="container grid gap-6 sm:gap-12">
     <BrewfilesRoute client:only="react" />
   </div>
+
+  <script>
+    import { logSearch } from "@/lib/logSearch";
+    const searchParams = window.location.search;
+    if (searchParams) {
+      logSearch({ search: searchParams.substring(8), type: "route" });
+    }
+  </script>
 </BaseLayout>

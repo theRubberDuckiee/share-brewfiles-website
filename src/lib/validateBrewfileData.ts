@@ -1,6 +1,7 @@
-import type { BrewEntry, BrewsItem } from "@/types/brews";
-import type { PackageCounted } from "@/types/packageEntry";
+import type { BrewsItem } from "@/types/brews";
 
-export default function validateBrewfileData(brewfileData: BrewsItem): BrewsItem {
-    return brewfileData
+export default function validateBrewfileData(
+  brewfileData: BrewsItem
+): BrewsItem {
+  return brewfileData;
 }

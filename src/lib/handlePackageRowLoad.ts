@@ -49,7 +49,7 @@ async function fetchLeaderboardData() {
     }`
   );
   const data = (await req.json()) as PackageCounted[];
-  
+
   data.forEach(({ name, downloads }, i) => {
     clearInterval(nameIntervals.get(i));
     clearInterval(downloadIntervals.get(i));
@@ -59,7 +59,7 @@ async function fetchLeaderboardData() {
     packageLinks[i].setAttribute("href", brewfileLink);
     packageFilters[i].setAttribute(
       "href",
-      `/brewfiles?package=${name.replace("/", "%2F")}`
+      `/brewfiles?search=${name.replace("/", "%2F")}`
     );
     downloadValues[i].textContent = String(downloads);
     dataRows[i].href = `/`;

@@ -22,7 +22,11 @@ let entry = brews.brews[0];
 
 if (!entry) return Astro.redirect("/");
 
-if (!entry.personalitySummary) {
+if (
+  !entry.personalitySummary ||
+  !entry.personalitySummary.last_generated ||
+  Date.now() - entry.personalitySummary.last_generated > 60000
+) {
   const personalitySummary = await generatePersonality(entry.data, entry.id);
   entry = { ...entry, personalitySummary };
 }
@@ -52,7 +56,7 @@ if (!entry.personalitySummary) {
               id="profile-container"
               class="opacity-0 transition-all duration-1000 translate-y-8"
             >
-              {entry.personalitySummary && <ProfileGrid entry={entry} />}
+              <ProfileGrid entry={entry} />
             </div>
           </div>
           <Button
@@ -85,7 +89,7 @@ if (!entry.personalitySummary) {
           spinnerContainer?.remove();
           profileContainer?.classList.remove("opacity-0");
           profileContainer?.classList.remove("translate-y-8");
-        }, 1600);
+        }, 800);
       });
 
       copyBtn?.addEventListener("click", () => {

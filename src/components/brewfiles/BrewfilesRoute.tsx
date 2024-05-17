@@ -4,14 +4,17 @@ import type { TBrewCard } from "@/types/brews";
 import useBrewFiles from "./useBrewFiles";
 import BrewCard from "./BrewCard";
 import FeaturedBrewfileToggle from "./FeaturedBrewfileToggle";
+import { logSearch } from "@/lib/logSearch";
 
 const BrewfilesRoute = () => {
+  const [searchLogTimeout, setSearchLogTimeout] =
+    useState<NodeJS.Timeout | null>(null);
   const [isToggledFeatured, setIsToggledFeatured] = useState(
     new URL(location.href).searchParams.get("isFeaturedToggled") === "true"
   );
   const { brews, error, isLoading } = useBrewFiles();
   const [filter, setFilter] = useState(
-    new URL(location.href).searchParams.get("package") || ""
+    new URL(location.href).searchParams.get("search") || ""
   );
   const [filteredBrews, setFilteredBrews] = useState<TBrewCard[] | null>(null);
 
@@ -61,21 +64,31 @@ const BrewfilesRoute = () => {
     setFilteredBrews(brewsMatchingFilter);
   }, [brews, filter, isToggledFeatured]);
 
-  // set filter on change
   const searchInput = useRef<HTMLInputElement>(null);
+
   const handleInputChange = () => {
+    if (searchLogTimeout) {
+      clearTimeout(searchLogTimeout);
+    }
     const currentFilter = searchInput?.current?.value ?? "";
     setFilter(currentFilter.toLowerCase());
     const url = new URL(location.href);
     currentFilter.length > 0
-      ? url.searchParams.set("package", currentFilter)
-      : url.searchParams.delete("package");
+      ? url.searchParams.set("search", currentFilter)
+      : url.searchParams.delete("search");
     history.replaceState({}, "", url.toString());
-    // update title
     document.title =
       currentFilter.length > 0
         ? `Brewfiles search: ${currentFilter}`
         : `Submitted brewfiles`;
+
+    if (currentFilter.length > 0) {
+      setSearchLogTimeout(
+        setTimeout(() => {
+          logSearch({ search: currentFilter, type: "search" });
+        }, 1000)
+      );
+    }
   };
 
   return (

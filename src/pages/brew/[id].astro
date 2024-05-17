@@ -2,6 +2,7 @@
 import Button from "@/components/ui/Button.astro";
 import Link from "@/components/ui/Link.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { generatePersonality } from "@/lib/generatePersonality";
 import { brewfileLinkDictionary } from "@/lib/getBrewfileLink";
 import type { Brews } from "@/types/brews";
 import { Image } from "astro:assets";
@@ -13,8 +14,17 @@ const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
 if (!res.ok) return Astro.redirect("/");
 const brews: Brews = await res.json();
 
-const entry = brews.brews[0];
+let entry = brews.brews[0];
 if (!entry) return Astro.redirect("/");
+
+if (
+  !entry.personalitySummary ||
+  !entry.personalitySummary.last_generated ||
+  Date.now() - entry.personalitySummary.last_generated > 60000
+) {
+  const personalitySummary = await generatePersonality(entry.data, entry.id);
+  entry = { ...entry, personalitySummary };
+}
 ---
 
 <BaseLayout

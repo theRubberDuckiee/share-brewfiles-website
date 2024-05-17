@@ -125,15 +125,13 @@ const currentPath = Astro.url.pathname;
         To upload your brewfile, run the following command in your terminal:
       </p>
       <div class="group max-w-fit relative">
-        <Link href="warp://action/new_window" variant="code" size="icon">
+        <Button variant="code" size="bland" id="copy-command">
           <Code class="animate-pulse">npx share-brewfiles</Code>
-        </Link>
+        </Button>
         <p
           class="absolute hidden top-1/2 left-full -translate-y-1/2 bg-black text-white text-center text-sm px-2 py-1.5 rounded transition-opacity duration-300 ml-2 w-44 opacity-0 group-hover:block group-hover:opacity-100"
         >
-          Click to open command in
-          <a class="underline" href="https://warp.dev" target="_blank">Warp</a>
-          terminal
+          Click to copy the command
         </p>
       </div>
 
@@ -165,6 +163,17 @@ const currentPath = Astro.url.pathname;
 
 <script>
   import "@/lib/handleNav";
+
+  const copyCommandBtn = document.querySelector("#copy-command");
+  const copyCodeBlock = copyCommandBtn?.querySelector("code") as HTMLModElement;
+
+  copyCommandBtn?.addEventListener("click", () => {
+    navigator.clipboard.writeText("npx share-brewfiles");
+    copyCodeBlock.textContent = "Copied command!";
+    setTimeout(() => {
+      copyCodeBlock.textContent = "npx share-brewfiles";
+    }, 2000);
+  });
 
   const codeContainer = document.getElementById("codeContainer");
   codeContainer?.addEventListener("mouseenter", () => {

@@ -34,17 +34,17 @@ const { index, isLast } = Astro.props;
         {getRandomWord()}
       </p>
       <div
-        class="items-center hidden group-hover:sm:flex gap-2 shrink-0 pr-8 text-base"
+        class="items-center opacity-0 absolute inset-0 sm:inset-auto sm:static sm:opacity-100 hover:bg-white/20 sm:hover:bg-transparent sm:hidden group-hover:sm:flex gap-2 shrink-0 pr-8 text-base"
       >
         <a
-          class="flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
+          class="absolute inset-0 opacity-0 sm:opacity-100 sm:inset-auto sm:static flex items-center gap-2 sm:max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
           data-packageNameLink
           target="_blank"
         >
           Explore tool
         </a>
         <a
-          class="flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
+          class="hidden sm:flex items-center gap-2 max-w-fit focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 leading-tight ring-offset-bkg py-2 px-4 bg-white/10 hover:bg-white/20 ring-accent-bluemedium rounded-full"
           href="/"
           data-packageFilterLink
         >
