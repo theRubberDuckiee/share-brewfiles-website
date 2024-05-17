@@ -25,10 +25,12 @@ const CustomPieChart = ({ data }: { data: DeveloperType }) => {
         <p className="text-lg sm:text-xl uppercase text-balance leading-heading tracking-widest font-mono">
           Dev Breakdown
         </p>
-        <PieChart
-          data={pieData}
-          className="max-w-[100px] place-self-center sm:max-w-full"
-        />
+        {data && (
+          <PieChart
+            data={pieData}
+            className="max-w-[100px] place-self-center sm:max-w-full"
+          />
+        )}
         <div className="flex gap-2 flex-wrap justify-center justify-self-center max-w-2xs sm:max-w-xs">
           {pieData
             .filter(({ value }) => value > 0)

@@ -1,0 +1,47 @@
+---
+import Heading from "../ui/Heading.astro";
+---
+
+<div class="grid gap-8 place-items-center animate-pulse text-center">
+  <Heading tagType="h1" size="lg">Generating profile…</Heading>
+  <div class="spinner"></div>
+</div>
+
+<style>
+  .spinner {
+    --spinner-size: 180;
+    width: calc(var(--spinner-size) * 1px);
+    height: calc(var(--spinner-size) * 1px);
+    display: grid;
+    border: calc((var(--spinner-size) / 12.4) * 1px) solid #111111;
+    border-radius: 50%;
+    border-color: hsl(0, 0%, 100%, 0.1) #111111;
+    animation: spinner 1s infinite linear;
+  }
+
+  .spinner::before,
+  .spinner::after {
+    content: "";
+    grid-area: 1/1;
+    margin: calc((var(--spinner-size) / 25.45) * 1px);
+    border: inherit;
+    border-radius: 50%;
+  }
+
+  .spinner::before {
+    border-color: #0868f9 #0000;
+    animation: inherit;
+    animation-duration: 0.5s;
+    animation-direction: reverse;
+  }
+
+  .spinner::after {
+    margin: calc((var(--spinner-size) / 6.2921348315) * 1px);
+  }
+
+  @keyframes spinner {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+</style>

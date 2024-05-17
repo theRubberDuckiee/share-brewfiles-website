@@ -24,7 +24,6 @@ const { entry } = Astro.props;
 
 const { personalitySummary } = entry;
 
-// TODO: Generate personality summary if null
 if (!personalitySummary) {
   return Astro.redirect("/brew/" + entry.id);
 }

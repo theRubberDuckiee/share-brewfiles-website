@@ -10,6 +10,7 @@ import Button from "@/components/ui/Button.astro";
 import ProfileGrid from "@/components/personality/ProfileGrid.astro";
 import { generatePersonality } from "@/lib/generatePersonality";
 import type { Brews } from "@/types/brews";
+import LoadingState from "@/components/personality/LoadingState.astro";
 
 const { id } = Astro.params;
 const res = await fetch(`${Astro.url.origin}/api/getBrewfiles.json?id=${id}`);
@@ -33,15 +34,26 @@ if (!entry.personalitySummary) {
     <div class="max-w-[2200px] mx-auto relative min-h-screen overflow-hidden">
       <Lines />
       <div class="place-content-center min-h-screen">
-        <main class="grid gap-4 place-items-center py-8">
+        <main class="grid gap-2 place-items-center py-4">
           <Heading
             tagType="h1"
             size="md"
             classes="flex items-center gap-2 text-center"
             >Screenshot and Share <Icon name="twitter" /></Heading
           >
-          <div class="p-4">
-            {entry.personalitySummary && <ProfileGrid entry={entry} />}
+          <div class="p-2 relative">
+            <div
+              id="spinner-container"
+              class="z-10 inset-0 absolute grid h-[80vh] place-items-center"
+            >
+              <LoadingState />
+            </div>
+            <div
+              id="profile-container"
+              class="opacity-0 transition-all duration-1000 translate-y-8"
+            >
+              {entry.personalitySummary && <ProfileGrid entry={entry} />}
+            </div>
           </div>
           <Button
             variant="default"
@@ -54,7 +66,10 @@ if (!entry.personalitySummary) {
         </main>
       </div>
     </div>
+
     <script define:vars={{ id, site: Astro.url.origin }}>
+      const spinnerContainer = document.getElementById("spinner-container");
+      const profileContainer = document.getElementById("profile-container");
       const copyBtn = document.getElementById("copy-btn");
       const copyLink = document.getElementById("copy-link");
       let copyTimeout;
@@ -64,6 +79,14 @@ if (!entry.personalitySummary) {
           copyLink.textContent = "Copy Link";
         }, 2000);
       };
+
+      window.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          spinnerContainer?.remove();
+          profileContainer?.classList.remove("opacity-0");
+          profileContainer?.classList.remove("translate-y-8");
+        }, 1600);
+      });
 
       copyBtn?.addEventListener("click", () => {
         const url = `${site}/brew/${id}/`;

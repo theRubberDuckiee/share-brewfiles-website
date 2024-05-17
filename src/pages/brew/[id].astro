@@ -28,9 +28,10 @@ if (!entry) return Astro.redirect("/");
       {entry.data.length} packages in this Brewfile
     </div>
     <Link
-      href={`${entry.id}/personality`}
       variant={"accent"}
-      classes="order-1 lg:order-none">Generate Dev Personality</Link
+      href=`${Astro.url.origin}/brew/${id}/personality`
+      size="large"
+      classes="order-1 lg:order-none">Generate Personality</Link
     >
     <div class="flex gap-2">
       <Link
@@ -71,21 +72,11 @@ if (!entry) return Astro.redirect("/");
     }
   </div>
   <div class="flex flex-wrap justify-center">
-    <Button variant="accent" size="large"
-      ><span id="generate-personality"> Generate Personality </span>
-    </Button>
+    <Link
+      href=`${Astro.url.origin}/brew/${id}/personality`
+      variant="accent"
+      size="large"
+      classes="generate-personality">Generate Personality</Link
+    >
   </div>
 </BaseLayout>
-
-<!-- TODO: Clean up url routing and account for when there's no personality yet. -->
-<script define:vars={{ id, site: Astro.url.origin }}>
-  const generatePersonalityBtn = document.getElementById(
-    "generate-personality"
-  );
-
-  generatePersonalityBtn?.addEventListener("click", () => {
-    const url = new URL(location.href + "/profile");
-    history.replaceState({}, "", url.toString());
-    location.reload();
-  });
-</script>
