@@ -12,7 +12,7 @@ import {
 } from "@/types/personality";
 import { personalityBuckets } from "./personalityBuckets";
 import { db } from "@/firebase/config";
-import { Timestamp, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export async function generatePersonality(packages: BrewEntry[], id: string) {
   const totalCountStatistics = calculateStatistics(packages);

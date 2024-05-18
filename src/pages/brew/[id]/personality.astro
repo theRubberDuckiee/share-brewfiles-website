@@ -21,15 +21,6 @@ const brews: Brews = await res.json();
 let entry = brews.brews[0];
 
 if (!entry) return Astro.redirect("/");
-
-if (
-  !entry.personalitySummary ||
-  !entry.personalitySummary.last_generated ||
-  Date.now() - entry.personalitySummary.last_generated > 60000
-) {
-  const personalitySummary = await generatePersonality(entry.data, entry.id);
-  entry = { ...entry, personalitySummary };
-}
 ---
 
 <html lang="en">
@@ -55,6 +46,7 @@ if (
             <div
               id="profile-container"
               class="opacity-0 transition-all duration-1000 translate-y-8"
+              data-lastGenerated={entry.personalitySummary?.last_generated}
             >
               <ProfileGrid entry={entry} />
             </div>
@@ -70,6 +62,33 @@ if (
         </main>
       </div>
     </div>
+
+    <script>
+      import { generatePersonality } from "@/lib/generatePersonality";
+      import type { Brews } from "@/types/brews";
+      const id = window.location.pathname.split("/")[2];
+      const updatePersonality = async () => {
+        const res = await fetch(`/api/getBrewfiles.json?id=${id}`);
+        if (!res.ok) return Astro.redirect("/");
+        const brews: Brews = await res.json();
+        const entry = brews.brews[0];
+        generatePersonality(entry.data, entry.id);
+      };
+
+      const last_generated = document.querySelector(
+        "[data-lastgenerated]"
+      ) as HTMLDivElement;
+
+      if (last_generated) {
+        if (
+          Date.now() -
+            parseInt(last_generated.dataset.lastgenerated as string) >
+          60000
+        ) {
+          updatePersonality();
+        }
+      }
+    </script>
 
     <script define:vars={{ id, site: Astro.url.origin }}>
       const spinnerContainer = document.getElementById("spinner-container");

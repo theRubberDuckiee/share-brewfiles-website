@@ -16,15 +16,6 @@ const brews: Brews = await res.json();
 
 let entry = brews.brews[0];
 if (!entry) return Astro.redirect("/");
-
-if (
-  !entry.personalitySummary ||
-  !entry.personalitySummary.last_generated ||
-  Date.now() - entry.personalitySummary.last_generated > 60000
-) {
-  const personalitySummary = await generatePersonality(entry.data, entry.id);
-  entry = { ...entry, personalitySummary };
-}
 ---
 
 <BaseLayout
@@ -33,6 +24,7 @@ if (
 >
   <div
     class="flex justify-center lg:justify-between items-center flex-wrap container pt-8 lg:pt-16 gap-8"
+    data-lastGenerated={entry.personalitySummary?.last_generated}
   >
     <div class="py-2 px-4 bg-white/10 rounded-full backdrop-blur-3xl">
       {entry.data.length} packages in this Brewfile
@@ -89,4 +81,30 @@ if (
       classes="generate-personality">Generate Personality</Link
     >
   </div>
+
+  <script>
+    import { generatePersonality } from "@/lib/generatePersonality";
+    import type { Brews } from "@/types/brews";
+    const id = window.location.pathname.split("/")[2];
+    const updatePersonality = async () => {
+      const res = await fetch(`/api/getBrewfiles.json?id=${id}`);
+      if (!res.ok) return Astro.redirect("/");
+      const brews: Brews = await res.json();
+      const entry = brews.brews[0];
+      generatePersonality(entry.data, entry.id);
+    };
+
+    const last_generated = document.querySelector(
+      "[data-lastgenerated]"
+    ) as HTMLDivElement;
+
+    if (last_generated) {
+      if (
+        Date.now() - parseInt(last_generated.dataset.lastgenerated as string) >
+        60000
+      ) {
+        updatePersonality();
+      }
+    }
+  </script>
 </BaseLayout>
