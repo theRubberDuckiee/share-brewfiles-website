@@ -15,9 +15,13 @@ const jsonLD = jsonLDGenerator({
 <link rel="sitemap" href="/sitemap-index.xml" />
 <link rel="canonical" href={url} />
 
+<title>{title}</title>
+<meta name="description" content={description} />
+
 <!-- Open Graph / Facebook -->
 <meta property="og:site_name" content={baseData.title} />
 <meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={url} />
 <meta property="og:image" content={`${Astro.site}social-image.jpg`} />

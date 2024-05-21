@@ -1,6 +1,8 @@
 export const baseData = {
-  title: "Share Brewfiles",
-  description: "Share your brewfiles with others",
+  title:
+    "Share your brewfile and see what tech stack other developers are using",
+  description:
+    "Visit this site and share your brewfile.  See what tools your favorite tech influencer is using, check out our leaderboard for top tools and generate a developer personality profile",
 };
 
 export const keyLinks = {

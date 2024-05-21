@@ -9,7 +9,7 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  site: "https://brewfiles.com",
+  site: "https://www.brewfiles.com",
   adapter: vercel(),
   integrations: [tailwind(), icon(), react(), sitemap()],
   prefetch: {

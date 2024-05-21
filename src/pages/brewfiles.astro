@@ -3,7 +3,10 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import BrewfilesRoute from "@/components/brewfiles/BrewfilesRoute";
 ---
 
-<BaseLayout title="Submitted Brewfiles">
+<BaseLayout
+  title="Search for other developers' Brewfiles"
+  description="See other developers uploaded Brewfiles.  Use the search functionality to discover the tools other developers use."
+>
   <div class="container grid gap-6 sm:gap-12">
     <BrewfilesRoute client:only="react" />
   </div>
