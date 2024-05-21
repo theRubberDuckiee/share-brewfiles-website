@@ -6,7 +6,7 @@ A tool to share your brewfiles with others.
 
 Homebrew is one of the most popular package managers for MacOS and Linux. People use it to download command-line tools (like tmux, LazyDocker, and NeoVim), libraries (like C, C++, and Rust), dev environments (like MySQL, Apache, and Nginx), and applications (like Warp, Raycast, or Zoom).
 
-Brewfiles is just a simple txt file that includes all packages and applications that are installed on the system via Homebrew!
+Brewfiles is just a simple txt file that includes all packages and applications that are installed on the system via Homebrew.
 
 ## Uploading a Brewfile
 
