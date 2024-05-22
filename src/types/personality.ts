@@ -1,5 +1,3 @@
-import type { Timestamp } from "firebase/firestore";
-
 export type Statistic = {
   title: string;
   content: string;
@@ -15,20 +13,21 @@ export type DeveloperType = {
 };
 
 export enum DeveloperPersonalityType {
-  RetroDeveloper = "Retro",
-  Traditionalist = "Traditionalist",
-  MarieKondo = "Marie Kondo",
-  Trailblazer = "Trailblazer",
-  CrazyScientist = "Crazy Scientist",
-  AI = "AI",
-  Architect = "Architect",
-  BobTheBuilder = "Bob-The-Builder",
-  Artist = "Artist",
-  Trendy = "Trendy",
-  Security = "The Guardian",
-  Rookie = "Rookie",
-  Pragamatist = "Pragmatist",
-  Wallflower = "Wallflower",
+    Retro = "Retro",
+    Traditionalist = "Traditionalist",
+    MarieKondo = "Marie Kondo",
+    Trailblazer = "Trailblazer",
+    CrazyScientist = "Crazy Scientist",
+    AI = "AI",
+    Architect = "Architect",
+    BobTheBuilder = "Bob-The-Builder",
+    Artist = "Artist",
+    Trendy = "Trendy",
+    Security = "The Guardian",
+    Rookie = "Rookie",
+    Pragamatist = "Pragmatist",
+    Wallflower = "Wallflower",
+    GoldenRetriever = "Golden Retriever",
 }
 
 export type PersonalitySummary = {
@@ -46,32 +45,35 @@ export type PersonalitySummary = {
 };
 
 export type PersonalityTotalCountStatistics = {
-  totalBackend: number;
-  totalFrontend: number;
-  totalSecurity: number;
-  totalData: number;
-  totalDevOps: number;
-  totalGeneral: number;
-  totalOld: number;
-  totalCustomization: number;
-  totalOrganization: number;
-  totalRecognized: number;
-  totalPackages: number;
-  totalPopular: number;
-  totalSuperPopular: number;
-};
+    totalBackend: number,
+    totalFrontend: number,
+    totalSecurity: number,
+    totalData: number,
+    totalDevOps: number,
+    totalGeneral: number,
+    totalOld: number,
+    totalCustomization: number,
+    totalOrganization: number,
+    totalRecognized: number,
+    totalPackages: number
+    totalPopular: number,
+    totalSuperPopular: number,
+    totalAI: number,
+}
 
 export type PersonalityPercentageStatistics = {
-  fractionBackend: number;
-  fractionFrontend: number;
-  fractionDevOps: number;
-  fractionSecurity: number;
-  fractionData: number;
-  fractionGeneral: number;
-  fractionOld: number;
-  fractionCustomization: number;
-  fractionOrganization: number;
-  fractionRecognized: number;
-  fractionPopular: number;
-  totalPackages: number;
-};
+    fractionBackend: number,
+    fractionFrontend: number,
+    fractionDevOps: number,
+    fractionSecurity: number,
+    fractionData: number,
+    fractionGeneral: number,
+    fractionOld: number,
+    fractionAI: number,
+    fractionCustomization: number,
+    fractionOrganization: number,
+    fractionRecognized: number,
+    fractionPopular: number,
+    totalPackages: number,
+}
+

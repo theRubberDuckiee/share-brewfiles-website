@@ -73,14 +73,6 @@ if (!entry) return Astro.redirect("/");
       ))
     }
   </div>
-  <div class="flex flex-wrap justify-center">
-    <Link
-      href=`${Astro.url.origin}/brew/${id}/personality`
-      variant="accent"
-      size="large"
-      classes="generate-personality">Generate Personality</Link
-    >
-  </div>
 
   <script>
     import { generatePersonality } from "@/lib/generatePersonality";

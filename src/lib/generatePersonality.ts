@@ -66,6 +66,7 @@ function calculateStatistics(
   let totalPackages = 0;
   let totalPopular = 0;
   let totalSuperPopular = 0;
+  let totalAI = 0;
 
   totalPackages = packages.length;
   packages.forEach((eachPackage) => {
@@ -96,6 +97,7 @@ function calculateStatistics(
       }
 
       labelledPackage.old ? (totalOld += 1) : totalOld;
+      labelledPackage.ai ? (totalAI +=1) : totalAI;
       labelledPackage.customization
         ? (totalCustomization += 1)
         : totalCustomization;
@@ -116,6 +118,7 @@ function calculateStatistics(
     totalSecurity: totalSecurity,
     totalGeneral: totalGeneral,
     totalCustomization: totalCustomization,
+    totalAI: totalAI,
     totalOld: totalOld,
     totalOrganization: totalOrganization,
     totalPackages: totalPackages,
@@ -152,6 +155,8 @@ function analyzeStats(
     totalCountStatistics.totalRecognized / totalCountStatistics.totalPackages;
   const fractionPopular =
     totalCountStatistics.totalPopular / totalCountStatistics.totalPackages;
+  const fractionAI =
+    totalCountStatistics.totalAI / totalCountStatistics.totalPackages;
 
   const personalityPercentageStatistics: PersonalityPercentageStatistics = {
     fractionBackend: fractionBackend,
@@ -161,6 +166,7 @@ function analyzeStats(
     fractionData: fractionData,
     fractionGeneral: fractionGeneral,
     fractionOld: fractionOld,
+    fractionAI: fractionAI,
     fractionCustomization: fractionCustomization,
     fractionOrganization: fractionOrganization,
     fractionRecognized: fractionRecognized,
@@ -170,71 +176,13 @@ function analyzeStats(
   return personalityPercentageStatistics;
 }
 
-async function turnStatsIntoPersonality(
+async function turnStatsIntoPersonality (
   personalityPercentageStatistics: PersonalityPercentageStatistics,
   packages: BrewEntry[]
 ): Promise<PersonalitySummary> {
-  let title: DeveloperPersonalityType;
-  let description: string;
-  let relevantStat: Statistic;
-  let hashtags: string[];
-  let friendsWith: DeveloperPersonalityType[];
+  const {title, description, relevantStat, hashtags, friendsWith} = getDeveloper(personalityPercentageStatistics)
   let percentileSimilarToType: number = 0;
   let totalPackagesUploadedComparitive: number = 0;
-
-  // Initialize the persona as a Wallflower Developer type, then see if we can change the personality based off other criteria
-  title = DeveloperPersonalityType.Wallflower;
-  description = personalityBuckets[title].description;
-  hashtags = personalityBuckets[title].hashtags;
-  friendsWith = personalityBuckets[title].friendsWith;
-  relevantStat = {
-    title: "Popularity Level",
-    content: `${convertFractionToPercentage(
-      personalityPercentageStatistics.fractionRecognized
-    )} match the top 200 most downloaded homebrew packages in the last year.`,
-  };
-
-  if (
-    personalityPercentageStatistics.fractionOld > 0.6 &&
-    personalityPercentageStatistics.fractionCustomization < 0.4
-  ) {
-    title = DeveloperPersonalityType.Traditionalist;
-    description = personalityBuckets[title].description;
-    hashtags = personalityBuckets[title].hashtags;
-    friendsWith = personalityBuckets[title].friendsWith;
-    relevantStat = {
-      title: "Traditionalist Level",
-      content: `${convertFractionToPercentage(
-        personalityPercentageStatistics.fractionOld
-      )}% of your packages were released 30 years ago.`,
-    };
-  }
-
-  if (
-    personalityPercentageStatistics.fractionOld > 0.6 &&
-    personalityPercentageStatistics.fractionCustomization >= 0.4
-  ) {
-    title = DeveloperPersonalityType.RetroDeveloper;
-    description = personalityBuckets[title].description;
-    relevantStat = {
-      title: "How Retro?",
-      content: `${convertFractionToPercentage(
-        personalityPercentageStatistics.fractionOld
-      )}% of your packages were released over 30 years ago.`,
-    };
-  }
-
-  if (
-    personalityPercentageStatistics.totalPackages < 25 &&
-    personalityPercentageStatistics.fractionOrganization > 0.4
-  ) {
-    title = DeveloperPersonalityType.MarieKondo;
-    description = personalityBuckets[title].description;
-    relevantStat = {
-      title: "Organization level",
-      content: `${personalityPercentageStatistics.fractionOrganization}% of your packages are related to organization.`,
-    };
-  }
 
   const allBrews = await getDocs(collection(db, "brewfiles"));
 
@@ -356,4 +304,172 @@ function convertFractionToPercentage(fraction: number): string {
   const percentage = fraction * 100;
   const roundedPercentage = percentage.toFixed(1);
   return roundedPercentage;
+}
+
+function isRetro(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionOld > .40 &&
+    personalityPercentageStatistics.fractionCustomization > .20
+)
+}
+
+function isTraditionalist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionOld > .40 &&
+    personalityPercentageStatistics.fractionCustomization < .20
+)
+}
+
+function isAI(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionRecognized > .30 &&
+    personalityPercentageStatistics.fractionAI > .40
+)
+}
+
+function isArchitect(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionDevOps > .20 &&
+    personalityPercentageStatistics.fractionBackend > .15 &&
+    personalityPercentageStatistics.fractionSecurity > .15
+)
+}
+
+function isTrailblazer(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionRecognized < .50 &&
+    personalityPercentageStatistics.fractionPopular < .50 &&
+    personalityPercentageStatistics.fractionOld < .20 &&
+    personalityPercentageStatistics.totalPackages > 30
+)
+}
+
+function isCrazyScientist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.totalPackages > 80 &&
+    personalityPercentageStatistics.fractionRecognized < .20 &&
+    personalityPercentageStatistics.fractionPopular < .33
+)
+}
+
+function isBobTheBuilder(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.totalPackages > 20 &&
+    personalityPercentageStatistics.fractionRecognized > .20 &&
+    personalityPercentageStatistics.fractionDevOps > .33
+)
+}
+
+function isMarieKondo(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.fractionRecognized > .20 &&
+    personalityPercentageStatistics.totalPackages < 40 &&
+    personalityPercentageStatistics.fractionOrganization > .40
+)
+}
+
+function isArtist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.totalPackages > 20 &&
+    personalityPercentageStatistics.fractionCustomization > .40 &&
+    personalityPercentageStatistics.fractionRecognized > .35
+)
+}
+
+function isRookie(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.totalPackages < 10
+)
+}
+
+function isSecurity(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+return (
+    personalityPercentageStatistics.totalPackages > 20 &&
+    personalityPercentageStatistics.fractionSecurity > .40 &&
+    personalityPercentageStatistics.fractionRecognized > .35
+)
+}
+
+function isPragmatist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+    return (
+        personalityPercentageStatistics.totalPackages > 20 &&
+        personalityPercentageStatistics.totalPackages < 100 &&
+        personalityPercentageStatistics.fractionOrganization > .15 &&
+        personalityPercentageStatistics.fractionBackend > .15 &&
+        personalityPercentageStatistics.fractionOrganization > .15
+    )
+}
+
+function isGoldenRetriever(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+    return (
+        personalityPercentageStatistics.fractionBackend > .03 &&
+        personalityPercentageStatistics.fractionFrontend > .03 &&
+        personalityPercentageStatistics.fractionDevOps > .03 &&
+        personalityPercentageStatistics.fractionSecurity > .03 &&
+        personalityPercentageStatistics.fractionData > .03 &&
+        personalityPercentageStatistics.fractionGeneral > .03
+    )
+}
+
+function isTrendy(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+    return (
+        personalityPercentageStatistics.fractionPopular > .25 &&
+        personalityPercentageStatistics.fractionRecognized > .25
+    )
+}
+
+function getDeveloper(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+  let title: DeveloperPersonalityType;
+  let description: string;
+  let relevantStat: Statistic;
+  let hashtags: string[];
+  let friendsWith: DeveloperPersonalityType[];
+
+  if (isRookie(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Rookie;
+  } else if (isGoldenRetriever(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.GoldenRetriever;
+  } else if (isPragmatist(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Pragamatist;
+  } else if (isAI(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.AI;
+  } else if (isArchitect(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Architect;
+  } else if (isArtist(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Artist;
+  } else if (isTraditionalist(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Traditionalist;
+  } else if (isRetro(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Retro;
+  } else if (isBobTheBuilder(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.BobTheBuilder;
+  } else if (isMarieKondo(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.MarieKondo;
+  } else if (isCrazyScientist(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.CrazyScientist;
+  } else if (isTrailblazer(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Trailblazer;
+  } else if (isSecurity(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Security;
+  } else if (isTrendy(personalityPercentageStatistics)) {
+      title = DeveloperPersonalityType.Trendy;
+  } else {
+      title = DeveloperPersonalityType.Wallflower;
+  }
+
+  description = personalityBuckets[title].description;
+  hashtags = personalityBuckets[title].hashtags;
+  friendsWith = personalityBuckets[title].friendsWith;
+  relevantStat = {
+      title: "Popularity Level",
+      content: `${convertFractionToPercentage(personalityPercentageStatistics.fractionRecognized)}% match the top 200 most downloaded homebrew packages in the last year.`
+  };
+
+  return {
+      title,
+      description,
+      relevantStat,
+      hashtags,
+      friendsWith
+  }
 }

@@ -1,6 +1,7 @@
 export const prerender = false;
 
 import { db } from "@/firebase/config";
+import { generatePersonality } from "@/lib/generatePersonality";
 import type { BrewEntry, BrewsItem } from "@/types/brews";
 import type { APIRoute } from "astro";
 import { getDoc, collection, doc, getDocs } from "firebase/firestore";
@@ -18,19 +19,21 @@ export const GET: APIRoute = async ({ request }) => {
         if (!singleBrewDoc.data()?.data) {
           throw new Error("No single brew found");
         }
+        const brewfileData = Object.values(
+          singleBrewDoc.data().data as BrewEntry[]
+        ).map((value) => {
+          return {
+            name: value.name,
+            packageManager: value.packageManager,
+          };
+        })
+        generatePersonality(brewfileData, singleBrewDoc.id);
         return new Response(
           JSON.stringify({
             brews: [
               {
                 id: singleBrewDoc.id,
-                data: Object.values(
-                  singleBrewDoc.data().data as BrewEntry[]
-                ).map((value) => {
-                  return {
-                    name: value.name,
-                    packageManager: value.packageManager,
-                  };
-                }),
+                data: brewfileData,
                 date: singleBrewDoc.data().date,
                 userInfo: singleBrewDoc.data().userInfo,
                 personalitySummary:
