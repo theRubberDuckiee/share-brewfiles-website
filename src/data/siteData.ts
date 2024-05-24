@@ -19,7 +19,7 @@ export const contributors = [
   {
     name: "Chris Pennington",
     role: "Dev",
-    href: "https://twitter.com/cpenned",
+    href: "https://codinginpublic.dev",
   },
   {
     name: "Kyle Ribant",

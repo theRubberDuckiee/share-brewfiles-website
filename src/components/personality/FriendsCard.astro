@@ -20,7 +20,7 @@ const { friendsWith } = Astro.props;
       </p>
       <p class="text-white/70">You would get along well with…</p>
     </div>
-    <div class="flex gap-4 items-start">
+    <div class="flex gap-4 items-end">
       {
         friendsWith.map((friend) => (
           <div class="grid gap-1 place-items-center">
@@ -30,7 +30,7 @@ const { friendsWith } = Astro.props;
               height={50}
               alt={friend}
             />
-            <p class="text-xs sm:text-sm">{friend}</p>
+            <p class="text-2xs sm:text-xs">{friend}</p>
           </div>
         ))
       }

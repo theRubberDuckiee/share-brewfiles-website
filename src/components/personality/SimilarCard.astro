@@ -1,5 +1,5 @@
 ---
-import type { PersonalitySummary } from "@/types/brews";
+import type { PersonalitySummary } from "@/types/personality";
 
 type Props = {
   title: PersonalitySummary["title"];
@@ -16,8 +16,6 @@ const { percentileSimilarToType, title } = Astro.props;
   <p class="flex gap-2 items-center text-xs py-2 3xl:py-0 lg:text-sm">
     <span class="bg-accent-bluemedium rounded-full px-2"
       >{percentileSimilarToType}%
-    </span>others are also {title.substring(0, 1).toUpperCase()}{
-      title.substring(1)
-    } Developers
+    </span>are also {title.substring(0, 1).toUpperCase()}{title.substring(1)} Developers
   </p>
 </div>
