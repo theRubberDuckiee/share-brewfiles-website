@@ -22,5 +22,10 @@ export default function totalBrewData(
       downloads: value,
     }))
     .sort((a, b) => b.downloads - a.downloads)
-    .slice(0, showOnlyTop10 ? 10 : 100);
+    .map((entry, index) => ({
+      ...entry,
+      downloads: entry.downloads,
+      rank: index + 1,
+    }))
+    .slice(0, showOnlyTop10 ? 10 : 200);
 }

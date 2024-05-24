@@ -4,5 +4,6 @@ export type PackageEntry = {
 
 export type PackageCounted = {
   name: string;
-  downloads: number;
+  downloads: string;
+  rank: number;
 };
