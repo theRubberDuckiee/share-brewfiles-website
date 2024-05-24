@@ -1,12 +1,12 @@
 ---
 import { getRandomNumber, getRandomWord } from "@/lib/getRandomValue";
+import type { PackageCounted } from "@/types/packageEntry";
 
-type Props = {
+interface Props extends PackageCounted {
   isLast?: boolean;
-  index: number;
-};
+}
 
-const { index, isLast } = Astro.props;
+const { rank, downloads, name, isLast } = Astro.props;
 ---
 
 <li class="relative @container">
@@ -16,7 +16,7 @@ const { index, isLast } = Astro.props;
     )
   }
   <div
-    id={`${index}`}
+    id={`${rank}`}
     class="sm:p-2 relative flex justify-between items-center group font-mono hover:bg-white/5 rounded-xl sm:rounded-3xl ring-accent-bluemedium focus:outline-none transition-all focus-visible:ring-4 ring-offset-4 ring-offset-bkg @sm:text-lg @lg:text-2xl @2xl:text-4xl"
     data-row
   >
@@ -24,14 +24,10 @@ const { index, isLast } = Astro.props;
       <p
         class="text-white/50 px-4 py-3 sm:px-8 sm:py-6 bg-white/5 max-w-fit rounded-xl sm:rounded-2xl leading-none"
       >
-        {index.toString().padStart(2, "0")}
+        {rank.toString().padStart(2, "0")}
       </p>
-      <p
-        class="uppercase tracking-widest break-all pr-4 sm:pr-2"
-        id={`entry-${index}`}
-        data-packageName
-      >
-        {getRandomWord()}
+      <p class="uppercase tracking-widest break-all pr-4 sm:pr-2">
+        {name ? name : setTimeout(() => getRandomWord(), 60)}
       </p>
       <div
         class="items-center opacity-0 absolute inset-0 sm:inset-auto sm:static sm:opacity-100 hover:bg-white/20 sm:hover:bg-transparent sm:hidden group-hover:sm:flex gap-2 shrink-0 pr-8 text-base"
@@ -54,10 +50,10 @@ const { index, isLast } = Astro.props;
     </div>
     <p
       class="uppercase tracking-widest mr-3"
-      id={`downloads-${index}`}
+      id={`downloads-${rank}`}
       data-downloadValue
     >
-      {getRandomNumber()}
+      {downloads ? downloads : setTimeout(() => getRandomNumber(), 60)}
     </p>
   </div>
 </li>

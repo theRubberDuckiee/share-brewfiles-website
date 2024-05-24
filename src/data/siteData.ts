@@ -24,6 +24,6 @@ export const contributors = [
   {
     name: "Kyle Ribant",
     role: "Design",
-    href: "/",
+    href: "https://ribant.co/",
   },
 ];

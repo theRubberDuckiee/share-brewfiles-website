@@ -2,7 +2,7 @@
 import Heading from "../ui/Heading.astro";
 import { Icon } from "astro-icon/components";
 import Link from "../ui/Link.astro";
-import LeaderboardList from "./LeaderboardList.astro";
+import LeaderboardList from "./LeaderboardList";
 ---
 
 <section class="container" aria-label="Brewfiles Leaderboard">
@@ -46,7 +46,7 @@ import LeaderboardList from "./LeaderboardList.astro";
         </div>
         <p class="pr-2">Downloads</p>
       </div>
-      <LeaderboardList />
+      <LeaderboardList client:only="react" showOnlyTop10={true} />
     </div>
   </div>
 </section>
