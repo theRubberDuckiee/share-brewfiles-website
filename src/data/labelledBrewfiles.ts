@@ -45,8 +45,9 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "",
   },
-  xz: {
+  "xz": {
     rank: 3,
     developer: Developer.General,
     old: false,
@@ -56,6 +57,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/xz",
   },
   "python@3.11": {
     rank: 4,
@@ -69,7 +71,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     isCLITool: false,
     link: "https://www.python.org/downloads/release/python-3110/",
   },
-  sqlite: {
+  "sqlite": {
     rank: 5,
     developer: Developer.Data,
     old: false,
@@ -79,8 +81,9 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/sqlite",
   },
-  glib: {
+  "glib": {
     rank: 6,
     developer: Developer.Backend,
     old: true,
@@ -90,8 +93,9 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/glib",
   },
-  node: {
+  "node": {
     rank: 7,
     developer: Developer.Backend,
     old: false,
@@ -101,8 +105,9 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://nodejs.org",
   },
-  harfbuzz: {
+  "harfbuzz": {
     rank: 8,
     developer: Developer.Frontend,
     old: false,
@@ -112,8 +117,9 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/harfbuzz",
   },
-  gettext: {
+  "gettext": {
     rank: 9,
     developer: Developer.Backend,
     old: true,
@@ -123,6 +129,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gettext",
   },
   icu4c: {
     rank: 10,
@@ -134,6 +141,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/icu4c",
   },
   libnghttp2: {
     rank: 11,
@@ -145,6 +153,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libnghttp2",
   },
   readline: {
     rank: 12,
@@ -156,6 +165,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/readline",
   },
   libx11: {
     rank: 13,
@@ -167,6 +177,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libx11",
   },
   zstd: {
     rank: 14,
@@ -178,6 +189,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/zstd",
   },
   cmake: {
     rank: 15,
@@ -189,6 +201,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/cmake",
   },
   gnutls: {
     rank: 16,
@@ -200,6 +213,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gnutls",
   },
   awscli: {
     rank: 17,
@@ -211,6 +225,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/awscli",
   },
   "jpeg-xl": {
     rank: 18,
@@ -222,6 +237,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/jpeg-xl",
   },
   git: {
     rank: 19,
@@ -233,6 +249,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: true,
+    link: "https://formulae.brew.sh/formula/git",
   },
   "openssl@1.1": {
     rank: 20,
@@ -244,6 +261,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openssl@1.1",
   },
   libtiff: {
     rank: 21,
@@ -255,6 +273,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libtiff",
   },
   gmp: {
     rank: 22,
@@ -266,6 +285,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gmp",
   },
   "little-cms2": {
     rank: 23,
@@ -277,6 +297,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/little-cms2",
   },
   unbound: {
     rank: 24,
@@ -288,6 +309,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/unbound",
   },
   pcre2: {
     rank: 25,
@@ -299,6 +321,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pcre2",
   },
   libpng: {
     rank: 26,
@@ -310,6 +333,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libpng",
   },
   "python@3.12": {
     rank: 27,
@@ -321,6 +345,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python@3.12",
   },
   aom: {
     rank: 28,
@@ -332,6 +357,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/aom",
   },
   "c-ares": {
     rank: 29,
@@ -343,6 +369,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/c-ares",
   },
   gcc: {
     rank: 30,
@@ -354,6 +381,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gcc",
   },
   libxcb: {
     rank: 31,
@@ -365,6 +393,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxcb",
   },
   openexr: {
     rank: 32,
@@ -376,6 +405,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openexr",
   },
   mpdecimal: {
     rank: 33,
@@ -387,6 +417,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/mpdecimal",
   },
   "python@3.10": {
     rank: 34,
@@ -398,6 +429,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python@3.10",
   },
   webp: {
     rank: 35,
@@ -409,6 +441,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/webp",
   },
   ffmpeg: {
     rank: 36,
@@ -420,6 +453,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ffmpeg",
   },
   pyenv: {
     rank: 37,
@@ -431,6 +465,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pyenv",
   },
   freetype: {
     rank: 38,
@@ -442,6 +477,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/freetype",
   },
   fontconfig: {
     rank: 39,
@@ -453,6 +489,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/fontconfig",
   },
   libidn2: {
     rank: 40,
@@ -464,6 +501,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libidn2",
   },
   lz4: {
     rank: 41,
@@ -475,6 +513,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/lz4",
   },
   xorgproto: {
     rank: 42,
@@ -486,6 +525,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/xorgproto",
   },
   curl: {
     rank: 43,
@@ -497,6 +537,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: true,
+    link: "https://formulae.brew.sh/formula/curl",
   },
   go: {
     rank: 44,
@@ -508,6 +549,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/go",
   },
   wget: {
     rank: 45,
@@ -519,6 +561,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/wget",
   },
   brotli: {
     rank: 46,
@@ -530,6 +573,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/brotli",
   },
   krb5: {
     rank: 47,
@@ -541,6 +585,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/krb5",
   },
   openjdk: {
     rank: 48,
@@ -552,6 +597,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openjdk",
   },
   libevent: {
     rank: 49,
@@ -563,6 +609,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libevent",
   },
   zlib: {
     rank: 50,
@@ -574,6 +621,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/zlib",
   },
   libuv: {
     rank: 51,
@@ -585,6 +633,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libuv",
   },
   "p11-kit": {
     rank: 52,
@@ -596,6 +645,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/p11-kit",
   },
   libunistring: {
     rank: 53,
@@ -607,6 +657,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libunistring",
   },
   cairo: {
     rank: 54,
@@ -618,6 +669,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/cairo",
   },
   "python@3.9": {
     rank: 55,
@@ -629,6 +681,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python@3.9",
   },
   gh: {
     rank: 56,
@@ -640,6 +693,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gh",
   },
   imagemagick: {
     rank: 57,
@@ -651,6 +705,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/imagemagick",
   },
   tesseract: {
     rank: 58,
@@ -662,6 +717,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/tesseract",
   },
   highway: {
     rank: 59,
@@ -673,6 +729,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/highway",
   },
   mpfr: {
     rank: 60,
@@ -684,6 +741,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/mpfr",
   },
   libxext: {
     rank: 61,
@@ -695,6 +753,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxext",
   },
   libpq: {
     rank: 62,
@@ -706,6 +765,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libpq",
   },
   ncurses: {
     rank: 63,
@@ -717,6 +777,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ncurses",
   },
   openldap: {
     rank: 64,
@@ -728,6 +789,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openldap",
   },
   libxdmcp: {
     rank: 65,
@@ -739,6 +801,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxdmcp",
   },
   nettle: {
     rank: 66,
@@ -750,6 +813,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/nettle",
   },
   imath: {
     rank: 67,
@@ -761,6 +825,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/imath",
   },
   php: {
     rank: 68,
@@ -772,6 +837,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/php",
   },
   protobuf: {
     rank: 69,
@@ -783,6 +849,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/protobuf",
   },
   pango: {
     rank: 70,
@@ -794,6 +861,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pango",
   },
   gnupg: {
     rank: 71,
@@ -805,6 +873,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gnupg",
   },
   openjpeg: {
     rank: 72,
@@ -816,6 +885,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openjpeg",
   },
   libssh2: {
     rank: 73,
@@ -827,6 +897,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libssh2",
   },
   giflib: {
     rank: 74,
@@ -838,6 +909,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/giflib",
   },
   autoconf: {
     rank: 75,
@@ -849,6 +921,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/autoconf",
   },
   coreutils: {
     rank: 76,
@@ -860,6 +933,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/coreutils",
   },
   ruby: {
     rank: 77,
@@ -871,6 +945,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ruby",
   },
   sdl2: {
     rank: 78,
@@ -882,6 +957,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/sdl2",
   },
   jq: {
     rank: 79,
@@ -893,6 +969,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/jq",
   },
   "postgresql@14": {
     rank: 80,
@@ -904,6 +981,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/postgresql@14",
   },
   isl: {
     rank: 81,
@@ -915,6 +993,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/isl",
   },
   librsvg: {
     rank: 82,
@@ -926,6 +1005,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/librsvg",
   },
   "pkg-config": {
     rank: 83,
@@ -937,6 +1017,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pkg-config",
   },
   boost: {
     rank: 84,
@@ -948,6 +1029,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/boost",
   },
   libvmaf: {
     rank: 85,
@@ -959,6 +1041,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libvmaf",
   },
   "python-setuptools": {
     rank: 86,
@@ -970,6 +1053,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python-setuptools",
   },
   libxau: {
     rank: 87,
@@ -981,6 +1065,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxau",
   },
   "kubernetes-cli": {
     rank: 88,
@@ -992,6 +1077,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/kubernetes-cli",
   },
   leptonica: {
     rank: 89,
@@ -1003,6 +1089,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/leptonica",
   },
   "ruby-build": {
     rank: 90,
@@ -1014,6 +1101,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ruby-build",
   },
   libheif: {
     rank: 91,
@@ -1025,6 +1113,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libheif",
   },
   libavif: {
     rank: 92,
@@ -1036,6 +1125,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libavif",
   },
   mysql: {
     rank: 93,
@@ -1047,6 +1137,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/mysql",
   },
   pixman: {
     rank: 94,
@@ -1058,6 +1149,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pixman",
   },
   libxml2: {
     rank: 95,
@@ -1069,6 +1161,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxml2",
   },
   jasper: {
     rank: 96,
@@ -1080,6 +1173,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/jasper",
   },
   watchman: {
     rank: 97,
@@ -1091,6 +1185,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/watchman",
   },
   libarchive: {
     rank: 98,
@@ -1102,6 +1197,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libarchive",
   },
   ghostscript: {
     rank: 99,
@@ -1113,6 +1209,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ghostscript",
   },
   libxrender: {
     rank: 100,
@@ -1124,6 +1221,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libxrender",
   },
   fribidi: {
     rank: 101,
@@ -1135,6 +1233,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/fribidi",
   },
   "tcl-tk": {
     rank: 102,
@@ -1146,6 +1245,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/tcl-tk",
   },
   freetds: {
     rank: 103,
@@ -1157,6 +1257,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/freetds",
   },
   qemu: {
     rank: 104,
@@ -1168,6 +1269,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/qemu",
   },
   llvm: {
     rank: 105,
@@ -1179,6 +1281,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/llvm",
   },
   mbedtls: {
     rank: 106,
@@ -1190,6 +1293,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/mbedtls",
   },
   libomp: {
     rank: 107,
@@ -1201,6 +1305,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libomp",
   },
   libyaml: {
     rank: 108,
@@ -1212,6 +1317,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libyaml",
   },
   glibc: {
     rank: 109,
@@ -1223,6 +1329,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/glibc",
   },
   graphite2: {
     rank: 110,
@@ -1234,6 +1341,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/graphite2",
   },
   libsodium: {
     rank: 111,
@@ -1245,6 +1353,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libsodium",
   },
   mpg123: {
     rank: 112,
@@ -1256,6 +1365,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/mpg123",
   },
   gd: {
     rank: 113,
@@ -1267,6 +1377,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gd",
   },
   oniguruma: {
     rank: 114,
@@ -1278,6 +1389,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/oniguruma",
   },
   libmpc: {
     rank: 115,
@@ -1289,6 +1401,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libmpc",
   },
   binutils: {
     rank: 116,
@@ -1300,6 +1413,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/binutils",
   },
   rtmpdump: {
     rank: 117,
@@ -1311,6 +1425,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/rtmpdump",
   },
   nvm: {
     rank: 118,
@@ -1322,6 +1437,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/nvm",
   },
   bzip2: {
     rank: 119,
@@ -1333,6 +1449,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/bzip2",
   },
   numpy: {
     rank: 120,
@@ -1344,6 +1461,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/numpy",
   },
   openblas: {
     rank: 121,
@@ -1355,6 +1473,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openblas",
   },
   libtool: {
     rank: 122,
@@ -1366,6 +1485,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libtool",
   },
   "svt-av1": {
     rank: 123,
@@ -1377,6 +1497,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/svt-av1",
   },
   "linux-headers@5.15": {
     rank: 124,
@@ -1388,6 +1509,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/linux-headers@5.15",
   },
   docker: {
     rank: 125,
@@ -1399,6 +1521,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/docker",
   },
   pycparser: {
     rank: 126,
@@ -1410,6 +1533,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pycparser",
   },
   helm: {
     rank: 127,
@@ -1421,6 +1545,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/helm",
   },
   lzo: {
     rank: 128,
@@ -1432,6 +1557,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/lzo",
   },
   m4: {
     rank: 129,
@@ -1443,6 +1569,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/m4",
   },
   cocoapods: {
     rank: 130,
@@ -1454,6 +1581,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/cocoapods",
   },
   dav1d: {
     rank: 131,
@@ -1465,6 +1593,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/dav1d",
   },
   abseil: {
     rank: 132,
@@ -1476,6 +1605,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/abseil",
   },
   "libgpg-error": {
     rank: 133,
@@ -1487,6 +1617,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libgpg-error",
   },
   six: {
     rank: 134,
@@ -1498,6 +1629,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/six",
   },
   folly: {
     rank: 135,
@@ -1509,6 +1641,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/folly",
   },
   rust: {
     rank: 136,
@@ -1520,6 +1653,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/rust",
   },
   librist: {
     rank: 137,
@@ -1531,6 +1665,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/librist",
   },
   netpbm: {
     rank: 138,
@@ -1542,6 +1677,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/netpbm",
   },
   "gobject-introspection": {
     rank: 139,
@@ -1553,6 +1689,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gobject-introspection",
   },
   "gdk-pixbuf": {
     rank: 140,
@@ -1564,6 +1701,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gdk-pixbuf",
   },
   rav1e: {
     rank: 141,
@@ -1575,6 +1713,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/rav1e",
   },
   snappy: {
     rank: 142,
@@ -1586,6 +1725,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/snappy",
   },
   libffi: {
     rank: 143,
@@ -1597,6 +1737,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libffi",
   },
   cffi: {
     rank: 144,
@@ -1608,6 +1749,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/cffi",
   },
   fb303: {
     rank: 145,
@@ -1619,6 +1761,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/fb303",
   },
   graphviz: {
     rank: 146,
@@ -1630,6 +1773,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/graphviz",
   },
   frei0r: {
     rank: 147,
@@ -1641,6 +1785,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/frei0r",
   },
   fizz: {
     rank: 148,
@@ -1652,6 +1797,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/fizz",
   },
   "berkeley-db@5": {
     rank: 149,
@@ -1675,6 +1821,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libtasn1",
   },
   libfido2: {
     rank: 151,
@@ -1686,6 +1833,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libfido2",
   },
   docutils: {
     rank: 152,
@@ -1697,6 +1845,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/docutils",
   },
   libksba: {
     rank: 153,
@@ -1708,6 +1857,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libksba",
   },
   maven: {
     rank: 154,
@@ -1719,6 +1869,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/maven",
   },
   "openjdk@11": {
     rank: 155,
@@ -1730,6 +1881,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openjdk@11",
   },
   wangle: {
     rank: 156,
@@ -1741,6 +1893,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/wangle",
   },
   nghttp2: {
     rank: 157,
@@ -1752,6 +1905,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/nghttp2",
   },
   srt: {
     rank: 158,
@@ -1763,6 +1917,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/srt",
   },
   redis: {
     rank: 159,
@@ -1774,6 +1929,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/redis",
   },
   z3: {
     rank: 160,
@@ -1785,6 +1941,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/z3",
   },
   opus: {
     rank: 161,
@@ -1796,6 +1953,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/opus",
   },
   edencommon: {
     rank: 162,
@@ -1807,6 +1965,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/edencommon",
   },
   "shared-mime-info": {
     rank: 163,
@@ -1818,6 +1977,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/shared-mime-info",
   },
   fbthrift: {
     rank: 164,
@@ -1829,6 +1989,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/fbthrift",
   },
   libusb: {
     rank: 165,
@@ -1840,6 +2001,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libusb",
   },
   "python@3.8": {
     rank: 166,
@@ -1851,6 +2013,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python@3.8",
   },
   neovim: {
     rank: 167,
@@ -1862,6 +2025,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/neovim",
   },
   mongosh: {
     rank: 168,
@@ -1873,6 +2037,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/",
   },
   libssh: {
     rank: 169,
@@ -1920,6 +2085,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/swiftlint",
   },
   qt: {
     rank: 173,
@@ -1931,6 +2097,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/qt",
   },
   "gnu-tar": {
     rank: 174,
@@ -1942,6 +2109,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gnu-tar",
   },
   unzip: {
     rank: 175,
@@ -1965,6 +2133,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/cjson",
   },
   libass: {
     rank: 177,
@@ -1976,6 +2145,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libass",
   },
   libgcrypt: {
     rank: 178,
@@ -1987,6 +2157,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libgcrypt",
   },
   gdbm: {
     rank: 179,
@@ -1998,6 +2169,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/gdbm",
   },
   zeromq: {
     rank: 180,
@@ -2009,6 +2181,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/zeromq",
   },
   "openjdk@17": {
     rank: 181,
@@ -2020,6 +2193,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openjdk@17",
   },
   "azure-cli": {
     rank: 182,
@@ -2031,6 +2205,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-macos",
   },
   libsndfile: {
     rank: 183,
@@ -2042,6 +2217,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libsndfile",
   },
   fzf: {
     rank: 184,
@@ -2065,6 +2241,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/git-lfs",
   },
   unixodbc: {
     rank: 186,
@@ -2076,6 +2253,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/unixodbc",
   },
   poppler: {
     rank: 187,
@@ -2087,6 +2265,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/poppler",
   },
   ansible: {
     rank: 188,
@@ -2098,6 +2277,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/ansible",
   },
   x265: {
     rank: 189,
@@ -2109,6 +2289,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/x265",
   },
   flac: {
     rank: 190,
@@ -2120,6 +2301,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/flac",
   },
   pygments: {
     rank: 191,
@@ -2131,6 +2313,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pygments",
   },
   perl: {
     rank: 192,
@@ -2142,6 +2325,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/perl",
   },
   luajit: {
     rank: 193,
@@ -2153,6 +2337,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/luajit",
   },
   zimg: {
     rank: 194,
@@ -2164,6 +2349,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/zimg",
   },
   libde265: {
     rank: 195,
@@ -2175,6 +2361,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libde265",
   },
   xcbeautify: {
     rank: 196,
@@ -2186,6 +2373,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/xcbeautify",
   },
   rubberband: {
     rank: 197,
@@ -2197,6 +2385,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/rubberband",
   },
   pandoc: {
     rank: 198,
@@ -2208,6 +2397,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/pandoc",
   },
   tmux: {
     rank: 199,
@@ -2219,6 +2409,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/tmux",
   },
   nss: {
     rank: 200,
@@ -2230,6 +2421,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: true,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/nss",
   },
   expat: {
     rank: 201,
@@ -2241,6 +2433,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/expat",
   },
   libzip: {
     rank: 202,
@@ -2252,6 +2445,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libzip",
   },
   yarn: {
     rank: 203,
@@ -2263,6 +2457,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/yarn",
   },
   libunibreak: {
     rank: 204,
@@ -2274,6 +2469,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libunibreak",
   },
   libedit: {
     rank: 205,
@@ -2285,6 +2481,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libedit",
   },
   virtualenv: {
     rank: 206,
@@ -2296,6 +2493,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/virtualenv",
   },
   "node@16": {
     rank: 207,
@@ -2307,6 +2505,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/node@16",
   },
   "python-packaging": {
     rank: 208,
@@ -2318,6 +2517,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/python-packaging",
   },
   "docker-compose": {
     rank: 209,
@@ -2329,6 +2529,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/docker-compose",
   },
   libvpx: {
     rank: 210,
@@ -2340,6 +2541,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libvpx",
   },
   yq: {
     rank: 211,
@@ -2351,6 +2553,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/yq",
   },
   openvino: {
     rank: 212,
@@ -2362,6 +2565,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/openvino",
   },
   libassuan: {
     rank: 213,
@@ -2373,6 +2577,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/libassuan",
   },
   "qt@5": {
     rank: 214,
@@ -2384,6 +2589,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/qt@5",
   },
   "apr-util": {
     rank: 215,
@@ -2395,6 +2601,7 @@ export const packagePersonalityDictionary: PersonalityDictionary = {
     organization: false,
     isDevApp: false,
     isCLITool: false,
+    link: "https://formulae.brew.sh/formula/apr-util",
   },
   warp: {
     rank: 216,
