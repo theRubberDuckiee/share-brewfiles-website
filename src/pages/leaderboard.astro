@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import LeaderboardList from "@/components/leaderboard/LeaderboardList.astro";
+import LeaderboardList from "@/components/leaderboard/LeaderboardList";
 ---
 
 <BaseLayout
@@ -8,6 +8,6 @@ import LeaderboardList from "@/components/leaderboard/LeaderboardList.astro";
   description="Visit Brewfiles leaderboard to discover new tools or to get validation on the tools in your tech stack."
 >
   <div class="container">
-    <LeaderboardList />
+    <LeaderboardList client:only="react" />
   </div>
 </BaseLayout>

@@ -4,7 +4,7 @@ import { db } from "@/firebase/config";
 import totalBrewData from "@/lib/totalBrewData";
 import type { BrewEntry, Brews, BrewsItem } from "@/types/brews";
 import type { APIRoute } from "astro";
-import { getDoc, collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export const GET: APIRoute = async ({ request }) => {
   // optional param to get only the top 10
@@ -23,7 +23,7 @@ export const GET: APIRoute = async ({ request }) => {
         }
         const brewData = Object.values(data as BrewEntry[]).map((value) => {
           return {
-            name: value.name,
+            name: value.name.replaceAll(",", ""),
             packageManager: value.packageManager,
           };
         });

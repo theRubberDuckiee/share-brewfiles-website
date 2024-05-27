@@ -1,9 +1,7 @@
 ---
-import Button from "@/components/ui/Button.astro";
 import Link from "@/components/ui/Link.astro";
+import { packagePersonalityDictionary } from "@/data/labelledBrewfiles";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { generatePersonality } from "@/lib/generatePersonality";
-import { brewfileLinkDictionary } from "@/lib/getBrewfileLink";
 import type { Brews } from "@/types/brews";
 import { Image } from "astro:assets";
 
@@ -63,7 +61,7 @@ if (!entry) return Astro.redirect("/");
           variant={"tile"}
           size={"bland"}
           href={
-            brewfileLinkDictionary[item.name] ??
+            packagePersonalityDictionary[item.name]?.link ??
             `https://google.com?q=${item.name}+package`
           }
           classes="backdrop-blur-3xl"
