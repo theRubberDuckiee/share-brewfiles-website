@@ -14,7 +14,7 @@ To upload your brewfile, run the following command in your terminal:
 
 `npx share-brewfiles`
 
-[PLACEHOLDER for GIF]
+![CLI command for share-brewfiles](/assets//share-brewfiles.gif)
 
 The command will:
 
@@ -26,14 +26,14 @@ The command will:
 
 We’ve calculated the [top packages on our leaderboard]("https://brewfiles.com/leaderboard").
 
-[PLACEHOLDER FOR GIF]
+![View the leaderboard](/assets/view-leaderboard.gif)
 
 ## View and Share Your Brewfile
 
 You can locate your brewfile by searching for your username [on our brewfiles landing page]("https://brewfiles.com/brewfiles").
 
-[PLACEHOLDER FOR GIF]
+![search for username](/assets/view-brewfile.gif)
 
 We analyze each brewfile to generate a fun personality type.
 
-[PLACEHOLDER FOR GIF]
+![generate personality type](/assets/generate-personality.gif)
