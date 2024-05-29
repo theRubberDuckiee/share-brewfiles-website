@@ -15,25 +15,31 @@ export const GET: APIRoute = async ({ request }) => {
     const allBrews = await getDocs(collection(db, "brewfiles"));
 
     if (allBrews) {
-      const brews = allBrews.docs.map((doc) => {
-        const rawData = doc.data();
+      const brews = allBrews.docs
+        .filter((doc) =>
+          isValidBrewfile(doc.data(), {
+            checkPersonalitySummary: false,
+          })
+        )
+        .map((doc) => {
+          const rawData = doc.data();
 
-        const { data } = rawData;
-        if (!data) {
-          return;
-        }
+          const { data } = rawData;
+          if (!data) {
+            return;
+          }
 
-        const brewData = Object.values(data as BrewEntry[]).map((value) => {
+          const brewData = Object.values(data as BrewEntry[]).map((value) => {
+            return {
+              name: value.name.replaceAll(",", ""),
+              packageManager: value.packageManager,
+            };
+          });
           return {
-            name: value.name.replaceAll(",", ""),
-            packageManager: value.packageManager,
+            id: doc.id,
+            data: brewData,
           };
-        });
-        return {
-          id: doc.id,
-          data: brewData,
-        };
-      }) as BrewsItem[];
+        }) as BrewsItem[];
 
       const totalData = totalBrewData(
         brews.map((brew) => brew.data).flat(),

@@ -21,7 +21,11 @@ export const GET: APIRoute = async ({ request }) => {
           throw new Error("No single brew found");
         }
 
-        if (!isValidBrewfile(singleBrewDoc.data())) {
+        if (
+          !isValidBrewfile(singleBrewDoc.data(), {
+            checkPersonalitySummary: false,
+          })
+        ) {
           throw new Error("No single brew found");
         }
 
@@ -56,32 +60,27 @@ export const GET: APIRoute = async ({ request }) => {
       const allBrews = await getDocs(collection(db, "brewfiles"));
 
       if (allBrews) {
-        const brews = allBrews.docs.map((doc) => {
-          const { data, date, userInfo } = doc.data();
-          if (
-            !data ||
-            !date ||
-            !userInfo ||
-            !isValidBrewfile(doc.data(), {
+        const brews = allBrews.docs
+          .filter((doc) =>
+            isValidBrewfile(doc.data(), {
               checkPersonalitySummary: false,
             })
-          ) {
-            // ignore result if it doesn't have all three items
-            return;
-          }
-          const brewData = Object.values(data as BrewEntry[]).map((value) => {
+          )
+          .map((doc) => {
+            const { data, date, userInfo } = doc.data();
+            const brewData = Object.values(data as BrewEntry[]).map((value) => {
+              return {
+                name: value.name,
+                packageManager: value.packageManager,
+              };
+            });
             return {
-              name: value.name,
-              packageManager: value.packageManager,
+              id: doc.id,
+              data: brewData,
+              date,
+              userInfo,
             };
-          });
-          return {
-            id: doc.id,
-            data: brewData,
-            date,
-            userInfo,
-          };
-        }) as BrewsItem[];
+          }) as BrewsItem[];
         return new Response(JSON.stringify({ brews: brews }));
       } else {
         throw new Error("No brews found");
