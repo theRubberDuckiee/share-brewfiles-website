@@ -30,7 +30,7 @@ export async function generatePersonality(packages: BrewEntry[], id: string) {
         {
           checkUserInfo: false,
           checkPackageData: true,
-          checkPersonalitySummary: true,
+          checkPersonalitySummary: false,
           checkDate: false,
         }
       )
