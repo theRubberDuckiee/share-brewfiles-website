@@ -13,7 +13,6 @@ import {
 import { personalityBuckets } from "./personalityBuckets";
 import { db } from "@/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
-import isValidBrewfile from "./validateBrewfileData";
 
 export async function generatePersonality(packages: BrewEntry[], id: string) {
   const totalCountStatistics = calculateStatistics(packages);
@@ -24,21 +23,6 @@ export async function generatePersonality(packages: BrewEntry[], id: string) {
   );
 
   try {
-    if (
-      !isValidBrewfile(
-        { data: packages },
-        {
-          checkUserInfo: false,
-          checkPackageData: true,
-          checkPersonalitySummary: false,
-          checkDate: false,
-        }
-      )
-    ) {
-      console.log("not working…");
-      throw new Error("Invalid brewfile data");
-    }
-
     const response = await fetch(
       "https://www.brewfiles.com/api/updatePersonality",
       {

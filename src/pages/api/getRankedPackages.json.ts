@@ -3,7 +3,7 @@ export const prerender = false;
 import { db } from "@/firebase/config";
 import totalBrewData from "@/lib/totalBrewData";
 import isValidBrewfile from "@/lib/validateBrewfileData";
-import type { BrewEntry, Brews, BrewsItem } from "@/types/brews";
+import type { BrewEntry, BrewsItem } from "@/types/brews";
 import type { APIRoute } from "astro";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -20,10 +20,6 @@ export const GET: APIRoute = async ({ request }) => {
 
         const { data } = rawData;
         if (!data) {
-          return;
-        }
-
-        if (!isValidBrewfile(doc.data())) {
           return;
         }
 
