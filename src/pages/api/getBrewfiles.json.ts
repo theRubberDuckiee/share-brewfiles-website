@@ -2,6 +2,7 @@ export const prerender = false;
 
 import { db } from "@/firebase/config";
 import { generatePersonality } from "@/lib/generatePersonality";
+import isValidBrewfile from "@/lib/validateBrewfileData";
 import type { BrewEntry, BrewsItem } from "@/types/brews";
 import type { APIRoute } from "astro";
 import { getDoc, collection, doc, getDocs } from "firebase/firestore";
@@ -19,6 +20,11 @@ export const GET: APIRoute = async ({ request }) => {
         if (!singleBrewDoc.data()?.data) {
           throw new Error("No single brew found");
         }
+
+        if (!isValidBrewfile(singleBrewDoc.data())) {
+          throw new Error("No single brew found");
+        }
+
         const brewfileData = Object.values(
           singleBrewDoc.data().data as BrewEntry[]
         ).map((value) => {
@@ -26,7 +32,7 @@ export const GET: APIRoute = async ({ request }) => {
             name: value.name,
             packageManager: value.packageManager,
           };
-        })
+        });
         generatePersonality(brewfileData, singleBrewDoc.id);
         return new Response(
           JSON.stringify({
@@ -52,7 +58,14 @@ export const GET: APIRoute = async ({ request }) => {
       if (allBrews) {
         const brews = allBrews.docs.map((doc) => {
           const { data, date, userInfo } = doc.data();
-          if (!data || !date || !userInfo) {
+          if (
+            !data ||
+            !date ||
+            !userInfo ||
+            !isValidBrewfile(doc.data(), {
+              checkPersonalitySummary: false,
+            })
+          ) {
             // ignore result if it doesn't have all three items
             return;
           }

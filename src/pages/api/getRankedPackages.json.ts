@@ -2,6 +2,7 @@ export const prerender = false;
 
 import { db } from "@/firebase/config";
 import totalBrewData from "@/lib/totalBrewData";
+import isValidBrewfile from "@/lib/validateBrewfileData";
 import type { BrewEntry, Brews, BrewsItem } from "@/types/brews";
 import type { APIRoute } from "astro";
 import { collection, getDocs } from "firebase/firestore";
@@ -16,11 +17,16 @@ export const GET: APIRoute = async ({ request }) => {
     if (allBrews) {
       const brews = allBrews.docs.map((doc) => {
         const rawData = doc.data();
-        // check that data actually exists
+
         const { data } = rawData;
         if (!data) {
           return;
         }
+
+        if (!isValidBrewfile(doc.data())) {
+          return;
+        }
+
         const brewData = Object.values(data as BrewEntry[]).map((value) => {
           return {
             name: value.name.replaceAll(",", ""),
