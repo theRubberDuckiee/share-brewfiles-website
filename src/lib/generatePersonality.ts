@@ -13,6 +13,7 @@ import {
 import { personalityBuckets } from "./personalityBuckets";
 import { db } from "@/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
+import isValidBrewfile from "./validateBrewfileData";
 
 export async function generatePersonality(packages: BrewEntry[], id: string) {
   const totalCountStatistics = calculateStatistics(packages);
@@ -23,6 +24,21 @@ export async function generatePersonality(packages: BrewEntry[], id: string) {
   );
 
   try {
+    if (
+      !isValidBrewfile(
+        { data: packages },
+        {
+          checkUserInfo: false,
+          checkPackageData: true,
+          checkPersonalitySummary: true,
+          checkDate: false,
+        }
+      )
+    ) {
+      console.log("not working…");
+      throw new Error("Invalid brewfile data");
+    }
+
     const response = await fetch(
       "https://www.brewfiles.com/api/updatePersonality",
       {
@@ -97,7 +113,7 @@ function calculateStatistics(
       }
 
       labelledPackage.old ? (totalOld += 1) : totalOld;
-      labelledPackage.ai ? (totalAI +=1) : totalAI;
+      labelledPackage.ai ? (totalAI += 1) : totalAI;
       labelledPackage.customization
         ? (totalCustomization += 1)
         : totalCustomization;
@@ -176,11 +192,12 @@ function analyzeStats(
   return personalityPercentageStatistics;
 }
 
-async function turnStatsIntoPersonality (
+async function turnStatsIntoPersonality(
   personalityPercentageStatistics: PersonalityPercentageStatistics,
   packages: BrewEntry[]
 ): Promise<PersonalitySummary> {
-  const {title, description, relevantStat, hashtags, friendsWith} = getDeveloper(personalityPercentageStatistics)
+  const { title, description, relevantStat, hashtags, friendsWith } =
+    getDeveloper(personalityPercentageStatistics);
   let percentileSimilarToType: number = 0;
   let totalPackagesUploadedComparitive: number = 0;
 
@@ -306,119 +323,147 @@ function convertFractionToPercentage(fraction: number): string {
   return roundedPercentage;
 }
 
-function isRetro(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionOld > .40 &&
-    personalityPercentageStatistics.fractionCustomization > .20
-)
+function isRetro(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionOld > 0.4 &&
+    personalityPercentageStatistics.fractionCustomization > 0.2
+  );
 }
 
-function isTraditionalist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionOld > .40 &&
-    personalityPercentageStatistics.fractionCustomization < .20
-)
+function isTraditionalist(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionOld > 0.4 &&
+    personalityPercentageStatistics.fractionCustomization < 0.2
+  );
 }
 
-function isAI(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionRecognized > .30 &&
-    personalityPercentageStatistics.fractionAI > .40
-)
+function isAI(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionRecognized > 0.3 &&
+    personalityPercentageStatistics.fractionAI > 0.4
+  );
 }
 
-function isArchitect(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionDevOps > .20 &&
-    personalityPercentageStatistics.fractionBackend > .15 &&
-    personalityPercentageStatistics.fractionSecurity > .15
-)
+function isArchitect(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionDevOps > 0.2 &&
+    personalityPercentageStatistics.fractionBackend > 0.15 &&
+    personalityPercentageStatistics.fractionSecurity > 0.15
+  );
 }
 
-function isTrailblazer(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionRecognized < .50 &&
-    personalityPercentageStatistics.fractionPopular < .50 &&
-    personalityPercentageStatistics.fractionOld < .20 &&
+function isTrailblazer(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionRecognized < 0.5 &&
+    personalityPercentageStatistics.fractionPopular < 0.5 &&
+    personalityPercentageStatistics.fractionOld < 0.2 &&
     personalityPercentageStatistics.totalPackages > 30
-)
+  );
 }
 
-function isCrazyScientist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
+function isCrazyScientist(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
     personalityPercentageStatistics.totalPackages > 80 &&
-    personalityPercentageStatistics.fractionRecognized < .20 &&
-    personalityPercentageStatistics.fractionPopular < .33
-)
+    personalityPercentageStatistics.fractionRecognized < 0.2 &&
+    personalityPercentageStatistics.fractionPopular < 0.33
+  );
 }
 
-function isBobTheBuilder(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
+function isBobTheBuilder(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
     personalityPercentageStatistics.totalPackages > 20 &&
-    personalityPercentageStatistics.fractionRecognized > .20 &&
-    personalityPercentageStatistics.fractionDevOps > .33
-)
+    personalityPercentageStatistics.fractionRecognized > 0.2 &&
+    personalityPercentageStatistics.fractionDevOps > 0.33
+  );
 }
 
-function isMarieKondo(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.fractionRecognized > .20 &&
+function isMarieKondo(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionRecognized > 0.2 &&
     personalityPercentageStatistics.totalPackages < 40 &&
-    personalityPercentageStatistics.fractionOrganization > .40
-)
+    personalityPercentageStatistics.fractionOrganization > 0.4
+  );
 }
 
-function isArtist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
+function isArtist(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
     personalityPercentageStatistics.totalPackages > 20 &&
-    personalityPercentageStatistics.fractionCustomization > .40 &&
-    personalityPercentageStatistics.fractionRecognized > .35
-)
+    personalityPercentageStatistics.fractionCustomization > 0.4 &&
+    personalityPercentageStatistics.fractionRecognized > 0.35
+  );
 }
 
-function isRookie(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
-    personalityPercentageStatistics.totalPackages < 10
-)
+function isRookie(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return personalityPercentageStatistics.totalPackages < 10;
 }
 
-function isSecurity(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-return (
+function isSecurity(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
     personalityPercentageStatistics.totalPackages > 20 &&
-    personalityPercentageStatistics.fractionSecurity > .40 &&
-    personalityPercentageStatistics.fractionRecognized > .35
-)
+    personalityPercentageStatistics.fractionSecurity > 0.4 &&
+    personalityPercentageStatistics.fractionRecognized > 0.35
+  );
 }
 
-function isPragmatist(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-    return (
-        personalityPercentageStatistics.totalPackages > 20 &&
-        personalityPercentageStatistics.totalPackages < 100 &&
-        personalityPercentageStatistics.fractionOrganization > .15 &&
-        personalityPercentageStatistics.fractionBackend > .15 &&
-        personalityPercentageStatistics.fractionOrganization > .15
-    )
+function isPragmatist(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.totalPackages > 20 &&
+    personalityPercentageStatistics.totalPackages < 100 &&
+    personalityPercentageStatistics.fractionOrganization > 0.15 &&
+    personalityPercentageStatistics.fractionBackend > 0.15 &&
+    personalityPercentageStatistics.fractionOrganization > 0.15
+  );
 }
 
-function isGoldenRetriever(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-    return (
-        personalityPercentageStatistics.fractionBackend > .03 &&
-        personalityPercentageStatistics.fractionFrontend > .03 &&
-        personalityPercentageStatistics.fractionDevOps > .03 &&
-        personalityPercentageStatistics.fractionSecurity > .03 &&
-        personalityPercentageStatistics.fractionData > .03 &&
-        personalityPercentageStatistics.fractionGeneral > .03
-    )
+function isGoldenRetriever(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionBackend > 0.03 &&
+    personalityPercentageStatistics.fractionFrontend > 0.03 &&
+    personalityPercentageStatistics.fractionDevOps > 0.03 &&
+    personalityPercentageStatistics.fractionSecurity > 0.03 &&
+    personalityPercentageStatistics.fractionData > 0.03 &&
+    personalityPercentageStatistics.fractionGeneral > 0.03
+  );
 }
 
-function isTrendy(personalityPercentageStatistics: PersonalityPercentageStatistics) {
-    return (
-        personalityPercentageStatistics.fractionPopular > .25 &&
-        personalityPercentageStatistics.fractionRecognized > .25
-    )
+function isTrendy(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
+  return (
+    personalityPercentageStatistics.fractionPopular > 0.25 &&
+    personalityPercentageStatistics.fractionRecognized > 0.25
+  );
 }
 
-function getDeveloper(personalityPercentageStatistics: PersonalityPercentageStatistics) {
+function getDeveloper(
+  personalityPercentageStatistics: PersonalityPercentageStatistics
+) {
   let title: DeveloperPersonalityType;
   let description: string;
   let relevantStat: Statistic;
@@ -426,50 +471,52 @@ function getDeveloper(personalityPercentageStatistics: PersonalityPercentageStat
   let friendsWith: DeveloperPersonalityType[];
 
   if (isRookie(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Rookie;
+    title = DeveloperPersonalityType.Rookie;
   } else if (isGoldenRetriever(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.GoldenRetriever;
+    title = DeveloperPersonalityType.GoldenRetriever;
   } else if (isPragmatist(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Pragamatist;
+    title = DeveloperPersonalityType.Pragamatist;
   } else if (isAI(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.AI;
+    title = DeveloperPersonalityType.AI;
   } else if (isArchitect(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Architect;
+    title = DeveloperPersonalityType.Architect;
   } else if (isArtist(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Artist;
+    title = DeveloperPersonalityType.Artist;
   } else if (isTraditionalist(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Traditionalist;
+    title = DeveloperPersonalityType.Traditionalist;
   } else if (isRetro(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Retro;
+    title = DeveloperPersonalityType.Retro;
   } else if (isBobTheBuilder(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.BobTheBuilder;
+    title = DeveloperPersonalityType.BobTheBuilder;
   } else if (isMarieKondo(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.MarieKondo;
+    title = DeveloperPersonalityType.MarieKondo;
   } else if (isCrazyScientist(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.CrazyScientist;
+    title = DeveloperPersonalityType.CrazyScientist;
   } else if (isTrailblazer(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Trailblazer;
+    title = DeveloperPersonalityType.Trailblazer;
   } else if (isSecurity(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Security;
+    title = DeveloperPersonalityType.Security;
   } else if (isTrendy(personalityPercentageStatistics)) {
-      title = DeveloperPersonalityType.Trendy;
+    title = DeveloperPersonalityType.Trendy;
   } else {
-      title = DeveloperPersonalityType.Wallflower;
+    title = DeveloperPersonalityType.Wallflower;
   }
 
   description = personalityBuckets[title].description;
   hashtags = personalityBuckets[title].hashtags;
   friendsWith = personalityBuckets[title].friendsWith;
   relevantStat = {
-      title: "Popularity Level",
-      content: `${convertFractionToPercentage(personalityPercentageStatistics.fractionRecognized)}% match the top 200 most downloaded homebrew packages in the last year.`
+    title: "Popularity Level",
+    content: `${convertFractionToPercentage(
+      personalityPercentageStatistics.fractionRecognized
+    )}% match the top 200 most downloaded homebrew packages in the last year.`,
   };
 
   return {
-      title,
-      description,
-      relevantStat,
-      hashtags,
-      friendsWith
-  }
+    title,
+    description,
+    relevantStat,
+    hashtags,
+    friendsWith,
+  };
 }

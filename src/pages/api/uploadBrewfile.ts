@@ -11,7 +11,6 @@ import {
 } from "firebase/firestore";
 import type { UserInfo } from "@/types/brews";
 import { generatePersonality } from "@/lib/generatePersonality";
-import isValidBrewfile from "@/lib/validateBrewfileData";
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -63,18 +62,6 @@ export const POST: APIRoute = async ({ request }) => {
         date: getCurrentDate(),
         userInfo: userInfo,
       });
-      if (
-        !isValidBrewfile(
-          { data: brewfileData },
-          {
-            checkPersonalitySummary: false,
-            checkUserInfo: false,
-            checkDate: false,
-          }
-        )
-      ) {
-        throw new Error("Invalid brewfile data");
-      }
       generatePersonality(brewfileData, existingDoc.id);
       return new Response(
         JSON.stringify({ success: true, id: existingDoc.id, updated: true }),
