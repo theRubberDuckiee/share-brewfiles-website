@@ -74,11 +74,11 @@ const { filter } = Astro.props;
     "brewfiles-grid"
   ) as HTMLDivElement;
 
-  focusSearchBtn.addEventListener("click", () => {
+  focusSearchBtn?.addEventListener("click", () => {
     brewSearchInput.focus();
   });
 
-  window.addEventListener("keydown", (e) => {
+  window?.addEventListener("keydown", (e) => {
     if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
       brewSearchInput.focus();
     }
@@ -87,7 +87,7 @@ const { filter } = Astro.props;
     }
   });
 
-  brewSearchInput.addEventListener("input", () => {
+  brewSearchInput?.addEventListener("input", () => {
     const url = new URL(location.href);
     url.searchParams.set("package", brewSearchInput.value);
     history.replaceState(null, "", url.href);
@@ -99,7 +99,7 @@ const { filter } = Astro.props;
   const brewCards = new Map();
 
   // on initial load, add brewcards and all their data to a Map
-  brewfilesGrid.addEventListener("brewfiles-loaded", () => {
+  brewfilesGrid?.addEventListener("brewfiles-loaded", () => {
     brewfilesGrid.querySelectorAll("article").forEach((card) => {
       const cards = Array.from(
         card.querySelectorAll("[data-brewlink]")
@@ -112,7 +112,7 @@ const { filter } = Astro.props;
     ) as HTMLParagraphElement;
   });
 
-  brewfilesGrid.addEventListener("update-brewcards", () => {
+  brewfilesGrid?.addEventListener("update-brewcards", () => {
     let showNoBrewfilesParagraph = true;
     if (!brewSearchInput.value) {
       brewCards.forEach((_, card) => {

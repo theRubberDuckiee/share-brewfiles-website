@@ -58,8 +58,8 @@ const togglePanel = ({
   }
 };
 
-backdrop.addEventListener("click", closeAllPanels);
-infoBtn.addEventListener("click", () =>
+backdrop?.addEventListener("click", closeAllPanels);
+infoBtn?.addEventListener("click", () =>
   togglePanel({ panelToExpand: infoPanel, btnToExpand: infoBtn })
 );
 shareYours?.addEventListener("click", () => {
@@ -67,11 +67,11 @@ shareYours?.addEventListener("click", () => {
   const codeContainer = document.getElementById("codeContainer");
   codeContainer?.classList.add("animate-pulse");
 });
-navBtn.addEventListener("click", () =>
+navBtn?.addEventListener("click", () =>
   togglePanel({ panelToExpand: navPanel, btnToExpand: navBtn })
 );
 
-window.addEventListener("keydown", (e) => {
+window?.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     if (
       infoPanel.classList.contains("grid") ||

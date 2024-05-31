@@ -1,6 +1,6 @@
 export default function initRowEventListeners(rows: HTMLAnchorElement[]) {
   rows.forEach((row, idx) => {
-    row.addEventListener("keydown", (e) => {
+    row?.addEventListener("keydown", (e) => {
       if (
         e.key === "ArrowUp" ||
         e.key === "ArrowDown" ||

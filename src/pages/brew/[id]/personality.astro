@@ -102,7 +102,7 @@ if (!entry) return Astro.redirect("/");
         }, 2000);
       };
 
-      window.addEventListener("DOMContentLoaded", () => {
+      window?.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           spinnerContainer?.remove();
           profileContainer?.classList.remove("opacity-0");
