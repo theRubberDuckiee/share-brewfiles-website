@@ -190,7 +190,7 @@ async function turnStatsIntoPersonality(
   if (allBrews) {
     let brews: BrewsItem[] = [];
     let personalitySummaries: PersonalitySummary[] = [];
-    allBrews.docs.forEach((doc) => {
+    allBrews.docs.slice(0, 100).forEach((doc) => {
       const { data, date, userInfo, personalitySummary } = doc.data();
       const brewData = Object.values(data as BrewEntry[]).map((value) => {
         return {
@@ -338,13 +338,13 @@ function isArchitect(
   personalityPercentageStatistics: PersonalityPercentageStatistics
 ) {
   return (
-    (personalityPercentageStatistics.fractionDevOps > 0.18 && 
-    personalityPercentageStatistics.fractionBackend > 0.18) ||
+    (personalityPercentageStatistics.fractionDevOps > 0.18 &&
+      personalityPercentageStatistics.fractionBackend > 0.18) ||
     (personalityPercentageStatistics.fractionBackend > 0.18 &&
-    personalityPercentageStatistics.fractionSecurity > 0.18) ||
+      personalityPercentageStatistics.fractionSecurity > 0.18) ||
     (personalityPercentageStatistics.fractionSecurity > 0.18 &&
       personalityPercentageStatistics.fractionDevOps > 0.18) ||
-    personalityPercentageStatistics.fractionDevOps > 0.50
+    personalityPercentageStatistics.fractionDevOps > 0.5
   );
 }
 
@@ -376,11 +376,9 @@ function isBobTheBuilder(
   return (
     personalityPercentageStatistics.totalPackages > 20 &&
     personalityPercentageStatistics.fractionRecognized > 0.05 &&
-    (
-      (personalityPercentageStatistics.fractionDevOps > 0.10 && 
-        personalityPercentageStatistics.fractionFrontend < 0.05) ||
-      personalityPercentageStatistics.fractionDevOps > .25
-    )
+    ((personalityPercentageStatistics.fractionDevOps > 0.1 &&
+      personalityPercentageStatistics.fractionFrontend < 0.05) ||
+      personalityPercentageStatistics.fractionDevOps > 0.25)
   );
 }
 
@@ -388,14 +386,12 @@ function isMarieKondo(
   personalityPercentageStatistics: PersonalityPercentageStatistics
 ) {
   return (
-    personalityPercentageStatistics.fractionRecognized > 0.10 &&
-    (
-      (personalityPercentageStatistics.fractionOrganization > 0.4 &&
-        personalityPercentageStatistics.totalPackages < 60) ||
+    personalityPercentageStatistics.fractionRecognized > 0.1 &&
+    ((personalityPercentageStatistics.fractionOrganization > 0.4 &&
+      personalityPercentageStatistics.totalPackages < 60) ||
       (personalityPercentageStatistics.fractionOrganization > 0.2 &&
-        personalityPercentageStatistics.totalPackages < 30)
-      )
-    )
+        personalityPercentageStatistics.totalPackages < 30))
+  );
 }
 
 function isArtist(
@@ -403,14 +399,11 @@ function isArtist(
 ) {
   return (
     personalityPercentageStatistics.totalPackages > 20 &&
-    (
-      (personalityPercentageStatistics.fractionCustomization > 0.10 &&
-       personalityPercentageStatistics.fractionFrontend > 0.10 &&
-       personalityPercentageStatistics.fractionPopular > .10) ||
-      (personalityPercentageStatistics.fractionCustomization > 0.20) ||
-      (personalityPercentageStatistics.fractionFrontend > .20)
-    )
-
+    ((personalityPercentageStatistics.fractionCustomization > 0.1 &&
+      personalityPercentageStatistics.fractionFrontend > 0.1 &&
+      personalityPercentageStatistics.fractionPopular > 0.1) ||
+      personalityPercentageStatistics.fractionCustomization > 0.2 ||
+      personalityPercentageStatistics.fractionFrontend > 0.2)
   );
 }
 
@@ -426,7 +419,7 @@ function isSecurity(
   return (
     personalityPercentageStatistics.totalPackages > 20 &&
     personalityPercentageStatistics.fractionSecurity > 0.15 &&
-    personalityPercentageStatistics.fractionRecognized > 0.20
+    personalityPercentageStatistics.fractionRecognized > 0.2
   );
 }
 
@@ -445,12 +438,12 @@ function isGoldenRetriever(
   personalityPercentageStatistics: PersonalityPercentageStatistics
 ) {
   return (
-    personalityPercentageStatistics.fractionBackend > 0.10 &&
-    personalityPercentageStatistics.fractionFrontend > 0.10 &&
-    personalityPercentageStatistics.fractionDevOps > 0.10 &&
-    personalityPercentageStatistics.fractionSecurity > 0.10 &&
-    personalityPercentageStatistics.fractionData > 0.10 &&
-    personalityPercentageStatistics.fractionGeneral > 0.10
+    personalityPercentageStatistics.fractionBackend > 0.1 &&
+    personalityPercentageStatistics.fractionFrontend > 0.1 &&
+    personalityPercentageStatistics.fractionDevOps > 0.1 &&
+    personalityPercentageStatistics.fractionSecurity > 0.1 &&
+    personalityPercentageStatistics.fractionData > 0.1 &&
+    personalityPercentageStatistics.fractionGeneral > 0.1
   );
 }
 
@@ -460,8 +453,8 @@ function isTrendy(
   return (
     personalityPercentageStatistics.fractionPopular > 0.35 ||
     (personalityPercentageStatistics.fractionPopular > 0.25 &&
-      personalityPercentageStatistics.fractionOld === 0.0) &&
-    personalityPercentageStatistics.fractionDevOps < 0.50
+      personalityPercentageStatistics.fractionOld === 0.0 &&
+      personalityPercentageStatistics.fractionDevOps < 0.5)
   );
 }
 
