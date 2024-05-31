@@ -435,9 +435,14 @@ function isPragmatist(
 ) {
   return (
     personalityPercentageStatistics.totalPackages > 20 &&
-    personalityPercentageStatistics.fractionOrganization > 0.08 &&
-    personalityPercentageStatistics.fractionBackend > 0.08 &&
-    personalityPercentageStatistics.fractionOrganization > 0.08
+    (
+      personalityPercentageStatistics.fractionOrganization > 0.11 &&
+      personalityPercentageStatistics.fractionBackend > 0.12 &&
+      personalityPercentageStatistics.fractionOrganization > 0.11
+    ) ||
+    (personalityPercentageStatistics.fractionData > 0.15 &&
+      personalityPercentageStatistics.fractionBackend > 0.07
+    )
   );
 }
 
