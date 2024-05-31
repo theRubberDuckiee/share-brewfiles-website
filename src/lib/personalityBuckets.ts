@@ -56,10 +56,10 @@ export const personalityBuckets = {
         "friendsWith": [DeveloperPersonalityType.Architect, DeveloperPersonalityType.BobTheBuilder],
         "hashtags": ["guardian-angel", "robust", "no-vulnerabilities"]
     },
-    [DeveloperPersonalityType.Rookie]: {
-        "description": "The Rookie Developer is eager to learn and explore. As they navigate through projects, they eagerly absorb knowledge and seek guidance from more experienced coworkers. Their enthusiasm drive them to overcome obstacles and steadily improve their skills.",
+    [DeveloperPersonalityType.Minimalist]: {
+        "description": "The Minimalist Developer is eager to learn and explore. As they navigate through projects, they eagerly absorb knowledge and seek guidance from coworkers. Their enthusiasm drive them to overcome obstacles and steadily improve their skills.",
         "friendsWith": [DeveloperPersonalityType.Wallflower, DeveloperPersonalityType.Trailblazer],
-        "hashtags": ["new-kid-on-the-block", "learning-to-code", "junior-dev"]
+        "hashtags": ["clean", "less-is-more"]
     },
     [DeveloperPersonalityType.Pragamatist]: {
         "description": "The Pragmatist Developer is grounded and a practical problem solver. Rather than chasing the latest trends, they focus on addressing real-world needs. While they appreciate innovation, they are cautious about adopting new technologies unless they offer clear benefits.",
@@ -68,7 +68,7 @@ export const personalityBuckets = {
     },
     [DeveloperPersonalityType.GoldenRetriever]: {
         "description": "The Golden Retriever Developer is known for friendly demeanor, eagerness to please, and unwavering commitment to teamwork. They foster strong relationships with colleagues and stakeholders alike. Their work is characterized by attention to detail and a can-do attitude.",
-        "friendsWith": [DeveloperPersonalityType.BobTheBuilder, DeveloperPersonalityType.Rookie],
+        "friendsWith": [DeveloperPersonalityType.BobTheBuilder, DeveloperPersonalityType.Minimalist],
         "hashtags": ["woofer", "loyal", "sociable"]
     },
     [DeveloperPersonalityType.Trendy]: {

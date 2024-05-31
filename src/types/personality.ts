@@ -24,7 +24,7 @@ export enum DeveloperPersonalityType {
     Artist = "Artist",
     Trendy = "Trendy",
     Security = "The Guardian",
-    Rookie = "Rookie",
+    Minimalist = "Minimalist",
     Pragamatist = "Pragmatist",
     Wallflower = "Wallflower",
     GoldenRetriever = "Golden Retriever",
