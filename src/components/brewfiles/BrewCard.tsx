@@ -48,7 +48,10 @@ const BrewCard = ({ entry }: Props) => {
           <p className="@md:text-lg uppercase tracking-widest text-accent-bluelight min-h-5 @md:min-h-7">
             {entry?.totalMatches === 0 && ""}
             {entry &&
-              entry?.totalMatches > 0 &&
+              entry?.totalMatches === 1 &&
+              `${entry?.totalMatches} match`}
+            {entry &&
+              entry?.totalMatches > 1 &&
               `${entry?.totalMatches} matches`}
           </p>
           <p className="@md:text-lg uppercase tracking-widest text-white/60">
