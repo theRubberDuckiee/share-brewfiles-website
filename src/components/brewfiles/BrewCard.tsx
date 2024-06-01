@@ -29,6 +29,8 @@ const BrewCard = ({ entry }: Props) => {
               alt={entry?.username}
               width="50"
               height="50"
+              loading="lazy"
+              decoding="async"
               className="rounded-full grayscale hover:ring-4 "
             />
           </a>
