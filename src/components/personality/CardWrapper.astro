@@ -10,10 +10,31 @@ const { name, classes } = Astro.props;
 
 <div
   class:list={twMerge([
-    "flex p-3 md:p-6 rounded-xl bg-bkg/70 text-center justify-center",
+    "relative overflow-hidden",
+    "bg-white/80 backdrop-blur-sm",
+    "rounded-3xl shadow-lg",
+    "border border-white/20",
+    "transition-all duration-300 hover:shadow-xl",
+    "before:content-[''] before:absolute before:inset-0",
+    "before:bg-gradient-to-br before:from-white/50 before:to-transparent",
+    "before:opacity-70 before:rounded-3xl",
+    "p-6 md:p-8",
     classes,
   ])}
   data-gridname={name}
 >
-  <slot />
+  <div class="relative z-10">
+    <slot />
+  </div>
 </div>
+
+<style>
+  div {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  div:hover {
+    transform: translateY(-2px);
+  }
+</style>

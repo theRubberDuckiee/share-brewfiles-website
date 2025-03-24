@@ -1,0 +1,19 @@
+---
+import { DeveloperPersonalityType } from '../types/types';
+import CardWrapper from './CardWrapper.astro';
+
+interface Props {
+  developerType: DeveloperPersonalityType;
+}
+
+const { developerType } = Astro.props;
+const imageUrl = `/images/${developerType.toLowerCase()}.png`;
+---
+
+<CardWrapper title="Developer Type">
+  <div class="flex flex-col items-center justify-center">
+    <img src={imageUrl} alt={developerType} class="w-24 h-24 mb-4" />
+    <h4 class="text-lg font-medium text-white">{developerType}</h4>
+  </div>
+</CardWrapper>
+

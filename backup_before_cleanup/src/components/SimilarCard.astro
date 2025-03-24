@@ -1,0 +1,22 @@
+---
+import CardWrapper from './CardWrapper.astro';
+
+interface Props {
+  percentileSimilarToType: number;
+}
+
+const { percentileSimilarToType } = Astro.props;
+const formattedPercentage = Math.round(percentileSimilarToType);
+---
+
+<CardWrapper title="Similar Developers">
+  <div class="flex flex-col items-center text-center">
+    <div class="text-4xl font-bold text-white mb-2">
+      {formattedPercentage}%
+    </div>
+    <p class="text-white/70">
+      of developers share your personality type
+    </p>
+  </div>
+</CardWrapper>
+

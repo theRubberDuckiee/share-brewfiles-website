@@ -1,0 +1,87 @@
+---
+import PersonalityLayout from '../components/personality/src/components/PersonalityLayout.astro';
+import { DeveloperPersonalityType } from '../components/personality/src/types/types';
+import "../styles/animations.css";
+
+const personalityData = {
+  developerType: DeveloperPersonalityType.Retro,
+  description: "You're a developer who appreciates tried-and-true methods and established patterns. Like a master craftsperson, you value reliability and proven solutions over cutting-edge experiments. Your code is typically well-documented and maintainable, drawing from years of community wisdom.",
+  friendsWith: [
+    DeveloperPersonalityType.Traditionalist,
+    DeveloperPersonalityType.Pragmatist,
+    DeveloperPersonalityType.MarieKondo
+  ],
+  percentileSimilarToType: 15,
+  mostPopularPackage: "lodash",
+  typeBreakdown: {
+    frontend: 30,
+    backend: 25,
+    fullstack: 20,
+    devops: 15,
+    other: 10
+  }
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Developer Personality Quiz Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      /* Reset default styles */
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f6f0ff 0%, #f0f9ff 100%);
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .title {
+        font-family: 'Fredoka', cursive;
+        background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+      }
+
+      .decorative-shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        opacity: 0.1;
+        animation: float 8s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen py-12 relative overflow-hidden">
+      <!-- Decorative shapes -->
+      <div class="decorative-shape" style="width: 100px; height: 100px; top: 10%; left: 5%;"></div>
+      <div class="decorative-shape" style="width: 80px; height: 80px; top: 15%; right: 10%;"></div>
+      <div class="decorative-shape" style="width: 120px; height: 120px; bottom: 20%; left: 15%;"></div>
+      <div class="decorative-shape" style="width: 60px; height: 60px; bottom: 10%; right: 5%;"></div>
+      
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 relative">
+          <h1 class="title text-6xl font-bold mb-6">Developer Personality Quiz</h1>
+          <div class="h-2 w-32 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full mx-auto"></div>
+          <p class="text-2xl mt-6 text-indigo-600">🎉 Your Results Are In! 🎉</p>
+        </div>
+        
+        <div class="bg-white/40 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
+          <PersonalityLayout personalitySummary={personalityData} />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

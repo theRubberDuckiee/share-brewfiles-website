@@ -1,0 +1,16 @@
+---
+import CardWrapper from './CardWrapper.astro';
+
+interface Props {
+  description: string;
+}
+
+const { description } = Astro.props;
+---
+
+<CardWrapper title="Your Developer Personality">
+  <p class="text-white/70 text-lg leading-relaxed">
+    {description}
+  </p>
+</CardWrapper>
+

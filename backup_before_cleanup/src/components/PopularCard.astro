@@ -1,0 +1,22 @@
+---
+import CardWrapper from './CardWrapper.astro';
+
+interface Props {
+  mostPopularPackage: string;
+}
+
+const { mostPopularPackage } = Astro.props;
+---
+
+<CardWrapper>
+  <div class="relative">
+    <div class="absolute -top-2 -right-2 bg-blue-500 transform rotate-45 px-8 py-1">
+      <span class="text-xs font-medium text-white">MOST POPULAR</span>
+    </div>
+    <div class="pt-6">
+      <h3 class="text-lg font-semibold text-white mb-2">Most Used Package</h3>
+      <p class="text-white/90 text-xl">{mostPopularPackage}</p>
+    </div>
+  </div>
+</CardWrapper>
+

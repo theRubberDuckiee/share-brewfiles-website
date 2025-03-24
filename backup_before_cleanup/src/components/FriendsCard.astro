@@ -1,0 +1,26 @@
+---
+import { DeveloperPersonalityType } from '../types/types';
+import CardWrapper from './CardWrapper.astro';
+
+interface Props {
+  friendsWith: DeveloperPersonalityType[];
+}
+
+const { friendsWith } = Astro.props;
+---
+
+<CardWrapper title="Compatible With">
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+    {friendsWith.map((type) => (
+      <div class="flex flex-col items-center">
+        <img
+          src={`/images/${type.toLowerCase()}.png`}
+          alt={type}
+          class="w-16 h-16 mb-2"
+        />
+        <span class="text-sm text-white/90 text-center">{type}</span>
+      </div>
+    ))}
+  </div>
+</CardWrapper>
+

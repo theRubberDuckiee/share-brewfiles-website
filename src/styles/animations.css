@@ -1,0 +1,48 @@
+/* Floating animation - used for titles and decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Bouncing animation - used for celebratory elements */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pulse animation - used for glowing effects */
+@keyframes pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+/* Animation utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
+
+.animate-pulse {
+  animation: pulse 3s infinite;
+}\r
+\r
+/* Spinner animation - used for loading states */\r
+@keyframes spinner {\r
+  from { transform: rotate(0deg); }\r
+  to { transform: rotate(360deg); }\r
+}\r
+\r
+.animate-spin {\r
+  animation: spinner 1s infinite linear;\r
+}\r
+\r
+.animate-spin-inherit {\r
+  animation: inherit;\r
+}\r

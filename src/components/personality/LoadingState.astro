@@ -1,10 +1,11 @@
 ---
 import Heading from "../ui/Heading.astro";
+import "../../styles/animations.css";
 ---
 
 <div class="grid gap-8 place-items-center animate-pulse text-center">
   <Heading tagType="h1" size="lg">Generating profile…</Heading>
-  <div class="spinner"></div>
+  <div class="spinner animate-spin"></div>
 </div>
 
 <style>
@@ -16,7 +17,6 @@ import Heading from "../ui/Heading.astro";
     border: calc((var(--spinner-size) / 12.4) * 1px) solid #111111;
     border-radius: 50%;
     border-color: hsl(0, 0%, 100%, 0.1) #111111;
-    animation: spinner 1s infinite linear;
   }
 
   .spinner::before,
@@ -37,11 +37,5 @@ import Heading from "../ui/Heading.astro";
 
   .spinner::after {
     margin: calc((var(--spinner-size) / 6.2921348315) * 1px);
-  }
-
-  @keyframes spinner {
-    100% {
-      transform: rotate(1turn);
-    }
   }
 </style>
