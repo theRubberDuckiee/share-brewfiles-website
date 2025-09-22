@@ -1,145 +1,27 @@
 name: Warp PR Review
-
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths:
-      - 'src/**'
-      - 'public/**'
-      - 'astro.config.mjs'
-      - 'tailwind.config.mjs'
-      - 'tsconfig.json'
-      - 'package.json'
-      - 'package-lock.json'
-
 jobs:
-  warp-review:
-    runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
-    
+  review:
+    # Prefer a self-hosted Linux runner that you've authenticated with `warp login`
+    runs-on: self-hosted
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build project
-        run: npm run build
-      
-      - name: Run type checking
-        run: npm run astro check
-      
-      - name: Run linting
-        run: npm run lint || true
-      
-      - name: Generate Warp PR Review
-        id: warp-review
+      - uses: actions/checkout@v4
+
+      # If your runner doesn't have the CLI yet, install it once or ensure it's in PATH.
+      # (On Linux, you can install the standalone package; see docs for distro-specific repos.)
+      # https://docs.warp.dev/developers/cli
+      # Example invocation:
+      - name: Show Warp CLI version
+        run: warp --version
+
+      - name: Generate diff
         run: |
-          echo "## 🔍 Warp PR Review" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
-          # Check for common issues
-          echo "### 📋 Code Quality Checks" >> $GITHUB_STEP_SUMMARY
-          
-          # Check for TypeScript errors
-          if npm run astro check 2>&1 | grep -q "error"; then
-            echo "❌ **TypeScript errors detected**" >> $GITHUB_STEP_SUMMARY
-            echo "Please fix TypeScript errors before merging." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ **TypeScript check passed**" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          # Check for build errors
-          if npm run build 2>&1 | grep -q "error"; then
-            echo "❌ **Build errors detected**" >> $GITHUB_STEP_SUMMARY
-            echo "Please fix build errors before merging." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ **Build successful**" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          # Check for large files
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 📁 File Size Analysis" >> $GITHUB_STEP_SUMMARY
-          large_files=$(find . -name "*.js" -o -name "*.ts" -o -name "*.astro" -o -name "*.tsx" | xargs wc -l | sort -nr | head -10)
-          echo "**Largest files by line count:**" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          echo "$large_files" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          
-          # Check for TODO/FIXME comments
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🚨 TODO/FIXME Comments" >> $GITHUB_STEP_SUMMARY
-          todos=$(grep -r "TODO\|FIXME\|HACK" src/ --include="*.ts" --include="*.astro" --include="*.tsx" | head -10 || true)
-          if [ -n "$todos" ]; then
-            echo "Found TODO/FIXME comments:" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            echo "$todos" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ No TODO/FIXME comments found" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          # Check for console.log statements
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🐛 Console Statements" >> $GITHUB_STEP_SUMMARY
-          console_logs=$(grep -r "console\." src/ --include="*.ts" --include="*.astro" --include="*.tsx" | head -10 || true)
-          if [ -n "$console_logs" ]; then
-            echo "Found console statements (consider removing for production):" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            echo "$console_logs" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ No console statements found" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          # Performance suggestions
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### ⚡ Performance Suggestions" >> $GITHUB_STEP_SUMMARY
-          echo "- Consider lazy loading for large components" >> $GITHUB_STEP_SUMMARY
-          echo "- Optimize images in public/images/ directory" >> $GITHUB_STEP_SUMMARY
-          echo "- Review bundle size impact of new dependencies" >> $GITHUB_STEP_SUMMARY
-          echo "- Ensure proper caching headers for static assets" >> $GITHUB_STEP_SUMMARY
-          
-          # Security checklist
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔒 Security Checklist" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] No hardcoded secrets or API keys" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Input validation for user data" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Proper error handling without exposing internals" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Dependencies are up to date" >> $GITHUB_STEP_SUMMARY
-          
-          # Accessibility checklist
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### ♿ Accessibility Checklist" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Proper alt text for images" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Semantic HTML structure" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Keyboard navigation support" >> $GITHUB_STEP_SUMMARY
-          echo "- [ ] Color contrast compliance" >> $GITHUB_STEP_SUMMARY
-          
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "---" >> $GITHUB_STEP_SUMMARY
-          echo "*This review was generated by Warp AI Assistant* 🚀" >> $GITHUB_STEP_SUMMARY
-      
-      - name: Comment PR
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const summary = fs.readFileSync(process.env.GITHUB_STEP_SUMMARY, 'utf8');
-            
-            // Post the summary as a PR comment
-            await github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: summary
-            });
+          git fetch origin main:refs/remotes/origin/main
+          git diff origin/main... > diff.patch
+
+      - name: Run Warp reviewer agent
+        run: |
+          warp agent run \
+            --saved-prompt QqfvqjGrSYmkoHNhfgrpov \
