@@ -2,11 +2,14 @@ name: Warp PR Review
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   review:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install Warp CLI
         run: |
@@ -14,15 +17,47 @@ jobs:
           brew update
           brew install --cask warp-cli
 
-      - name: Login to Warp
-        run: warp login
-
-      - name: Generate diff
+      - name: Generate diff and context
         run: |
-          git fetch origin main
-          git diff origin/main HEAD > diff.patch
+          # Generate the PR diff
+          git fetch origin ${{ github.base_ref }}
+          git diff origin/${{ github.base_ref }}..HEAD > pr_diff.patch
+          
+          # Create a comprehensive context file
+          cat > pr_context.txt << EOF
+          # Pull Request Review Context
+          
+          ## PR Information
+          - **Title**: ${{ github.event.pull_request.title }}
+          - **Number**: #${{ github.event.pull_request.number }}
+          - **Author**: ${{ github.event.pull_request.user.login }}
+          - **Base Branch**: ${{ github.base_ref }}
+          - **Head Branch**: ${{ github.head_ref }}
+          - **Repository**: ${{ github.repository }}
+          
+          ## PR Description
+          ${{ github.event.pull_request.body }}
+          
+          ## Files Changed
+          $(git diff --name-only origin/${{ github.base_ref }}..HEAD)
+          
+          ## Diff Content
+          $(cat pr_diff.patch)
+          EOF
 
       - name: Run Warp reviewer agent
         run: |
-          warp agent run \
-            --prompt diff.patch \
+          warp-cli agent run \
+            --prompt "$(cat pr_context.txt)" \
+            --api-key "wk-1.c230ca01237244adb9ae716dc9e6246067f48e9b75e23cbd227d91bea40db7d2" \
+            --cwd "$GITHUB_WORKSPACE"
+
+      - name: Upload artifacts for debugging
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: warp-pr-review-artifacts
+          path: |
+            pr_diff.patch
+            pr_context.txt
+          if-no-files-found: ignor
