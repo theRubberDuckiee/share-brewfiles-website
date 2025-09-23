@@ -16,8 +16,8 @@ jobs:
 
       - name: Generate diff
         run: |
-          git fetch origin main:refs/remotes/origin/main
-          git diff origin/main... > diff.patch
+          git fetch origin main
+          git diff origin/main HEAD > diff.patch
 
       - name: Run Warp reviewer agent
         run: |
