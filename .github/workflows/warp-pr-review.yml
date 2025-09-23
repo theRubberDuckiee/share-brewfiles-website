@@ -4,14 +4,16 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   review:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
 
-      # If your runner doesn't have the CLI yet, install it once or ensure it's in PATH.
-      # (On Linux, you can install the standalone package; see docs for distro-specific repos.)
-      # https://docs.warp.dev/developers/cli
-      # Example invocation:
+      - name: Install Warp CLI
+        run: |
+          brew tap warpdotdev/warp
+          brew update
+          brew install --cask warp-cli
+
       - name: Show Warp CLI version
         run: warp --version
 
