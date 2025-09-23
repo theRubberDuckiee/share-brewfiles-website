@@ -22,5 +22,4 @@ jobs:
       - name: Run Warp reviewer agent
         run: |
           warp agent run \
-            --saved-prompt QqfvqjGrSYmkoHNhfgrpov \
-            --input diff.patch
+            --prompt diff.patch \
