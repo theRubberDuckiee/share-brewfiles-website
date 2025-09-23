@@ -14,12 +14,8 @@ jobs:
           brew update
           brew install --cask warp-cli
 
-      - name: Check Warp CLI authentication options
-        run: |
-          echo "Checking Warp CLI help for authentication options:"
-          warp --help | grep -i auth || echo "No auth options found in help"
-          echo "Checking if WARP_TOKEN environment variable is supported:"
-          warp agent --help | grep -i token || echo "No token options found in agent help"
+      - name: Login to Warp
+        run: warp login
 
       - name: Generate diff
         run: |
