@@ -17,6 +17,13 @@ jobs:
           brew update
           brew install --cask warp-cli
 
+      - name: Authenticate Warp CLI
+        env:
+          WARP_API_KEY: "wk-1.c230ca01237244adb9ae716dc9e6246067f48e9b75e23cbd227d91bea40db7d2"
+        run: |
+          echo "Authenticating with Warp CLI..."
+          warp login --api-key="$WARP_API_KEY"
+
       - name: Generate diff and context
         run: |
           # Generate the PR diff
@@ -46,8 +53,6 @@ jobs:
           EOF
 
       - name: Run Warp reviewer agent
-        env:
-          WARP_API_KEY: "wk-1.c230ca01237244adb9ae716dc9e6246067f48e9b75e23cbd227d91bea40db7d2"
         run: |
           warp agent run \
             --prompt "$(cat pr_context.txt)" \
