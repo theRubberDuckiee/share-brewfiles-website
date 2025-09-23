@@ -1,4 +1,4 @@
-name: Warp PR Review
+name: Warp PR Reviewer
 on:
   pull_request:
     types: [opened, synchronize, reopened]
