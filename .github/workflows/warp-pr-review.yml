@@ -14,9 +14,6 @@ jobs:
           brew update
           brew install --cask warp-cli
 
-      - name: Show Warp CLI version
-        run: warp --version
-
       - name: Generate diff
         run: |
           git fetch origin main:refs/remotes/origin/main
