@@ -4,8 +4,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   review:
-    # Prefer a self-hosted Linux runner that you've authenticated with `warp login`
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -25,3 +24,4 @@ jobs:
         run: |
           warp agent run \
             --saved-prompt QqfvqjGrSYmkoHNhfgrpov \
+            --input diff.patch
