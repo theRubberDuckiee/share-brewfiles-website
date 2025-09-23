@@ -47,7 +47,7 @@ jobs:
 
       - name: Run Warp reviewer agent
         run: |
-          warp-cli agent run \
+          warp agent run \
             --prompt "$(cat pr_context.txt)" \
             --api-key "wk-1.c230ca01237244adb9ae716dc9e6246067f48e9b75e23cbd227d91bea40db7d2" \
             --cwd "$GITHUB_WORKSPACE"
